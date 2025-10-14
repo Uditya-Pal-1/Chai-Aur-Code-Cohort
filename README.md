@@ -45,7 +45,7 @@ Chai Aur Cohort is a full-stack web development course by <a href="#Hitesh choud
 ## Contributing
 
 Contributions are always welcome!
-See <a href="#"> CONTRIBUTING.md </a> for ways to get started.
+See <a href="CONTRIBUTING.md"> CONTRIBUTING.md </a> for ways to get started.
 
 ## License
 
