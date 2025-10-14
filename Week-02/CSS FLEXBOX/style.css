@@ -1,0 +1,22 @@
+div>h1{
+    background-color: yellow;
+    color: blue;
+    text-shadow: 2px 2px 2px red;
+    box-shadow: inset 2px 2px 2px wheat;
+}
+.parent{
+    height: 2000px;
+    display: flex;
+    padding: 5px;
+    border: 2px solid black;
+    gap: 20px;
+    flex-wrap:wrap;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.child{
+    height: 200px;
+    width: 60px;
+    border: 2px solid black;
+}

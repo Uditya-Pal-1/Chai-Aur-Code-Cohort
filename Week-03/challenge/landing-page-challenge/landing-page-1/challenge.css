@@ -1,0 +1,144 @@
+/* Challenge CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Basic styles */
+body {
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+  background-image: url(assets/chaigym.png);
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 50px;
+  padding: 30px;
+  background-color: rgb(43, 43, 43);
+  color: white;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-left: 30px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.logo img {
+  border-radius: 50%;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 13px;
+  margin: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+  transform: scale(1.05);
+}
+
+/* Hero section styles */
+.hero {
+  width: 100vw;
+  position: absolute;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.711);
+  z-index: 10;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 90vw;
+  height: 250px;
+}
+
+.hero-content h1 {
+  font-size: 40px;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+}
+
+.hero-content p {
+  color: white;
+  margin: 15px 0;
+}
+
+.cta-button {
+  font-size: 15px;
+  background-color: rgb(235, 130, 0);
+  padding: 16px 25px;
+  border: none;
+  border-radius: 5px;
+}
+
+.cta-button:hover {
+  box-shadow: 0 5px 10px orange;
+  transform: scale(1.05);
+}
+
+/* Features section styles */
+.features {
+  position: relative;
+  width: 90vw;
+  z-index: 11;
+  height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  margin: auto;
+  margin-top: 1px;
+  border-radius: 10px;
+}
+
+.feature {
+  color: white;
+  align-self: center;
+  justify-self: center;
+  font-size: 12px;
+  gap: 6px;
+  padding: 7px;
+  margin: 40px;
+  height: fit-content;
+  width: 250px;
+  border-radius: 10px;
+  border: 2px solid rgb(235, 130, 0);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.feature  img{
+    width: 40px;
+  }
+
+.feature h3 {
+  color: rgb(235, 130, 0);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.feature p {
+  font-size: 13px;
+}

@@ -1,0 +1,123 @@
+/* Challenge CSS */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f3f1f1c1;
+}
+
+.container {
+  margin-top: 10px;
+  width: 100vw;
+  height: 50px;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+h1 {
+ display: flex;
+ margin: 5px;
+ justify-self: center;
+ align-items: center;
+}
+
+.pricing-heading {
+ font-size: 1.5em;
+ font-weight: bold; 
+}
+
+.pricing-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+  
+}
+
+.pricing-card {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px;
+  padding: 20px;
+  border: 1px solid white;
+  height: fit-content;
+  border-radius: 5px;
+  font-size: 13px;
+  background-color: rgb(255, 255, 255);
+}
+.pricing-card:hover {
+  border: 2px solid orange;
+  transform: scale(1.05);
+  transition: transform 0.3s, border 0.3s;
+}
+
+.pricing-card.popular {
+  position: relative;
+}
+
+.popular-badge {
+  display: inline-block;
+  padding: 2px 5px;
+ background-color: orange;
+  color: white;
+  border-radius: 20px;
+  font-size: 10px;
+  position:absolute;
+  top: -10px;
+  right: 65px;
+}
+h2{
+  justify-self: center;
+}
+.price {
+  justify-self: center;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.period {
+  font-size: 10px;
+  color: grey;
+  justify-self: center;
+}
+
+.features {
+  font-size: 12px;
+  color: rgb(102, 102, 102);
+  justify-self: center;
+
+}
+
+.features li {
+justify-self: center;
+line-height: 1.8em;
+text-align: center;
+}
+
+.subscribe-btn {
+  padding: 7px 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: orange;
+  cursor: pointer;
+  font-size: 10px;
+  margin-top: 10px;
+}
+
+.subscribe-btn:hover {
+  transform: scale(1.05);
+  background-color: darkorange;
+  transition: transform 0.3s, background-color 0.3s;
+  color: white;
+  box-shadow: 0 4px 18px 2px rgba(255, 123, 0, 0.7);
+}

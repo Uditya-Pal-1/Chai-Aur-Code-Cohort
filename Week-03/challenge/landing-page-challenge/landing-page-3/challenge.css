@@ -1,0 +1,146 @@
+/* Challenge CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Georgia", serif;
+  line-height: 1.6;
+  color: #333;
+
+}
+
+.header {
+ background-color: #ffffff;
+ color: brown;
+ display: flex;
+ justify-content: space-evenly;
+ align-items: center;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+font-size: 20px;
+font-weight: bold;
+margin: 10px 10px;
+gap: 15px;
+
+}
+
+.logo img {
+  font-size: 30px;
+  border: 2px solid brown;
+  border-radius: 50px;
+}
+
+.nav-menu a {
+ margin: 10px 20px;
+ text-decoration: none;
+ color: brown;
+ transition: transform 0.3s ease-in-out;
+
+}
+
+.nav-menu a:hover {
+  text-decoration: underline;
+  transform: scale(1.05);
+  color: black;
+}
+
+.hero {
+  height: 70vh;
+  width: 100%;
+  color: #ffffff;
+  background-image: url(assets/chaipatti.png);
+  background-size: cover;
+ background-position: center center;
+
+}
+.hero-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70vh;
+  background-color: rgba(0, 0, 0, 0.354);
+}
+
+.hero-text h1 {
+  text-align: center;
+  font-weight: 600;
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+.hero-text p {
+  font-size: 14px;
+}
+
+.shop-button {
+  border: none;
+  font-size: 12px;
+  margin: 20px 0;
+  padding: 10px 20px;
+  border-radius: 15px;
+  color: #ffffff;
+  background-image: linear-gradient(to right, rgb(141, 44, 44) , rgb(247, 4, 4));
+}
+
+.shop-button:hover {
+  box-shadow: 0 5px 15px rgb(189, 43, 43);
+}
+
+.tea-collection {
+  background-color: #f4f1f1;
+  padding: 20px;
+  
+}
+
+.tea-collection h2 {
+  text-align: center;
+  margin: 30px 0 20px 0;
+  font-size: 35px;
+  font-weight: 600;
+  color: brown;
+}
+
+.tea-cards {
+  justify-self: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+width: 75vw;
+height: 500px;
+
+}
+
+.tea-card {
+  cursor:pointer;
+  background-color: #fff;
+  border-radius: 10px;
+  height: 200px;
+  width: 240px;
+  margin: 20px 50px;
+  padding: 20px;
+  justify-items: center;
+  text-align: center;
+  box-shadow: 10px 10px 10px rgb(228, 228, 228);
+  transition: all 0.3s ease-in-out;
+}
+.tea-card:hover{
+  transform: scale(1.05);
+}
+.tea-card h3 {
+  color:brown ;
+}
+
+.tea-card p {
+  color: rgb(87, 87, 87);
+  margin-top: 10px;
+ font-size: 14px;
+}

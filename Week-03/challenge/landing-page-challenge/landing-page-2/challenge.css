@@ -1,0 +1,135 @@
+/* Challenge CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+    background-image: url(assets/chaicohort.png) ;
+  background-size:100vw 120vh;
+  background-repeat: no-repeat;
+}
+/* Navbar styles */
+.navbar {
+  width: 100vw;
+  height: 6%;
+  background-color: black;
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+ padding: 5px;
+
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgb(0, 255, 123);
+}
+
+.logo img {
+  margin: 0 15px;
+  border: 2px solid rgb(0, 255, 123);
+  border-radius: 50%;
+}
+
+.menu a {
+  margin: 0 18px;
+  text-decoration: none;
+  color: white;
+}
+
+.menu a:hover {
+  color: rgb(0, 255, 123);
+  /* transform: scale(1.02); */
+}
+
+/* Hero section styles */
+.hero {
+  width: 100vw;
+  height: 80vh;
+
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 111vh;
+  width: 100vw;
+  z-index: 10;
+  color: rgb(0, 255, 123);
+  background-color: rgba(0, 0, 0, 0.747);
+}
+
+.hero-content h1 {
+  font-size: 32px;
+  margin-top: 40px;
+  font-weight: 600;
+  margin-bottom: 10px;
+
+}
+
+.hero-content p {
+  color: white;
+
+}
+
+.hero-content img {
+  border: 2px solid rgb(0, 255, 123);
+  border-radius: 10px;
+}
+
+.enroll-button {
+  color: #000;
+  background-color: rgb(0, 255, 123);
+  padding: 15px 30px;
+  margin: 20px;
+  border: none;
+  border-radius: 30px;
+}
+
+.enroll-button:hover {
+  box-shadow: 0 4px 8px rgb(0, 255, 123);
+}
+
+/* Highlights section styles */
+.highlights {
+  width: 100vw;
+  height: 200px;
+  background-color: black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: white;
+}
+
+.highlight-card {
+  width: 200px;
+  height: 160px;
+background-color: rgba(49, 48, 48, 0.752);
+padding: 10px;
+border-radius: 10px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+
+.highlight-card h3 {
+  color: rgb(0, 255, 123);  
+  font-size: 15px;
+}
+
+.highlight-card p {
+  font-size: 13px;
+}

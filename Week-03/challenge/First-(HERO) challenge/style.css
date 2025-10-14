@@ -1,0 +1,47 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    color: #ffffff;
+    background-color: #1d0e00;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 90vh;
+    margin: auto;
+}
+main h1{
+    font-size: 40px;
+    font-weight: 700;
+    margin: 20px;
+}
+.btn{
+    padding: 10px 20px;
+    gap: 20px;
+}
+.btn button{
+    font-size: 10px;
+    font-weight: bold;
+    background-color: rgb(54, 31, 0);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 15px;
+    cursor: pointer;
+
+}
+button a{
+    color: rgb(222, 181, 57);
+    text-decoration: none;
+    font-size: 12px;
+
+
+    
+}

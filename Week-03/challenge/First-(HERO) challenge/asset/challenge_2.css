@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Times New Roman";
+  letter-spacing: -0.1px;
+}
+body {
+  background-color: #ffffffff;
+  color: #000000;
+}
+nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100vw;
+}
+nav button {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-right: 100px;
+  padding: 6px 14px;
+  border: none;
+  color: #ffffffff;
+  font-weight: 400;
+  background-color: rgb(22, 22, 248);
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+}
+nav button:hover{
+  background-color: rgba(23, 8, 160, 0.957);
+}
+.dark-theme{
+  background-color: #030303;
+  color: #000000;
+  filter: invert(1);
+}
+.dark-theme nav button{
+  background-color: #333;
+  color: white;
+}
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.left {
+  width: 35%;
+  height: 350px;
+}
+.left h1 {
+  font-weight: 700;
+  font-size: 60px;
+}
+.left p {
+  font-size: 20px;
+  margin: 10px 10px 20px 10px;
+}
+.left input {
+  padding: 7px;
+  width: 65%;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+}
+.left button {
+  padding: 8px 15px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: -0.1px;
+}
+.left button::placeholder {
+  color: lightgrey;
+  font-size: 10px;
+}
+.left .trust {
+  margin-top: 35px;
+  font-size: 10px;
+  letter-spacing: -0.3px;
+}
+.partn {
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  gap: 30px;
+  
+}
+.imglogo {
+  width: 70px;
+  height: auto;
+  mix-blend-mode: darken;
+}
+.partn :nth-child(1) {
+  filter: invert(1);
+}
+.partn :nth-last-child(1) {
+  filter: grayscale(100%) brightness(50%) contrast(150%);
+}
+.right {
+  margin: 30px;
+  margin-top: 10px;
+  width: 40%;
+}
+.right img {
+  width: 430px;
+  border-radius: 10px;
+}
