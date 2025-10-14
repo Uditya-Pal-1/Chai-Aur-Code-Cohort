@@ -1,7 +1,7 @@
 <img width="1648" height="888" alt="chai-cohort" src="https://github.com/user-attachments/assets/9a5a6b48-9508-4230-ac3a-d3f6a736da38" />
+
 <h1 align="center">Chai Aur Cohort</h1>
 
-<hr>
 <p align="center">
   
 [![X (Twitter)](https://img.shields.io/badge/@Udityapal-ffffff?style=flat&logo=x&logoColor=black)](https://x.com/Aman_Pal_1)
@@ -21,20 +21,20 @@
 </p>
 
 ## Introduction
-<hr>
+
 <p>
 Chai Aur Cohort is a full-stack web development course by <a href="#Hitesh choudhary"> Hitesh Choudhary </a> & <a href="#Piyush Garg"> Piyush Garg </a>. From basics to full-stack ninja, this repository documents my in-depth learning journey within the program.
 </p>
 
 ## Documentation
-<hr>
+
 - <a href="">**Assignments**: </a> [learn] <br>
 - <a href="">**Projects**: </a> [apply] <br>
 - <a href="">**Blogs**:</a> [showcase] <br>
 <br/>
 <br/>
 ## Tech Stack
-<hr>
+
 <ul align="left">
   <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="20" height="20""")/><a href="Git"> Git</a> - versioning</li>
   <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" width="20" height="20""")/><a href="HTML5">HTML5</a> - structuring</li>
@@ -42,6 +42,10 @@ Chai Aur Cohort is a full-stack web development course by <a href="#Hitesh choud
 </ul>
 
 ## Contributing
-<hr>
+
 Contributions are always welcome!
 See <a href="#"> CONTRIBUTING.md </a> for ways to get started.
+
+## License
+
+This project is licensed under the <a href="#"> MIT License </a>.  Feel free to learn, add upon, and share my work!
