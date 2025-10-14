@@ -28,26 +28,20 @@ Chai Aur Cohort is a full-stack web development course by <a href="#Hitesh choud
 
 ## Documentation
 <hr>
-- **Assignments**: [learn](https://example.com/assignments)
-- **Projects**: [apply](https://example.com/projects)
-
+- <a href="">**Assignments**: </a> [learn] <br>
+- <a href="">**Projects**: </a> [apply] <br>
+- <a href="">**Blogs**:</a> [showcase] <br>
 <br/>
 <br/>
-
----
-
 ## Tech Stack
-
-Here are some of the technologies and tools I am working with.
-
-<p align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="45" height="45""")/>>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" width="45" height="45""")/>>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" width="45" height="45""")/>>
-</p>
-
----
+<hr>
+<ul align="left">
+  <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="20" height="20""")/><a href="Git"> Git</a> - versioning</li>
+  <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" width="20" height="20""")/><a href="HTML5">HTML5</a> - structuring</li>
+  <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" width="20" height="20""")/><a href="CSS3">CSS3</a> - modular css</li> 
+</ul>
 
 ## Contributing
-
-The course is ongoing, and contributions are welcome! If you have any suggestions, please feel free to open an issue or pull request.
+<hr>
+Contributions are always welcome!
+See <a href="#"> CONTRIBUTING.md </a> for ways to get started.
