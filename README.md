@@ -1,2 +1,3 @@
 # Chai-Aur-Code-Cohort
-Explore my assignments, projects and blogs as i evolve from a newbie to an expert developer.
+
+<img width="1648" height="888" alt="chai-cohort" src="https://github.com/user-attachments/assets/9a5a6b48-9508-4230-ac3a-d3f6a736da38" />
