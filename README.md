@@ -49,4 +49,4 @@ See <a href="#"> CONTRIBUTING.md </a> for ways to get started.
 
 ## License
 
-This project is licensed under the <a href="License.md"> MIT License </a>.  Feel free to learn, add upon, and share my work!
+This project is licensed under the <a href="LICENSE"> MIT License </a>.  Feel free to learn, add upon, and share my work!
