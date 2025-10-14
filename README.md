@@ -37,9 +37,9 @@ Chai Aur Cohort is a full-stack web development course by <a href="#Hitesh choud
 ## Tech Stack
 
 <ul align="left" style="list-style-type:none">
-  <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="20" height="20""")/><a href="Git"> Git</a> - versioning</li>
-  <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" width="20" height="20""")/><a href="HTML5">HTML5</a> - structuring</li>
-  <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" width="20" height="20""")/><a href="CSS3">CSS3</a> - modular css</li> 
+  <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="20" height="20""")/><a href="https://git-scm.com/">Git</a> - versioning</li>
+  <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" width="20" height="20""")/><a href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML5</a> - structuring</li>
+  <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" width="20" height="20""")/><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS3</a> - modular css</li> 
 </ul>
 
 ## Contributing
