@@ -2,7 +2,7 @@
 #Thank you for considering contributing to our collaborative learning environment!
 #We welcome any suggestions or improvements that can enhance the learning experience for all cohort members.
 ## Pull Requests
-Conventional Commits use the GitHub flow as main versioning workflow
+Conventional Commits use the <a href="https://docs.github.com/en/get-started/using-github/github-flow"> GitHub flow </a> as main versioning workflow
 
  1. Fork the repository
  2. Create a new branch for each feature, fix or improvement
