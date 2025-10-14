@@ -13,7 +13,7 @@ This allow to review and pull in new features or improvements individually.
 
 ## Style Guide
 
-All pull requests SHOULD adhere to the <a href="#"> Conventional Commits specification </a>
+All pull requests SHOULD adhere to the <a href="https://www.conventionalcommits.org/en/v1.0.0/"> Conventional Commits specification </a>
 
 ### Ways To Contribute
 <hr>
