@@ -5,7 +5,7 @@ div>h1{
     box-shadow: inset 2px 2px 2px wheat;
 }
 .parent{
-    height: 2000px;
+    height: 400px;
     display: flex;
     padding: 5px;
     border: 2px solid black;

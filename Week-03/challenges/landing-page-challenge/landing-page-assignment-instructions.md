@@ -22,5 +22,3 @@
 - Use browser developer tools to inspect elements and test your CSS code.
 - Break down the task into smaller parts and tackle one section at a time (e.g., navbar, hero section, features section).
 - Ask for help if you get stuck, but try to solve the problem on your own first.
-
-Good luck and have fun!
