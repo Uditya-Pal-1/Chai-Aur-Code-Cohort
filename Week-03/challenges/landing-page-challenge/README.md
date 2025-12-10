@@ -5,6 +5,15 @@
 </p>
 
 <hr>
+<br>
+
+<h2 style="color: #6495ED;">Landing Page</h2>
+
+<div align="center">
+    <img src="./screenshots/Landing-Page.png" alt="Landing-Page" width="500" />
+</div>
+
+<br>
 
 <h2 style="color: #6495ED;">01-Landing-Page-challenge (chai-patti) </h2>
 

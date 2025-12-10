@@ -5,6 +5,17 @@
 </p>
 
 <hr>
+<br>
+
+<h2 style="color: #6495ED;">Pricing-Table-Home</h2>
+
+<div align="center">
+    <img src="./screenshots/Pricing-Table-Home.png" alt="Pricing-Table-Home-Page" width="500" />
+</div>
+
+<br>
+<hr>
+<br>
 
 <h2 style="color: #6495ED;">Challenge-01</h2>
 
