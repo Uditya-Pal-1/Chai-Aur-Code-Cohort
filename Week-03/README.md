@@ -4,7 +4,8 @@
 
 <h2><a href="#Practice"> Hw-1 Practice </a></h2>
 <div align="center">
-  <img src="./screenshots/Screenshot%202025-12-10%20155342.png" alt="Web-Assignment" width="400" />
+  <img src="./screenshots/Screenshot%202025-12-10%20155613.png" alt="Web-Assignment" width="400" />
+  Screenshot 2025-12-10 155613.png
 </div>
 </hr>
 
@@ -12,6 +13,7 @@
 <div align="center">
   <img src="./screenshots/Screenshot%202025-12-10%20155342.png" alt="Web-Assignment" width="400" />
 </div>
+
 
 
 
