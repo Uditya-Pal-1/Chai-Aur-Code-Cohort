@@ -9,7 +9,7 @@
 <h2 style="color: #6495ED;">01-First-Hero-challenge</h2>
 
 <div align="center">
-    <img src="./screenshots/Screenshot%202025-12-10%20155342.png" alt="Practice" width="500" />
+    <img src="./screenshots/Screenshot%202025-12-10%20154330.png" alt="Practice" width="500" />
 </div>
 
 <br>
@@ -19,7 +19,7 @@
 <h2 style="color: #6495ED;">02-First-Hero-challenge</h2>
 
 <div align="center">
-    <img src="./screenshots/Screenshot%202025-12-10%20155613.png" alt="Chai Aur Fitness Pricing Table" width="500" />
+    <img src="./screenshots/Screenshot%202025-12-10%20154541.png" alt="Chai Aur Fitness Pricing Table" width="500" />
 </div>
 
 <br>
@@ -29,7 +29,7 @@
 <h2 style="color: #6495ED;">03-First-Hero-challenge</h2>
 
 <div align="center">
-    <img src="./screenshots/Screenshot%202025-12-10%20155613.png" alt="Chai Aur Fitness Pricing Table" width="500" />
+    <img src="./screenshots/Screenshot%202025-12-10%20154608.png" alt="Chai Aur Fitness Pricing Table" width="500" />
 </div>
 
 <br>
