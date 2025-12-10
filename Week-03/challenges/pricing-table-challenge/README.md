@@ -1,4 +1,4 @@
-<h1 align="center">Week - 3 Practice</h1>
+<h1 align="center">Week - 3 Pricing-Table-Challenge</h1>
 
 <p align="center">
     Welcome to my Week Two Assignments repository! Here, you'll find solutions to CSS challenges.
@@ -6,20 +6,20 @@
 
 <hr>
 
-<h2 style="color: #6495ED;">Hw-01 Practice</h2>
+<h2 style="color: #6495ED;">Challenge-01</h2>
 
 <div align="center">
-    <img src="./screenshots/Screenshot%202025-12-10%20155342.png" alt="Practice" width="500" />
+    <img src="./screenshots/chai-aur-fitness-pricing.png" alt="chai-aur-fitness-pricing" width="500" />
 </div>
 
 <br>
 <hr>
 <br>
 
-<h2 style="color: #6495ED;">Hw-02 Practice</h2>
+<h2 style="color: #6495ED;">Challenge-02</h2>
 
 <div align="center">
-    <img src="./screenshots/Screenshot%202025-12-10%20155613.png" alt="Chai Aur Fitness Pricing Table" width="500" />
+    <img src="./screenshots/chai-patti-pricing.png" alt="chai-patti-pricing" width="500" />
 </div>
 
 <br>
