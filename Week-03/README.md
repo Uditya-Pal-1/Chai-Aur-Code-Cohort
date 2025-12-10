@@ -1,5 +1,5 @@
 <div>
-<h1 align="center">Week-3</h1>
+<h1 align="center">Week-3 Home Work Practice </h1>
 <p align="center">Welcome to my Week Two Assignments repository! Here, you'll find solutions to CSS challenges.</p>
 </br>
 </hr>

@@ -1,4 +1,4 @@
-<h1 align="center">Week - 3</h1>
+<h1 align="center">Week - 3 Practice</h1>
 
 <p align="center">
     Welcome to my Week Two Assignments repository! Here, you'll find solutions to CSS challenges.
