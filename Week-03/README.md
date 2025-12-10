@@ -2,10 +2,13 @@
 <p align="center">Welcome to my Week Two Assignments repository! Here, you'll find solutions to CSS challenges.</p>
 </hr>
 
+<font color="blue"><h2>Practice HW </h2></font>
+> ## Practice HW
 <h2 style="color: blue;">Practice HW </h2>
 <div align="center">
   <img src="./screenshots/Screenshot%202025-12-10%20155342.png" alt="Web-Assignment" width="400" />
 </div>
+
 
 
 
