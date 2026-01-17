@@ -1,3 +1,10 @@
+<div>
+<h1 align="center">Project Genesis</h1>
+<p align="center">Showcase of my journey to building a solid Foundation.</p>
+</br>
+</hr>
+</div>
+
 <div align="center"dir="auto">
 
 [![](https://img.shields.io/badge/Twitter-ffffff?style=flat&logo=x&logoColor=black)](https://x.com/Aman_Pal_1)
@@ -8,3 +15,31 @@
 [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 </div>
+
+</br>
+<h2><a href="#project"> PROJECT-01 </a></h2>
+<div align="center">
+  <img src="./assets/Basics of CSS.jpg" width="400" />
+  </br>
+</hr>
+</div>
+
+
+</br>
+<h2><a href="#project"> PROJECT-02 </a></h2>
+<div align="center">
+  <img src="./assets/CSS DISPLAY PROPERTIES.jpg" alt="Web-Assignment" width="400" />
+  </br>
+</hr>
+</div>
+
+
+  </br>
+<h2><a href="#project"> PROJECT-03 </a></h2>
+<div align="center">
+  <img src="./assets/specificity_Algorithm.jpg" alt="Web-Assignment" width="400" />
+  </br>
+</hr>
+</div>
+
+
