@@ -49,6 +49,6 @@ This repository tracks Week 00 activities for the Chai Aur Code Cohort. It inclu
 - Conflicts? Resolve manually, then `git add` and commit.
 - Remote issues: `git remote -v` to verify origin URL.
 
-  <img src="./Week-00/Workflow diagram.md" alt="Workflow diagram" />
+  <img src="./Week-00/WorkFlow diagram.md" alt="Workflow diagram" />
 
 
