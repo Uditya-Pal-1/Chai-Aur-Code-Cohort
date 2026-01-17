@@ -6,20 +6,21 @@
 </div>
 
 </br>
-<h2><a href="#Practice"> Hw-1 Practice </a></h2>
+<h2><a href="#Practice"> CSS Basics </a></h2>
 <div align="center">
-  <img src="./screenshots/Screenshot%202025-12-10%20155613.png" alt="Web-Assignment" width="400" />
+  <img src="./assets/CSS Basics" width="400" />
   </br>
 </hr>
 </div>
 
 
 </br>
-<h2><a href="#Practice"> Hw-2 Practice </a></h2>
+<h2><a href="#Practice"> CSS </a></h2>
 <div align="center">
-  <img src="./screenshots/Screenshot%202025-12-10%20155342.png" alt="Web-Assignment" width="400" />
+  <img src="./assets/CSS" alt="Web-Assignment" width="400" />
   </br>
 </div>
+
 
 
 
