@@ -19,6 +19,8 @@
 <div align="center">
   <img src="./assets/CSS DISPLAY PROPERTIES.jpg" alt="Web-Assignment" width="400" />
   </br>
+</hr>
+</div>
 
 
   </br>
@@ -26,7 +28,9 @@
 <div align="center">
   <img src="./assets/specificity_Algorithm.jpg" alt="Web-Assignment" width="400" />
   </br>
+</hr>
 </div>
+
 
 
 
