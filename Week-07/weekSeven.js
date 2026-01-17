@@ -1,4 +1,5 @@
 //weekSeven.js
+//Objects and Prototypes.
 
 //alert message to indicate the script is loaded.
 alert("This is week 7 JavaScript file!");
