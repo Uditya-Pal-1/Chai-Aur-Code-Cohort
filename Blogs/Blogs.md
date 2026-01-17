@@ -1,6 +1,6 @@
 <div>
-<h1 align="center">Week-3 Home Work Practice </h1>
-<p align="center">Welcome to my Week Two Assignments repository! Here, you'll find solutions to CSS challenges.</p>
+<h1 align="center">Blogs Archive</h1>
+<p align="center">Showcase of my journey to building a solid Foundation.</p>
 </br>
 </hr>
 </div>
@@ -20,6 +20,7 @@
   <img src="./screenshots/Screenshot%202025-12-10%20155342.png" alt="Web-Assignment" width="400" />
   </br>
 </div>
+
 
 
 
