@@ -31,4 +31,4 @@ This repository tracks Week 00 activities for the Chai Aur Code Cohort. It inclu
 - Conflicts? Resolve manually, then `git add` and commit.
 - Remote issues: `git remote -v` to verify origin URL.
 
-Happy coding with Chai Aur Code! 🚀
+
