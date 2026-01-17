@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .website {
+        border: 1px solid;
+        display: grid;
+
+        grid-template-areas: "header header header" "content content ads" "content content ads" "footer footer footer";
+      }
+
+      .header {
+        grid-area: header;
+      }
+
+      .content {
+        grid-area: content;
+      }
+
+      .ads {
+        grid-area: ads;
+      }
+
+      .footer {
+        grid-area: footer;
+      }
+
+      .item {
+        border: 1px solid;
+        background-color: lightblue;
+      }
+    </style>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="website">
+      <div class="header item">Header</div>
+      <div class="content item">Content</div>
+      <div class="ads item">Ads</div>
+      <div class="footer item">Footer</div>
+    </div>
+  </body>
+</html>

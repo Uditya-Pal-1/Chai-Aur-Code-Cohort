@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .parent {
+        border: 2px solid;
+
+        display: grid;
+        grid-template-rows: repeat(4, 60px);
+        grid-template-columns: repeat(4, 60px);
+        grid-gap: 10px;
+      }
+
+      .child {
+        border: 1px dashed;
+      }
+    </style>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="parent">
+      <div class="child">Item 1</div>
+      <div class="child">Item 2</div>
+      <div class="child">Item 3</div>
+      <div class="child">Item 4</div>
+      <div class="child">Item 5</div>
+      <div class="child">Item 6</div>
+    </div>
+  </body>
+</html>
