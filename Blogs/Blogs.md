@@ -6,7 +6,7 @@
 </div>
 
 </br>
-<h2><a href="#Practice"> Basics of CSS </a></h2>
+<h2><a href="https://basics-css.hashnode.dev/basics-of-cascading-style-sheet"> Basics of CSS </a></h2>
 <div align="center">
   <img src="./assets/Basics of CSS.jpg" width="400" />
   </br>
@@ -30,6 +30,7 @@
   </br>
 </hr>
 </div>
+
 
 
 
