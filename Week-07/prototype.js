@@ -147,3 +147,76 @@ dog.makeSound();
 // define object constructor property of a class instance using new keyword
 // object constructor property of a class instance using new keyword is a property that is used to create objects.
 
+
+// prototype 
+// prototype of array.
+Array.prototype.Aman = function() {
+    console.log("Aman");
+}
+
+let arr = [1, 2, 3];
+arr.Aman();
+
+// prototype of object.
+Object.prototype.Chai = function(){
+    console.log(`Chalo ${this.name} pite hai.`);
+}
+
+const obj1 = {
+    name: "Herbal Tea"
+}
+obj1.Chai();
+
+// prototype of function.
+Function.prototype.Aman = function() {
+    console.log("This function prototype is created by Aman.");
+}
+
+function chai(){
+
+}
+chai.Aman();
+
+// prototype of string.
+String.prototype.Aman = function() {
+    console.log("This string prototype is created by Aman.");
+}
+
+const str = 'Aman';
+str.Aman();
+
+// prototype of number.
+Number.prototype.Aman = function() {
+    console.log("This number prototype is created by Aman.");
+}
+
+const num = 123;
+num.Aman();
+
+//----------------------------------------------------------------------------
+
+// const arr5 = [1,2,3,4,5,6];
+// if(!Array.prototype.fill)throw new Error("Array.prototype.fill is not defined");
+// arr5.fill();
+// console.log(arr5);
+
+//----------------------------------------------------------------------------
+const arr6 = [1,2,3,4,5,6];
+if(!Array.prototype.MyForEach){
+    Array.prototype.MyForEach = function(userfn){
+        const originalArr = this;
+        for(let i = 0; i < originalArr.length; i++){
+            userfn(originalArr[i],i);
+        }
+
+    };
+}
+//Error: forEach function does not exist on arr variable.
+//Real Signature ko samjho - No return , function input, value, index;
+
+arr6.MyForEach(function(value, index){
+    console.log(`value at index ${index} is ${value}`)
+
+});
+
+//----------------------------------------------------------------------------
