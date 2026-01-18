@@ -220,3 +220,65 @@ arr6.MyForEach(function(value, index){
 });
 
 //----------------------------------------------------------------------------
+//signature.map
+//return ? - New Array, Each Element Iteration, userFn
+
+if(!Array.prototype.myMap){
+    Array.prototype.myMap = function(userFn){
+        const result = [];
+        for(let i = 0; i < this.length; i++){
+            const value = (userFn(this[i],i));
+            result.push(value);
+        }
+        return result;
+    }
+}
+const arr7 = [0,9,8,7,6];
+const n = arr7.myMap((e)=>e*2);
+console.log(n);
+console.log(arr7);
+const n2 = arr7.map((e)=>e*3);
+console.log(n2);
+
+//----------------------------------------------------------------------------
+//filter
+//return ? - New Array, Each Element Iteration,input- userfunction
+if(!Array.prototype.myFilter){
+    Array.prototype.myFilter = function(userFn){
+        const result = [];
+        for(let i = 0; i<this.length; i++){
+            if(userFn(this[i])){
+            result.push(this[i]);
+            }
+        }
+        return result; 
+    }
+}
+const arr8 = [5,4,3,2,1,6,9];
+const n3 = arr8.myFilter((e)=>e%3==0);
+console.log(n3);
+console.log(arr8);
+
+// Object & Prototype
+
+const user = {   // object
+    name: "John",
+    age: 30
+}
+
+const user5 = {   // object
+    name: "Jane",
+    age: 25
+}
+
+user.__proto__ = user2;
+console.log(user.age);
+
+
+// classes
+class Person{
+    //...schema (Blueprint)
+
+}
+
+// continue in index.js
