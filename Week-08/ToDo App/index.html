@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo-App</title>
+    <style>
+      body{
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        font-family: 'Times New Roman', Times, serif;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+      }
+      .main{
+        width: 50vw;
+        height: 60vh;
+        justify-items: center;
+        align-content: center;
+        border: 1px solid rgb(27, 27, 27);
+        background-color: rgb(14, 14, 14);
+        color: rgb(255, 255, 255);
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <h1 class="heading">ToDo App</h1>
+      <div class="container">
+        <input id = "todo-input" type="text" placeholder="Add Tasks" />
+        <button id="addbtn">Add</button>
+      </div>
+      <div class="tasks">
+        <ul id="unorderdlist">
+        </ul>
+        <button id="del-btn">Delete All</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

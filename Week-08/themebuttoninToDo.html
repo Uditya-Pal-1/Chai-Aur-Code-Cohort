@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do App</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+      }
+      .maindiv{
+        border: 1px solid grey;
+        border-radius: 10px;
+        height: auto;
+        width: auto;
+      }
+      div{
+        margin: 20px;
+        padding: 20px;
+
+      }
+      div>h1{
+        margin: 20px;
+      }
+      div>p{
+        font-size: 20px;
+        font-weight: 600;
+        margin: 10px;
+      }
+      button{
+        margin: 10px;
+        padding: 10px ;
+        width: auto;
+        border: none;
+        border-radius: 10px ;
+        font-weight: 500;
+        text-shadow: 2px 2px 12px rgb(255, 255, 255);
+        box-shadow: 2px 2px 2px black;
+        box-shadow: inset 2px 2px 2px rgb(162, 162, 155);
+      }
+      input{
+        padding: 10px;
+      }
+      ul{
+        margin: 10px;
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <button onclick="changeBackgroundBlack()">Change Background to Black</button>
+    <button onclick="changeBackgroundWhite()" >Change Background to White</button> -->
+
+    <!-- <button onclick="changeBackground('Black')">Theme Change to Black</button>
+    <button onclick="changeBackground('White')">Theme Change to White</button> -->
+
+    <!-- <button id="dark-Button">click me theme to black</button>
+    <button id = "light-Button">change theme to white</button> -->
+    <div class="maindiv">
+      <button id="theme-button">Theme</button>
+    <div>
+      <h1>Uditya Pal</h1>
+      <p>This is a To-Do App</p>
+      <input type="text" placeholder="Enter your to-do" />
+      <button>Add</button>
+      <ul>
+        <li>Go to Gym <button>Delete</button></li>
+      </ul>
+    </div>
+    </div>
+    <script src="Todo.js"></script>
+  </body>
+</html>
