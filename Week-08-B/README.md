@@ -3,6 +3,7 @@
 <p align="center">Showcase of my journey to building a solid Foundation.</p>
 </br>
 </hr>
+  
 </div>
 
 <div align="center"dir="auto">
