@@ -13,14 +13,14 @@ const x = 10;
 console.log(x * x);
 
 const person = {
-    FristName: "Uditya",
+    FirstName: "Uditya",
     LastName: "Pal",
     Age: 20,
     hobbies: ["Coding", "Gaming", "Reading", "Traveling"],
     isMarried: false,
     hasGf: false,
     getFullName: function () {
-        return `${this.FristName} ${this.LastName}`
+        return `${this.FirstName} ${this.LastName}`
     },
     address:{
         houseNo:123,
