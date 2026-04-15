@@ -16,3 +16,9 @@
 [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 </div>
+
+<div align="center">
+  <img src="./web dev cohort pose.jpeg" alt="Web-Assignment" width="400" />
+  </br>
+</hr>
+</div>
