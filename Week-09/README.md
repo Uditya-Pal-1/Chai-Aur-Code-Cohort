@@ -17,8 +17,9 @@
 
 </div>
 
+<h1 align="center">Its Pose Time!! 😀.</h1>
 <div align="center">
-  <img src="./web dev cohort pose.jpeg" alt="Web-Assignment" width="400" />
+  <img src="./web dev cohort pose.jpeg" alt="Web-Assignment" width="700" />
   </br>
 </hr>
 </div>
