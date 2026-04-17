@@ -23,6 +23,6 @@
 </hr>
 <h1 align="center">Project- :Digital Clock:</h1>
 <div align="center">
-  <img src="./project/assets/DigitalClockProject.png" alt="Web-Project" width="900" />
+  <img src="./project/assets/DigitalClockProject.png" alt="Web-Project" width="1000" />
   </br>
 </div>
