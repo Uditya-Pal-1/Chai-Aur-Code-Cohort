@@ -56,5 +56,9 @@ function negativeIndex(arr) {
 let arr = [1,2,3,4,5,6,7,8,9,10];
 
 
-negativeIndex(arr);
+let newArr = negativeIndex(arr);
 console.log(arr[-1]);
+console.log(newArr[-1]);
+newArr[-1] = 22;
+console.log(newArr);
+console.log(arr);
