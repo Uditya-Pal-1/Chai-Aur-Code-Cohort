@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(10, 8, 18);
+}
+
+.clock-container {
+  width: 40vw;
+  height: 40vh;
+  background-color: rgb(14, 16, 28);
+  border: 1px dotted rgb(1, 1, 26);
+  box-shadow: 2px 2px 2px rgb(0, 0, 0);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+#time {
+  color: rgb(0, 123, 255);
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  letter-spacing: 3px;
+}
+#date{
+    color: grey;
+    font-weight: 500;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    letter-spacing: 2px;
+}
