@@ -18,11 +18,11 @@
 </div>
 
 <div align="center">
-  <img src="./web dev cohort pose.jpeg" alt="Web-Assignment" width="700" />
+  <img src="../Week-09/web dev cohort pose.jpeg" alt="Web-Assignment" width="700" />
   </br>
 </hr>
 <h1 align="center">Project- :Digital Clock:</h1>
 <div align="center">
-  <img src="./project/assets/DigitalClockProject.png" alt="Web-Project" width="700" />
+  <img src="./project/assets/DigitalClockProject.png" alt="Web-Project" width="900" />
   </br>
 </div>
