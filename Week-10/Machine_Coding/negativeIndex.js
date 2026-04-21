@@ -62,3 +62,25 @@ console.log(newArr[-1]);
 newArr[-1] = 22;
 console.log(newArr);
 console.log(arr);
+
+const arr2 = [1,2,3,4,5]
+function enableNegIndexing(targArr){
+    return new Proxy(targArr,{
+        set(target,prop, value){
+            target[prop] = `${value} 💦`;
+
+        },
+        get(target, prop){
+            return target[prop];
+        },
+    })
+}
+
+const proxyArr = enableNegIndexing([...arr2]);
+console.log('Original Arr',arr2);
+console.log(`ProxyArr`,proxyArr);
+
+proxyArr[1]=111;
+
+console.log('Update Arr',arr2);
+console.log('Proxied Update Arr',proxyArr);
