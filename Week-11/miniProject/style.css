@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Impact, 'Arial Narrow Bold', sans-serif;
+}
+
+body{
+text-align: center;
+/* margin-top: 100px; */
+transition: background 0.4 ease;
+}
+
+.container{
+    border: 2px solid black;
+    padding: 20px;
+    margin: auto;
+    width: 250px;
+    margin-top: 200px;
+    border-radius: 10px;
+}
+
+button{
+    padding: 10px 10px;
+    margin: 10px;
+    cursor: pointer;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+input{
+    padding: 8px;
+    width: 120px;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 8px;
+}
+.hidden{
+    display: none;
+}
