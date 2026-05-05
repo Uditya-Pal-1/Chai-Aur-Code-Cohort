@@ -26,3 +26,17 @@
   <img src="./project/assets/DigitalClockProject.png" alt="Web-Project" width="1000" />
   </br>
 </div>
+
+<h1 align="center">Practice Project.</h1>
+<div align="center">
+  <img src="./assets/image.png" alt="Web-Project" width="700" />
+  </br>
+</hr>
+</div>
+
+<h1 align="center">Its Pose Time!! 😀.</h1>
+<div align="center">
+  <img src="./assets/pose.jpeg" alt="Pose" width="700" />
+  </br>
+</hr>
+</div>

@@ -1,5 +1,8 @@
+// ------------------debouncing-----------------------
+// remove past request => keep a reference of it
+//fire a new request
+//userRequest () =>debouncedUserRequest
 function ptaNhi(fn, delay){
-
 
     let myId;
     return function(...args){
