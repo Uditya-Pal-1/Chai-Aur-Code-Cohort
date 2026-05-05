@@ -17,15 +17,6 @@
 
 </div>
 
-<div align="center">
-  <img src="../Week-09/web dev cohort pose.jpeg" alt="Web-Assignment" width="700" />
-  </br>
-</hr>
-<h1 align="center">Project-</h1>
-<div align="center">
-  <img src="./project/assets/DigitalClockProject.png" alt="Web-Project" width="1000" />
-  </br>
-</div>
 
 <h1 align="center">Practice Project.</h1>
 <div align="center">
