@@ -34,3 +34,7 @@ applyBtn.addEventListener("click",()=>{const hexValue = hexInput.value.trim();
     }
     app.applyColor();
 })
+
+
+
+
