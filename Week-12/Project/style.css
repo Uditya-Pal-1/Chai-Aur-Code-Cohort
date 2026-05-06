@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 80vw;
+    height: auto;
+}
+
+.mainHeading {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    
+}
+
+.mainHeading h2 {
+    font: 20px;
+    font-weight: 700;
+    text-align: center;
+    text-shadow: 2px 2px 3px rgb(120, 218, 247);
+}
+
+.panels {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+
+}
+
+.board {
+    width: 300px;
+    height: 550px;
+    border: 2px solid #cccccc;
+    border-radius: 10px;
+    box-shadow: 2px 5px 5px #c2c2c2;
+}
+
+.board h4 {
+    margin: 15px;
+    display: flex;
+    justify-self: center;
+    color: #000000;
+    font-size: 1.5vw;
+    text-shadow: 2px 2px 3px rgb(120, 218, 247);
+    margin-bottom: 20px;
+}
+
+.task {
+    display: flex;
+    padding: 10px;
+    margin: 10px;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 500;
+    border: 2px solid #cccc;
+    border-radius: 10px;
+    cursor:pointer;
+}
+
+.addButton {
+margin: 20px;
+padding: 10px 20px;
+font-weight: 500;
+border:1px solid #cccc;
+border-radius: 8px;
+font-size: 14px;
+margin-left: 230px;
+box-shadow: 2px 5px 5px #c2c2c2;
+cursor:pointer
+}
+.tasks{
+    transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.2s ease;
+}
+.tasks i{
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+.board{
+    transition: background-color 0.2 ease;
+}
+.board:has(.Flying){
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.Flying{
+    opacity: 0.4;
+    transform: scale(1.04);
+    border: 2px dashed #666;
+}
+.fa-map-pin{
+    color:rgb(159, 0, 0);
+}
+.fa-spinner{
+    color:orange;
+}
+.fa-circle-check{
+    color:green;
+}

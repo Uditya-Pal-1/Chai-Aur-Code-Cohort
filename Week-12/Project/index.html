@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KanBan-Board</title>
+    <link rel="stylesheet" href="style.css">
+
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    </head>
+
+</head>
+
+<body>
+    <Header>
+    </Header>
+    <main>
+        <div class="container">
+            <div class="content">
+                <div class="mainHeading">
+                    <h2>KanBan Board</h2>
+                </div>
+                <div class="panels">
+                    <div id='ToDo' class="board">
+                        <h4>ToDo</h4>
+                        <hr>
+                        <div class="tasks" draggable="true">
+                            <i class="fa-solid fa-map-pin"></i>
+                            <p class="task">abcder</p>
+                        </div>
+                        <div class="tasks" draggable="true">
+                            <i class="fa-solid fa-map-pin"></i>
+                            <p class="task">dfasdfdf</p>
+                        </div>
+                        <div class="tasks" draggable="true">
+                            <i class="fa-solid fa-map-pin"></i>
+                            <p draggable="true" class="task">dfadfas</p>
+                        </div>
+                    </div>
+                    <div id='process' class="board">
+                        <h4>In Progress</h4>
+                        <hr>
+                        <!-- <i class="fa-solid fa-spinner"></i> -->
+                    </div>
+                    <div id="done" class="board">
+                        <h4>Done</h4>
+                        <hr>
+                        <!-- <i class="fa-solid fa-circle-check"></i> -->
+                    </div>
+                </div>
+                <button type="button" class="addButton"><i class="fa-solid fa-plus"></i>Add Tasks</button>
+                <button id="addBoardBtn" class="addButton"> <i class="fa-solid fa-plus"></i> Add New Board</button>
+            </div>
+    </main>
+    <footer>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
