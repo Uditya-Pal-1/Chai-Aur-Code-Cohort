@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KanBan Board</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="content">
+                <div class="mainHeading">
+                    <h2>KanBan Board</h2>
+                </div>
+                <div class="panels">
+                    <div id="todo" class="board">
+                        <h4>ToDo</h4>
+                        <div class="tasks" draggable="true">
+                            <i class="fa-solid fa-map-pin"></i>
+                            <p class="task">Sample Task 1</p>
+                            <button class="delete-task-btn"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div id="process" class="board">
+                        <h4>In Progress</h4>
+                    </div>
+                    <div id="done" class="board">
+                        <h4>Done</h4>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button id="addTaskBtn" class="addButton"><i class="fa-solid fa-plus"></i> Add Tasks</button>
+                    <button id="addBoardBtn" class="addButton"><i class="fa-solid fa-plus"></i> Add New Board</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="customModal" class="modal hidden">
+        <div class="modal-box">
+            <p id="modalText"></p>
+            <input type="text" id="modalInput" />
+            <div class="modal-actions">
+                <button id="modalCancel" class="modal-btn cancel-btn">Cancel</button>
+                <button id="modalConfirm" class="modal-btn confirm-btn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

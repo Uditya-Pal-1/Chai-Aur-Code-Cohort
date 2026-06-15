@@ -1,0 +1,96 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+:root{
+    --primary-color: #ffffff;
+    --secondry-color: #111111;
+    --terary-color: #c9c7c7;
+    --gradient-sky: linear-gradient(180deg, #0A2A5C 0%, #2A62A3 45%, #5D9FE6 100%);
+    --gradient-silver: linear-gradient(135deg, #e7e5e5 0%, #ebedee 100%);
+    --gradient-mesh: #ff9a9e radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--gradient-sky);
+    color: var(--secondry-color);
+}
+
+.container{
+    text-align: center;
+    border: 1px solid var(--terary-color);
+    padding: 20px;
+    background-color: var(--primary-color);
+    box-shadow: 3px 3px 5px var(--terary-color),
+    inset 4px 4px 6px rgba(1, 213, 255, 0.5);;
+    border-radius: 10px;
+}
+
+.text-strip-container {
+    width: 100vw;
+    overflow: hidden;
+    white-space: nowrap;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.text-strip {
+    display: inline-block;
+    font-size: 44px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 500;
+    color: var(--terary-color);
+    animation: scrollRight 12s linear infinite;
+}
+
+@keyframes scrollRight {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100vw);
+    }
+}
+
+h1{
+    background: linear-gradient(180deg, #0A2A5C 0%, #2A62A3 45%, #5D9FE6 100%);
+    background-color: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.1));
+}
+
+input, button{
+    padding: 8px;
+    margin: 25px 5px 5px 5px;
+    font-size: 16px;
+    border: 1px solid var(--terary-color);
+    border-radius: 10px;
+    background: var(--gradient-silver);
+    color: #0A2A5C;
+    box-shadow: 2px 2px 2px var(--gradient-sky);
+    font-weight: 600;
+    transition: transform 1 ease;
+}
+
+button:hover{
+    transform: scale(1.09);
+}
+
+p{
+    margin: 10px;
+    font-size: 15px;
+    font-weight: 600;
+}

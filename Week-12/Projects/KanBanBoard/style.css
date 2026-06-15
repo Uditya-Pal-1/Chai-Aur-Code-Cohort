@@ -1,0 +1,308 @@
+:root {
+    --bg-color: #F2F2F7;
+    --board-bg: #F9F9FB;
+    --task-bg: #FFFFFF;
+    --text-primary: #1C1C1E;
+    --text-secondary: #8E8E93;
+    --accent-blue: #007AFF;
+    --accent-blue-hover: #0056b3;
+    --accent-red: #FF3B30;
+    --accent-green: #34C759;
+    --accent-orange: #FF9500;
+    
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --shadow-drag: 0 16px 32px rgba(0, 0, 0, 0.15);
+    
+    --radius-lg: 16px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+    
+    --transition-spring: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --transition-smooth: 0.2s ease-in-out;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 50px;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+}
+
+.container {
+    width: 95vw;
+    max-width: 1200px;
+}
+
+.mainHeading {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.mainHeading h2 {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.panels {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.board {
+    width: 320px;
+    min-height: 500px;
+    background-color: var(--board-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding-bottom: 20px;
+    transition: background-color var(--transition-smooth);
+    border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.board h4 {
+    margin: 20px 20px 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.board hr {
+    display: none; 
+}
+
+.tasks {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    margin: 0 12px 12px 12px;
+    background-color: var(--task-bg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    cursor: grab;
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    animation: slideIn 0.3s ease-out forwards;
+}
+
+.tasks:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.tasks:active {
+    cursor: grabbing;
+}
+
+.task {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.4;
+    word-break: break-word;
+    flex-grow: 1; 
+    cursor: text;
+    color: var(--text-primary);
+}
+
+.tasks > i {
+    font-size: 16px;
+    margin-right: 12px;
+}
+
+.delete-task-btn, .remove-board {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 5px;
+    font-size: 14px;
+    margin-left: 10px;
+    transition: color var(--transition-smooth), transform var(--transition-spring);
+}
+
+.delete-task-btn:hover, .remove-board:hover {
+    color: var(--accent-red);
+    transform: scale(1.15);
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.addButton {
+    padding: 12px 24px;
+    font-weight: 600;
+    font-size: 15px;
+    color: white;
+    background-color: var(--accent-blue);
+    border: none;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    transition: background-color var(--transition-smooth), transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.addButton i {
+    margin-right: 8px;
+}
+
+.addButton:hover {
+    background-color: var(--accent-blue-hover);
+    box-shadow: var(--shadow-md);
+}
+
+.addButton:active {
+    transform: scale(0.96); 
+}
+
+.board:has(.Flying) {
+    background-color: #E5E5EA; 
+}
+
+.Flying {
+    opacity: 0.9;
+    transform: scale(1.05) rotate(2deg) !important;
+    box-shadow: var(--shadow-drag) !important;
+    border: none;
+    z-index: 100;
+}
+
+.fa-map-pin { color: var(--accent-red); }
+.fa-spinner { color: var(--accent-orange); }
+.fa-circle-check { color: var(--accent-green); }
+.fa-cube { color: var(--text-secondary); }
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(6px); 
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    width: 320px;
+    box-shadow: var(--shadow-drag);
+    text-align: center;
+    transform: scale(1);
+    transition: transform var(--transition-spring);
+}
+
+.modal.hidden .modal-box {
+    transform: scale(0.9);
+}
+
+.modal-box p {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.modal-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 24px;
+    background-color: var(--bg-color);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: var(--radius-sm);
+    font-size: 16px;
+    outline: none;
+    transition: border-color var(--transition-smooth);
+}
+
+.modal-box input:focus {
+    border-color: var(--accent-blue);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.modal-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform var(--transition-smooth), opacity var(--transition-smooth);
+}
+
+.modal-btn:active {
+    transform: scale(0.96);
+}
+
+.cancel-btn {
+    background: var(--bg-color);
+    color: var(--accent-blue);
+}
+
+.cancel-btn:hover {
+    opacity: 0.8;
+}
+
+.confirm-btn {
+    background: var(--accent-blue);
+    color: white;
+}
+
+.confirm-btn:hover {
+    background: var(--accent-blue-hover);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

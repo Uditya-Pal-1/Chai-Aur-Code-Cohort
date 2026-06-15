@@ -19,11 +19,7 @@
 
 
 <h1 align="center">Practice Project.</h1>
-<div align="center">
-  <img src="./assets/image.png" alt="Web-Project" width="700" />
-  </br>
-</hr>
-</div>
+
 
 <h1 align="center">Its Pose Time!! 😀.</h1>
 <div align="center">
