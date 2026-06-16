@@ -1,0 +1,72 @@
+:root {
+    --primarycolor: #ffffff;
+    --secondrycolor: #111111;
+    --tertiarycolor: #494949;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--tertiarycolor);
+    border-color: var(--tertiarycolor);
+
+}
+
+.container {
+    width: 400px;
+    border: 1px solid var(--tertiarycolor);
+    border-radius: 10px;
+    padding: 20px;
+    background-color: var(--secondrycolor);
+    color: var(--primarycolor);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.5s ease;
+    box-shadow: 2px 2px 15px var(--primarycolor);
+}
+
+.container:hover{
+    transform: scale(1.05);
+}
+
+input {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    margin: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button{
+    padding: 12px;
+    font-size: 25px;
+    margin: 7px;
+    cursor: pointer;
+    transition: transform 0.5s ease-in-out;
+}
+
+button:hover{
+    background-color: var(--tertiarycolor);
+    transform: scale(1.1);
+}
+#result{
+    font-size: 25px;
+    font-weight: 500;
+    font-style: oblique;
+    text-transform:uppercase;
+}
