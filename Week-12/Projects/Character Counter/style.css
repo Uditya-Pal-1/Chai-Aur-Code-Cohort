@@ -1,0 +1,78 @@
+:root {
+    --primarycolor: #000000;
+    --secondrycolor: #ffffff;
+    --tertiarycolor: #9c9a9a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-color: var(--tertiarycolor);
+
+}
+
+.container {
+    width: 400px;
+    border: 1px solid var(--tertiarycolor);
+    border-radius: 10px;
+    padding: 20px;
+    background-color: var(--secondrycolor);
+    color: var(--primarycolor);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.5s ease;
+    box-shadow: 2px 2px 15px var(--primarycolor);
+}
+
+.container:hover {
+    transform: scale(1.05);
+}
+
+h1{
+    margin: 10px;
+}
+
+#textInput{
+    width: 200px;
+    height: 200px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+#textInput:focus{
+    outline: none;
+    border-color: blue;
+    box-shadow: 0px 0px 2px blue;
+
+}
+
+#repeatedWords {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    min-height: 25px;
+}
+
+.word-badge {
+    display: inline-block;
+    background-color: var(--tertiarycolor);
+    color: var(--secondrycolor);
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin: 3px;
+    font-size: 12px;
+}
