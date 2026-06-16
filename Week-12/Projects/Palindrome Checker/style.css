@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary-color: #ffffff;
+    --secondry-color: #111111;
+    --terary-color: #a4a4a4;
+    --gradient-sky: linear-gradient(180deg, #363737c3 0%, #000000c2 45%, #1b1b1b 100%);
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--gradient-sky);
+    color: var(--secondry-color);
+}
+
+.container {
+    text-align: center;
+    border: 1px solid var(--terary-color);
+    padding: 35px;
+    background-color: var(--primary-color);
+    box-shadow: 3px 3px 5px var(--terary-color),
+        inset 4px 4px 6px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    transition: transform 1s ease;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.container:hover {
+    transform: scale(1.02);
+}
+
+#Heading {
+    margin: 20px;
+}
+
+#inputField {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border-color: var(--terary-color);
+
+}
+
+#checkButton {
+    padding: 10px;
+    margin: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    border-color: var(--terary-color);
+    background-color: rgb(5, 196, 5);
+    color: var(--primary-color);
+}
+
+#result {
+    margin: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
