@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Challenge 3 </title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <!-- ## Challenge 3: Real-time Form Input Display 📋
+
+- Design a profile form with the following fields:
+  - Name (text input)
+  - Job Title (text input)
+  - Age (number input)
+  - Bio (textarea)
+- Create a "Profile Preview" section that dynamically displays the entered information.
+- The preview should update in real-time as the user types.
+- If a field is left empty, display "Not provided" in the preview instead. -->
+    <div class="container">
+        <div id="profileCount">
+            <h1>Profile Form</h1>
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Enter Name">
+
+            <label for="jobTitle">Job Title</label>
+            <input type="text" id="jobTitle" placeholder="Enter Your Job Title">
+
+            <label for="Age">Age</label>
+            <input type="number"id="Age" placeholder="Enter Your Age">
+
+            <label for="Bio">Bio</label>
+            <textarea id="Bio" placeholder="Enter Quary"></textarea>
+
+            <button type="submit" id="submitBtn">Save Profile</button>
+        </div>
+        <div id="profilePreview">
+            <h1>Profile Preview</h1>
+            <p>Name</p>
+            <p class="previewer" id="previewName">Not provided</p>
+            <p>Job Title:</p>
+            <p class="previewer" id="previewJobTitle">Not provided</p>
+            <p>Age:</p>
+            <p class="previewer" id="previewAge">Not provided</p>
+            <p>Bio</p>
+            <p class="previewer" id="previewBio">Not provided</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

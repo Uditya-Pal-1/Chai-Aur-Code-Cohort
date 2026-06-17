@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Challenge 4 </title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+ <!--   ## Challenge 4: Task Management 🧏🏻‍♂️
+
+### Task Management
+
+- Allow users to add a new task by typing into an input field and clicking the "Add" button or pressing Enter.
+- Display each task in a list with a checkbox and a delete button.
+- Users should be able to remove tasks by clicking the "Delete" button.
+
+### Task Completion
+
+- Users should be able to mark tasks as completed by clicking the checkbox next to a task.
+- Completed tasks should be visually distinct (e.g., strikethrough text and a different color).
+- Users should be able to uncheck a completed task, reverting it to an incomplete state.
+
+### Task List State
+
+- If there are no tasks, display a message: "No tasks yet. Add one above!"
+- This message should disappear once a task is added.
+- If all tasks are deleted, the message should reappear.
+
+### Task Statistics
+
+- Display the total number of tasks.
+- Show the number of completed tasks.
+ - These statistics should update dynamically as tasks are added, completed, or deleted. -->
+    <div class="container">
+        <h1>Task Manager</h1>
+        <div id="addTaskSection">
+        <input type="text" id="taskInput" placeholder="Enter Task...">
+        <button id="addTaskBtn">Add Task</button>
+        </div>
+        <hr><div id="sectionDisplay">
+        <div id="totalTaskDisplay">Total Tasks: </div>
+        <div id="completedTasks">Completed: </div>
+        </div>
+        <hr>
+        <div id="taskList">
+
+        </div>
+        <div id="messageDisplay">
+            <p>No tasks yet. Add one above!</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

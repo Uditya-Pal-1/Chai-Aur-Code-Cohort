@@ -1,0 +1,127 @@
+:root {
+    --primarycolor: #000000;
+    --secondrycolor: #ffffffd8;
+    --tertiarycolor: #9c9a9a;
+    --buttonColor: #1093ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-color: var(--tertiarycolor);
+    background-image: url(./d6.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    font-size: 20px;
+}
+
+.container {
+    width: 80vw;
+    padding: 20px;
+    color: var(--primarycolor);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    transition: all 0.5s ease;
+    /* flex: 0.5; */
+}
+
+.container:hover {
+    transform: scale(1.01);
+    background-color: var(--secondrycolor);
+    border-radius: 10px;
+}
+
+#addTaskSection {
+    display: flex;
+    gap: 50px;
+}
+
+#taskInput {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--tertiarycolor);
+    font-size: 15px;
+    font-weight: 500;
+
+}
+
+#addTaskBtn {
+    padding: 8px;
+    background-color: var(--primarycolor);
+    color: var(--secondrycolor);
+    border: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+hr {
+    color: var(--primarycolor);
+    height: 2px;
+    width: 70vw;
+    box-shadow: 0 0 5px var(--buttonColor);
+}
+
+#sectionDisplay {
+    display: flex;
+    gap: 50px;
+}
+
+#totalTaskDisplay {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 30px;
+}
+
+#completedTasks {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 30px;
+}
+
+#taskList {
+    padding: 20px;
+    align-items: baseline;
+    width: 70vw;
+    gap: 50px;
+}
+
+/* #taskDiv{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#deleteBtn {
+    padding: 8px;
+    background-color: var(--primarycolor);
+    color: var(--secondrycolor);
+    border: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    
+}
+#displayMessage{
+    min-height: 60vh;
+} */

@@ -17,5 +17,11 @@
 
 </div>
 
+
+
+<h1 align="center">DOM CHALLENGES 😀.</h1>
+<div align="center">
+  <!-- <img src="./assets/pose.jpeg" alt="Pose" width="700" /> -->
+  </br>
 </hr>
 </div>
