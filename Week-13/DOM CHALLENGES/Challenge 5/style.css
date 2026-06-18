@@ -30,7 +30,7 @@ body {
 }
 
 .caption {
-    position: absolute;
+
     bottom: 0;
     width: 100%;
     background: rgba(0, 0, 0, 0.7);
@@ -51,13 +51,6 @@ button {
 
 button:hover {
     background: #0056b3;
-}
-
-.dot-container {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 15px;
 }
 
 .dot {

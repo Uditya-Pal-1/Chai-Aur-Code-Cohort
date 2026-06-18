@@ -4,7 +4,7 @@ const previousBtn = document.querySelector('.previousBtn')
 const nextBtn = document.querySelector('.nextBtn')
 const dotContainer = document.querySelector('.dotContainer')
 const autoPlayBtn = document.getElementById('autoPlayBtn')
-const timerDisplay = document.querySelector('.timming')
+const timerDisplay = document.querySelector('.timing')
 
 const images = [
     { url: './BgImages/BMW.jpg', caption: 'A Beautiful Car' },
@@ -41,6 +41,10 @@ function updateCarousel() {
 
 function createDot() {
     dotContainer.innerHTML = ''
+    dotContainer.style.display = 'flex'
+    dotContainer.style.gap = '10px'
+    dotContainer.style.justifyContent = 'center'
+    dotContainer.style.marginTop = '15px'
     images.forEach((_, index) => {
         const dot = document.createElement('div')
         dot.classList.add('dot')
@@ -73,11 +77,11 @@ previousBtn.addEventListener('click', previousSlide)
 function startTimer(){
     timerInterval = setInterval(()=>{
         timeLeft --;
-        timerDisplay.textContent = timeLeft
+        timerDisplay.textContent = `Next image in: ${timeLeft}s`
         if(timeLeft <= 0){
             nextSlide();
             timeLeft=2;
-            timerDisplay.textContent = timeLeft;
+            timerDisplay.textContent = `Next image in: ${timeLeft}s`;
         }
     },1000)
 }
@@ -86,7 +90,7 @@ function resetTimer(){
     if(isPlaying){
         clearInterval(timerInterval)
         timeLeft = 2;
-        timerDisplay.textContent = timeLeft
+        timerDisplay.textContent = `Next image in: ${timeLeft}s`
         startTimer();
     }
 }
