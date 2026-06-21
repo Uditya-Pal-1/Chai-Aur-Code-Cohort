@@ -1,0 +1,96 @@
+:root {
+    --forthcolor: #5555;
+    --thirdcolor: #0084ff;
+    --primarycolor: #ffffff;
+    --secondrycolor: #000000;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--primarycolor);
+    background: var(--forthcolor);
+}
+
+h1 {
+    margin: 10px;
+    font-weight: 700;
+    color: var(--secondrycolor);
+}
+
+.container {
+    gap: 80px;
+    width: 80vw;
+    height: 50vh;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    justify-content: center;
+    background: var(--secondrycolor);
+    transition: all 0.5s ease-in-out;
+    box-shadow: 0 0 30px var(--thirdcolor);
+}
+
+.container:hover {
+    transform: scale(1.01);
+}
+
+.digitalClock {
+    width: 350px;
+    height: 100px;
+    background: wheat;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.line {
+    width: 2px;
+    height: 180px;
+    background: var(--primarycolor);
+}
+
+.analogClock {
+    width: 200px;
+    height: 200px;
+    background-color: #fff;
+    border-radius: 50% ;
+    cursor: pointer;
+}
+
+.dateContainer {
+    width: 80vw;
+    height: 10vw;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: var(--secondrycolor);
+    transition: all 0.5s ease-in-out;
+    box-shadow: 0 0 30px var(--thirdcolor);
+}
+
+.dateContainer:hover {
+    transform: scale(1.01);
+}
+
+.dateDisplay{
+    width: 500px;
+    height: 100px;
+    background: var(--primarycolor);
+    border-radius: 10px;
+    cursor: pointer;
+}
