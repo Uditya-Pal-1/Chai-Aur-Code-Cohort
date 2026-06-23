@@ -3,7 +3,6 @@
     --thirdcolor: #0084ff;
     --primarycolor: #ffffff;
     --secondrycolor: #000000;
-
 }
 
 * {
@@ -48,7 +47,7 @@ h1 {
     transform: scale(1.01);
 }
 
-.digitalClock {
+.digitalClock, .dateDisplay {
     width: 350px;
     height: 100px;
     display: flex;
@@ -70,9 +69,67 @@ h1 {
 .analogClock {
     width: 200px;
     height: 200px;
-    background-color: #fff;
-    border-radius: 50% ;
     cursor: pointer;
+    border-radius: 50%;
+    position: relative;
+    background-color: var(--primarycolor);
+}
+
+.hand{
+    left: 50%;
+    bottom: 50%;
+    position: absolute;
+    border-radius: 10px;
+    transform-origin: bottom center;
+}
+
+.hour-hand{
+    z-index: 3;
+    width: 6px;
+    height: 50px;
+    margin-left: -3px;
+    background: var(--secondrycolor);
+}
+
+.min-hand{
+    z-index: 2;
+    width: 4px;
+    height: 70px;
+    margin-left: -2px;
+    background: var(--fourthcolor);
+}
+
+.sec-hand{
+    z-index: 4;
+    width: 2px;
+    height: 85px;
+    margin-left: -1px;
+    background: var(--thirdcolor);
+}
+
+.center-dot{
+    top: 50%;
+    left: 50%;
+    z-index: 5;
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    border-radius: 50%;
+    background: var(--secondrycolor);
+    transform: translate(-50%, -50%);
+}
+
+.clock-number{
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+    margin-top: -15px;
+    margin-left: -15px;
+    position: absolute;
+    text-align: center;
+    color:var(--secondrycolor);
 }
 
 .dateContainer {
@@ -80,9 +137,10 @@ h1 {
     height: 10vw;
     margin: 10px;
     display: flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondrycolor);
     background: var(--secondrycolor);
     transition: all 0.5s ease-in-out;
     box-shadow: 0 0 30px var(--thirdcolor);
@@ -90,12 +148,4 @@ h1 {
 
 .dateContainer:hover {
     transform: scale(1.01);
-}
-
-.dateDisplay{
-    width: 500px;
-    height: 100px;
-    background: var(--primarycolor);
-    border-radius: 10px;
-    cursor: pointer;
 }

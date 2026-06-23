@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Challenge 6</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- ## Challenge 6: Enhanced Clock ⏰
 
@@ -36,15 +38,25 @@
 
 - Display the current date below the clock.
 - The format should include day, month, and year. -->
+
     <h1>Clock ⏱️</h1>
+
     <div class="container">
         <div class="digitalClock">00:00:00 AM</div>
         <div class="line"></div>
-        <div class="analogClock"></div>
+        <div class="analogClock">
+            <div class="hand hour-hand"></div>
+            <div class="hand min-hand"></div>
+            <div class="hand sec-hand"></div>
+            <div class="center-dot"></div>
+        </div>
     </div>
+
     <div class="dateContainer">
         <div class="dateDisplay">00-00-0000</div>
     </div>
+    
     <script src="script.js"></script>
 </body>
+
 </html>

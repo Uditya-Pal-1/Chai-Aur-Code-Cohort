@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Challenge 8</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Challenge 8</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <!-- ## Challenge 8: Simple Shopping Cart 🛒
+  <!-- ## Challenge 8: Simple Shopping Cart 🛒
 
 ### Product Display
 
@@ -27,10 +29,45 @@
   - A list of added items with their quantities.
   - Individual item subtotals (price × quantity).
   - The total cost of all items in the cart. -->
-
-    <div class="container">
-        
+  <h1 class="mainHeading">My Shop</h1>
+  <div class="productsContainer">
+    <h1>Products</h1>
+    <div class="product">
+      <img src="./d1.jpg" alt="anime-girl">
+      <p class='productName'>anime-girl painting</p>
+      <p class='productPrice'>$1200.34</p>
+      <button class="addBtn Btn">Add</button>
     </div>
-    <script src="script.js"></script>
+
+    <div class="product">
+      <img src="./d2.jpg" alt="lovers image">
+      <p class='productName'>lovers painting</p>
+      <p class='productPrice'>$1600.66</p>
+      <button class="addBtn Btn">Add</button>
+    </div>
+
+    <div class="product">
+      <img src="./d3.jpg" alt="mercedese car">
+      <p class='productName'>mercedese car</p>
+      <p class='productPrice'>$199999</p>
+      <button class="addBtn Btn">Add</button>
+    </div>
+
+    <div class="product">
+      <img src="./d4.jpg" alt="focus poster">
+      <p class='productName'>focus poster</p>
+      <p class='productPrice'>$13.49</p>
+      <button class="addBtn Btn">Add</button>
+    </div>
+
+
+  </div>
+  <div class="cartContainer">
+    <h1>Your Cart</h1>
+    <div class="totalAmount"></div>
+    <button class="CheckOut Btn">CheckOut</button>
+  </div>
+  <script src="script.js"></script>
 </body>
+
 </html>
