@@ -1,5 +1,5 @@
 :root {
-    --forthcolor: #5555;
+    --fourthcolor: #5555;
     --thirdcolor: #0084ff;
     --primarycolor: #ffffff;
     --secondrycolor: #000000;
@@ -21,7 +21,7 @@ body {
     flex-direction: column;
     justify-content: center;
     color: var(--primarycolor);
-    background: var(--forthcolor);
+    background: var(--fourthcolor);
 }
 
 h1 {
@@ -51,9 +51,14 @@ h1 {
 .digitalClock {
     width: 350px;
     height: 100px;
-    background: wheat;
-    border-radius: 10px;
+    display: flex;
+    font-size: 40px;
     cursor: pointer;
+    font-weight: 600;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    border: 10px solid wheat;
 }
 
 .line {
