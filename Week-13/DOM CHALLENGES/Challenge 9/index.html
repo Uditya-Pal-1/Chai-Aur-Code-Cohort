@@ -35,9 +35,23 @@
 - Use proper cursor indicators for clickable elements.
 - Prevent scrolling issues when the menu is open. -->
 
-    <div class="container">
-        
+    <div class="main-page">
+        <button id="openBtn" class='toggle-btn'>&#9776;</button>
+        <h1> Sliding Menu 🪟 </h1>
+        <p>This is a practice page. click the button to see the magic!</p>
     </div>
+    <div id="overlay" class="overlay"></div>
+    <nav id="slidingMenu" class="side-menu">
+        <div class="menu-header">
+            <h2>Navigation</h2>
+            <button id="closeMenuBtn" class="closeMenuBtn">&times;</button></div>
+            <ul class="menu-items">
+                <li class="menu-item">🏠 Home</li>
+                <li class="menu-item">👤 Profile</li>
+                <li class="menu-item">⚙️ Settings</li>
+                <li class="menu-item">📞 Contact Us</li>
+            </ul>
+    </nav>
     <script src="script.js"></script>
 </body>
 </html>

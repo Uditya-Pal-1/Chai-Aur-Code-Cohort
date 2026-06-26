@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Challenge 10</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Challenge 10</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <!-- ## Challenge 10: Interactive Memory Card Game 🂫
+  <!-- ## Challenge 10: Interactive Memory Card Game 🂫
 
 ### Game Setup
 
@@ -30,16 +32,21 @@
 - Suggested 8 emojis for card pairs:
   🐶, 🐱, 🐭, 🐹, 🐰, 🦊, 🐻, 🐼. -->
 
-<h1>Interactive Memory Card Game</h1>
-<div class="infoContainer">
-  <h3>dashboard</h3>
-  <span class="mouse"></span>
-  <span class="time"></span>
-  <button id="resetBtn">Reset</button>
-</div>
-    <div class="gridContainer">
-
+  <h1>Interactive Memory Card Game</h1>
+  <div class="infoContainer">
+    <div class="dashboard">
+      <h3>Score Board</h3>
+      <div class="stats">
+        <span class="movesDisplay"></span>
+        <span class="timeDisplay"></span>
+      </div>
+      <button id="resetBtn">Restart Game</button>
     </div>
-    <script src="script.js"></script>
+  </div>
+  <div class="game-board" id="gameBoard">
+
+  </div>
+  <script src="script.js"></script>
 </body>
+
 </html>

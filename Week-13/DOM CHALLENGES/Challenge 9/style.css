@@ -1,0 +1,118 @@
+:root {
+    --primaryColor: #e5dbb4;
+    --secondryColor: #1111;
+    --darkColor: #aca485;
+    --mainColor: #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--mainColor);
+    position: relative;
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--mainColor);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.toggle-btn {
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    background-color: var(--primaryColor);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+h1 {
+    margin: 10px;
+    justify-self: center;
+    font-size: 40px;
+    position: absolute;
+    top: 0;
+    right: 45%;
+    left: 55%;
+    width: 400px;
+}
+
+p {
+    justify-self: center;
+    margin: 10px;
+    font-size: 20px;
+}
+
+.side-menu{
+    position: fixed;
+    top: 0; 
+    right: 0;
+    background-color: var(--primaryColor);
+    width: 300px;
+    border-radius: 10px;
+    padding: 10px;
+    height: 100vh;
+    box-shadow: -5px 0 15px var(--primaryColor);
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
+    z-index: 20;
+}
+
+h2{
+    margin: 10px;
+    font-size: 25px;
+}
+
+.closeMenuBtn {
+    border: none;
+    font-size: 50px;
+    cursor: pointer;
+    background-color: var(--primaryColor);
+    border-radius: 10px;
+    padding: 2px 10px;
+    margin: 10px;
+}
+
+.menu-items{
+    text-decoration: none;
+    padding: 10px;
+}
+
+.menu-item{
+    list-style-type: none;
+    font-size: 20px;
+    padding: 10px;
+    transition: all 0.5s ease; 
+}
+.menu-item:hover{
+    background-color: var(--darkColor);
+    border-radius: 10px;
+    transform:all;
+}
+
+.overlay.active{
+    opacity: 1;
+    visibility: visible;
+}
+.side-menu.active{
+ transform:translateX(0)
+}
+body.no-scroll{
+    overflow: hidden;
+}
