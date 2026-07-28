@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Master Ji Project</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="container">
 
+<body>
+    <!-- create a daily mood tracker where users log their mood each day and visualize there emotional trends.
+   1 users pick a emoji (happy, sad, neutral, excited etc.) for the day.
+   2 store the mood logs in the localStorage.
+   3 Display a timeline view of past moods day/week/month wise views.
+   4 Bonus: to display in calendar view. -->
+    <div class="container">
+        <h1>Mood Tracker</h1>
+        <div class="logger-section">
+            <h3>how are you feeling today ?</h3>
+            <div class="emojiContainer">
+                <button class="moodBtn" data-mood="Happy"> 😀 </button>
+                <button class="moodBtn" data-mood="Sad"> ☹️ </button>
+                <button class="moodBtn" data-mood="Neutral"> 🫥 </button>
+                <button class="moodBtn" data-mood="Excited"> 🙃 </button>
+            </div>
+            <p id="saveMessage"></p>
+        </div>
+        <div class="viewControl">
+            <button class="timelinebtn" class="active">Timeline View</button>
+            <button class="calendarBtn">Calendar View</button>
+        </div>
+        <div class="viewSection" id="timelineView"></div>
+        <div class="viewSection hidden" id="calendarView"></div>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
