@@ -1,11 +1,11 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Times New Roman', Times, serif;
 }
 
-body{
+body {
     background-color: #f4f4f4;
     display: flex;
     justify-content: center;
@@ -13,23 +13,23 @@ body{
     padding: 20px;
 }
 
-.container{
+.container {
     background: white;
     width: 100%;
     max-width: 500px;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-.emojiContainer{
+.emojiContainer {
     display: flex;
     justify-content: space-around;
     margin: 20px 0;
 }
 
-.moodBtn{
+.moodBtn {
     font-size: 30px;
     background: none;
     border: 2px solid transparent;
@@ -39,19 +39,19 @@ body{
     padding: 10px;
 }
 
-.moodBtn:hover{
+.moodBtn:hover {
     transform: scale(1.2);
     border: 2px solid #0084ff;
 }
 
-.viewControl{
+.viewControl {
     margin: 20px 0;
     display: flex;
     justify-content: center;
     gap: 10px;
 }
 
-.viewControl button{
+.viewControl button {
     padding: 10px 20px;
     cursor: pointer;
     border: none;
@@ -59,11 +59,51 @@ body{
     border-radius: 5px;
 }
 
-.viewControl button.active{
+.viewControl button.active {
     background: #0084ff;
     color: white;
 }
 
-.hidden{
-    display:none !important;
+.hidden {
+    display: none !important;
+}
+
+.timeline-item { 
+    display: flex; 
+    justify-content: space-between; 
+    padding: 15px; 
+    border-bottom: 1px solid #eee; 
+    font-size: 18px; 
+    margin-top: 10px;
+}
+
+.calendar-grid {
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    padding: 20px;
+}
+
+.day-header {
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.calendar-cell {
+    aspect-ratio: 1;
+    border: 2px solid peru;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+.calendar-cell.has-mood{
+    background-color:  #ffebcd;
+    font-size: 18px;
 }
