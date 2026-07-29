@@ -5,12 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Master Ji Project</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
-<body>
-    <div class="container">
-
+    <!-- Instructions
+Quote of the Day
+Create a simple website that fetches and displays a random quote from the API.
+Features
+Fetch a random quote from the API.
+Display the quote and author on the page.
+Add a "New Quote" button to fetch another quote.
+Implement a copy to clipboard button.
+Add a share on Twitter button.
+Bonus extra points
+Set a random background image behind the quote
+Add a "Export" button to save the quote image to user computer
+API Endpoint
+https://api.freeapi.app/api/v1/public/quotes/quote/random
+Documentation
+https://freeapi.hashnode.space/api-guide/apireference/getARandom Quote -->
+<body id="bodyBg">
+    <div class="overlay"></div>
+    <div class="quote-card">
+        <div class="quote-text" id="quoteText">Loading quote...</div>
+        <div class="quote-author" id="authorText">Loading Author...</div>
+        <div class="button-group">
+            <button id="newQuoteBtn" title="New Quote">🔄️ New Quote</button>
+            <button id="copyBtn" title="copy clipboard">📃 Copy clipboard</button>
+            <button id="tweetBtn" title="Tweet">🐦 Tweet</button>
+            <button id="exportBtn" title="Export">💾 Export</button>
+        </div>
     </div>
-
-    <script src="script.js"></script>
+    
+  <script src="script.js"></script>
 </body>
 </html>
