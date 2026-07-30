@@ -1,5 +1,5 @@
 const searchInput = document.getElementById("searchInput")
-const sortSelection = document.getElementById('sortSelection')
+const sortSelection = document.getElementById('sortSelect')
 const gridBtn = document.getElementById('gridBtn')
 const listBtn = document.getElementById('listBtn')
 const bookContainer = document.getElementById('bookContainer')
@@ -39,7 +39,7 @@ function renderBooks(booksToRender) {
         const author = book?.volumeInfo?.authors?.join(", ") || book?.author || 'Unknown Author'
         const publisher = book?.volumeInfo?.publisher || book?.publisher || 'Unknown Publisher'
         const publishedDate = book?.volumeInfo?.publishedDate || book?.publishedDate || 'Unknown Date'
-        const thumbnail = book?.volumeInfo?.imageLinks?.thumbnail || book?.thumbnail || 'https://via.placeholder.com/150x200?text=No+Cover'; '#';
+        const thumbnail = book?.volumeInfo?.imageLinks?.thumbnail || book?.thumbnail || 'https://via.placeholder.com/150x200?text=No+Cover';
         const infoLink = book?.volumeInfo?.infoLink || book?.infoLink || "#"
 
         const card = document.createElement('a')
@@ -66,7 +66,7 @@ function applyFiltersAndRender() {
 
     let filteredBooks = allBooks.filter(book => {
         const title = (book?.volumeInfo?.title || book?.title || "").toLowerCase()
-        const author = (book?.volumeInfo?.author.join(", ") || book?.author || "").toLowerCase()
+        const author = (book?.volumeInfo?.authors?.join(", ") || book?.author || "").toLowerCase()
         return title.includes(searchTerm) || author.includes(searchTerm)
     });
 

@@ -13,8 +13,9 @@
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .header {
@@ -28,9 +29,9 @@ body {
 
 }
 
-.header.h2 {
+.header h2 {
     font-size: 26px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     justify-self: center;
 }
 
@@ -40,17 +41,24 @@ body {
     flex-wrap: wrap;
 }
 
-.searchBox{
+#gridBtn, #listBtn{
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+
+.searchBox {
     flex: 1;
     font-size: 16px;
     min-width: 250px;
     padding: 10px 20px;
     border: 1px solid var(--secondry-color);
     border-radius: 20px;
-    background-color: tra;
+    background-color: transparent;
 }
 
-#sortSelect{
+#sortSelect {
     padding: 10px;
     border: 1px solid var(--secondry-color);
     border-radius: 10px;
@@ -58,7 +66,7 @@ body {
     transition: 0.2s;
 }
 
-.view-toggle button.active{
+.view-toggle button.active {
     background: #2c3e50;
     color: white;
     border-color: #2c3e50;
@@ -72,11 +80,12 @@ main {
 
 .grid-view {
     display: grid;
-    grid-template-columns: repeat(autofill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 25px;
+
 }
 
-.grid-view .book-card{
+.grid-view .book-card {
     flex-direction: column;
     text-align: center;
 }
@@ -88,7 +97,7 @@ main {
     margin-bottom: 15px;
 }
 
-.list-view{
+.list-view {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -101,17 +110,17 @@ main {
     gap: 20px;
 }
 
-.list-view .book-thumbnail{
+.list-view .book-thumbnail {
     width: 120px;
     height: 180px;
     object-fit: cover;
 }
 
-.book-card{
+.book-card {
     background: var(--primary-color);
     border-radius: 10px;
     padding: 15px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
     display: flex;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -119,9 +128,9 @@ main {
     color: inherit;
 }
 
-.book-card:hover{
+.book-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05);
 }
 
 .book-info h3 {
