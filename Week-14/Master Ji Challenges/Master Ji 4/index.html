@@ -1,16 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Master Ji Project</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="container">
 
+<body>
+    <!-- Books Library
+Build a Book Library webite using FreeAPI.app that will fetch and display book data dynamically in a user-friendly way. This will help you practice working with API requests, handling JSON data, and rendering dynamic content using JavaScript.
+Tech Stack
+HTML
+CSS
+JavaScript
+Features
+Fetch books from the API and display them as a list/grid
+Provide an option to user to switch between the viewing type of list v/s grid
+Show book details including title, author, publisher, published date, and thumbnail
+Implement a search bar to filter books by title or author
+Implement a sort feature to list books in Alphabetical order based on their title, date of release (publishedDate)
+Implement pagination on reaching the end of the page to call next set of details
+Clicking on a book item, should open more details in a new tab (using infoLink)
+API Endpoint
+GET https://api.freeapi.app/api/v1/public/books
+Documentation
+https://freeapi.hashnode.space/api-guide/apireference/getBooks -->
+<header class="header">
+    <h2>📚 My Books Library</h2>
+    <div class="controls">
+        <input type="text" id="searchInput" class="searchBox" placeholder="Search by Title or author name...">
+        <select name="Select" id="sortSelect">
+            <option value="default">Search By...</option>
+            <option value="title-asc">Title (A-Z)</option>
+            <option value="title-desc">Title (Z-A)</option>
+            <option value="date-new">Release Date (Newest)</option>
+            <option value="date-old">Release Date (Oldest)</option>
+        </select>
+
+        <div class="view-toggle">
+            <button id="gridBtn" class="active" title="Grid View">⊞ Grid</button>
+            <button id="listBtn" title="List View">𝌆 List</button>
+        </div>
     </div>
+</header>
+<main>
+    <div id="bookContainer" class="grid-view"></div>
+    <div id="loader" class="hidden">Loading more books... 📖</div>
+</main>
+
 
     <script src="script.js"></script>
 </body>
+
 </html>
