@@ -1,0 +1,26 @@
+{
+  "name": "fullstack-project",
+  "version": "1.0.0",
+  "description": "first fullstack project ",
+  "keywords": [
+    "first",
+    "fullstack",
+    "project"
+  ],
+  "license": "ISC",
+  "author": "Uditya Pal",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
