@@ -1,16 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Master Ji Project</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </head>
-<body>
-    <div class="container">
 
-    </div>
+<body>
+    <!-- Markdown Previewer
+Build a simple readme markdown previewer that allows users to enter markdown text in a textarea and display the formatted preview in real time without any extra API calls to backend. You may use a js Markdown parser like marked.js or write your own basic parser. This assignment will help you practice working with user input, text processing, and dynamically updating the DOM based on user interactions.
+Tech Stack
+HTML
+CSS
+JavaScript
+Features
+A textarea where users can type Markdown syntax (on left-hand side)
+A preview section that displays the formatted output in real time (on right-hand side)
+Support for basic Markdown elements like:
+Headings (# H1, ## H2, etc.)
+Bold & Italics (**bold**, italic)
+Links ([title](http://example.com))
+Lists (ordered and unordered)
+A clear/reset button to clear the textarea
+BONUS:
+To handle code blocks (inline and multi-line) with highlighting code blocks
+Demo
+https://www.digitalocean.com/community/markdown
+https://marked.js.org/demo/
+Dependency
+https://github.com/markedjs/marked
+Documentation -->
+
+    <header class="header">
+        <h1>📝 Markdown Previewer</h1>
+        <button id="clearBtn" class="clear-btn">🗑️ Clear Editor</button>
+    </header>
+    <main class="container">
+        <div class="pane editor-pane">
+            <div class="pane-header">Editor</div>
+            <textarea name="markdown-editor" id="editor" placeholder="Type your markdown here..."></textarea>
+        </div>
+        <div class="pane preview-pane">
+            <div class="pane-header">Preview</div>
+            <div id="preview" class="markdown-body"></div>
+        </div>
+    </main>
 
     <script src="script.js"></script>
 </body>
+
 </html>
