@@ -8,10 +8,8 @@
 
 // export default User;
 
-
-
-
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema({
     name: String,
@@ -19,7 +17,7 @@ const userSchema = new mongoose.Schema({
     password: String,
     role: {
         type: String,
-        enum:['user','admin'],
+        enum: ['user', 'admin'],
         default: 'user'
     },
     isVerified: {
@@ -27,18 +25,27 @@ const userSchema = new mongoose.Schema({
         default: false
     },
     verificationToken: {
-        type:String,
+        type: String,
     },
     resetPasswordToken: {
-        type:String,
+        type: String,
     },
     resetPasswordExpires: {
-        type:Date,
+        type: Date,
     },
 
-},{
-    timestamps: true,
+},
+    {
+        timestamps: true,
+    }
+);
+
+userSchema.pre('save', async function () {
+    if (this.isModified('password')) {
+        this.password = await bcrypt.hash(this.password, 10);
+    }
 });
+
 
 const User = mongoose.model('User', userSchema);
 

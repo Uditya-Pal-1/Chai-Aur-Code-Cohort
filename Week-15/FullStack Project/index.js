@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import db from './utils/db.js';
 import userRoutes from './routes/user.routes.js'
-
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 const port = process.env.PORT || 4000;
@@ -20,7 +20,7 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-
+app.use(cookieParser());
 
 // const port = 3000; // also we use ports are - 4000, 5000, 5173, 8080, 8000 etc
 // not to use are - 443, 80, 23 etc.
