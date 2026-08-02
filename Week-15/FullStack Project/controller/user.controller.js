@@ -27,7 +27,6 @@ const registerUser = async (req, res) => {
     //     receivedData: { name, email, password }
     // })
 
-
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -119,54 +118,54 @@ const verifyUser = async (req, res) => {
 }
 
 const login = async (req, res) => {
-    const {email, password} = req.body;
+    const { email, password } = req.body;
 
-    if(!email || !password){
+    if (!email || !password) {
         return res.status(400).json({
             message: "All fields are required"
         })
     }
-    try{
-        const user = await User.findOne({email})
-            if(!user){
-                return res.status(400).json({
-                    message: "Invalid Email or Password"
-                })
-            }
-            const isMatch = await bcrypt.compare(password, user.password);
-            console.log(isMatch);
-
-            if(!isMatch){
-                return res.status(400).json({
-                    message: "Invalid email or password"
-                })
-            }
-            if(!user.isVerified){
-                return res.status(401).json({
-                    message: "Please verify your email before logging in."
-                })
-            }
-            const token = jwt.sign({id: user._id, role: user.role},
-                process.env.JWT_SECRET, {
-                    expiresIn: '24h'
-                }
-            );
-            const cookieOptions = {
-                httpOnly: true,
-                secure: true,
-                maxAge: 24*60*60*1000
-            }
-            res.cookie('test', token, cookieOptions)
-            res.status(200).json({
-                success: true,
-                message: 'Login successful',
-                token,
-                user: {
-                    id: user._id,
-                    name: user.name,
-                    role: user.role
-                }
+    try {
+        const user = await User.findOne({ email })
+        if (!user) {
+            return res.status(400).json({
+                message: "Invalid Email or Password"
             })
+        }
+        const isMatch = await bcrypt.compare(password, user.password);
+        console.log(isMatch);
+
+        if (!isMatch) {
+            return res.status(400).json({
+                message: "Invalid email or password"
+            })
+        }
+        if (!user.isVerified) {
+            return res.status(401).json({
+                message: "Please verify your email before logging in."
+            })
+        }
+        const token = jwt.sign({ id: user._id, role: user.role },
+            process.env.JWT_SECRET, {
+            expiresIn: '24h'
+        }
+        );
+        const cookieOptions = {
+            httpOnly: true,
+            secure: true,
+            maxAge: 24 * 60 * 60 * 1000
+        }
+        res.cookie('test', token, cookieOptions)
+        res.status(200).json({
+            success: true,
+            message: 'Login successful',
+            token,
+            user: {
+                id: user._id,
+                name: user.name,
+                role: user.role
+            }
+        })
     } catch (error) {
         res.status(400).json({
             message: "Error during login",

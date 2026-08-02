@@ -1,11 +1,7 @@
 //                                         this is boiler plate .
-
 // import mongoose from 'mongoose';
-
 // const userSchema = new mongoose.Schema()
-
 // const User = mongoose.model('User', userSchema)
-
 // export default User;
 
 import mongoose from 'mongoose';
@@ -45,7 +41,6 @@ userSchema.pre('save', async function () {
         this.password = await bcrypt.hash(this.password, 10);
     }
 });
-
 
 const User = mongoose.model('User', userSchema);
 
