@@ -186,13 +186,51 @@ const logOutUser = async (req, res) => {
 const forgotPassword = async (req, res) => {
     try {
         // get email // req.body se lena hai
+        const { email } = req.body;
+        if (!email) {
+            return res.status(400).json({ message: "Email is required" })
+        }
         // find user based on email
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: "User not found with this email." })
+        }
+        //generate token
+        const resetToken = crypto.randomBytes(20).toString('hex')
         // reset token + reset expiry => Date.now() + 10 * 60 * 1000
+        user.resetPasswordToken = resetToken;
+        user.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
+        await user.save();
         // save mail => url designing
+        const transporter = nodemailer.createTransport({
+            host: process.env.MAILTRAP_HOST,
+            port: process.env.MAILTRAP_PORT,
+            secure: false,
+            auth: {
+                user: process.env.MAILTRAP_USERNAME,
+                pass: process.env.MAILTRAP_PASSWORD
+            }
+
+        })
         // generate token then send to database and user then verify it.
 
+        const resetUrl = `${process.env.BASE_URL}/api/v1/users/reset/${resetToken}`;
+        const mailOption = {
+            from: process.env.MAILTRAP_SENDEMAIL,
+            to: user.email,
+            subject: 'password reset request',
+            text: `you requested to reset password. please click on the following links`
+        }
+        await transporter.sendMail({ mailOption })
+        return res.status(200).json({
+            message: 'password reset link sent successfully.',
+            success: true,
+        })
     } catch (error) {
-
+        return res.status(500).json({
+            error: error.message,
+            message: "error send reset email",
+        })
     }
 }
 
@@ -204,22 +242,45 @@ const resetPassword = async (req, res) => {
         const { token } = req.params
         const { password } = req.body
 
-        try {
-            const user = await User.findOne({
-                resetPasswordToken: token,
-                resetPasswordExpires: { $gt: Date.now() }
-
-            })
-        }catch(error){
-
+        if (!password) {
+            return res.status(400).json({ error: 'new password required' })
         }
-// set password in user
-// reset token , reset expiry => reset
-// save
 
 
-    }catch (error) {
+        const user = await User.findOne({
+            resetPasswordToken: token,
+            resetPasswordExpires: { $gt: Date.now() }
 
+        })
+
+        if(!user){
+            return res.status(400).json({
+                message: "Password reset token is invalid or has expired."
+            })
+        }
+
+        // hash new password
+        const salt = await bcrypt.getSalt(10)
+        const hashedPassword = await bcrypt.hash(password, salt)
+
+        // set password in user
+        user.password = hashedPassword;
+
+        // reset token , reset expiry => reset
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
+
+        // save
+        await user.save();
+        return res.status(200).json({
+            message: 'password has been successfully reset.'
+        })
+
+    } catch (error) {
+        return res.status(400).json({
+            message: "error resetting password",
+            error: error.message
+        })
     }
 }
 
