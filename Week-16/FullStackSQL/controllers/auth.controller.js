@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 import dotenv from 'dotenv'
 import nodemailer from 'nodemailer'
+import jwt from 'jsonwebtoken'
 
 const prisma = new PrismaClient();
 
@@ -53,7 +54,7 @@ export const registerUser = async (req, res) => {
 
         const verificationURL = `${process.env.BASE_URL}/api/v1/users/verify/${verificationToken}`
 
-       const mailOptions = {
+        const mailOptions = {
             from: process.env.MAILTRAP_SENDEMAIL,
             to: user.email,
             subject: 'Verify your email address',
@@ -83,3 +84,60 @@ export const registerUser = async (req, res) => {
     }
 };
 
+export const loginUser = async (req, res) => {
+    const { email, password } = req.body
+
+    if (!email || !password) {
+        return res.status(400).json({
+            success: false,
+            error: error.message,
+            message: 'All fields required.'
+        })
+    }
+    try {
+        const user = await prisma.user.findUnique({
+            where: { email }
+        })
+        if (!user) {
+            return res.status(400).json({
+                success: false,
+                error: error.message,
+                message: 'user not found '
+            })
+        }
+        const isMatched = bcrypt.compare(password, user.password)
+        if (!isMatched) {
+            return res.status(400).json({
+                success: false,
+                error: error.message,
+                message: 'invalid email or password.'
+            })
+        }
+
+        const token = jwt.sign(
+            { id: user.id, role: user.role },
+            process.env.JWT_SECRET,
+            { expiresIn: '24h' }
+        )
+        const cookieOptions = {
+            httpOnly: true,
+        }
+        res.cookie('token', token, cookieOptions)
+        return res.status(201).json({
+            success: true,
+            token,
+            user:{
+                id: user.id,
+                name: user.name,
+                email: user.email
+            },
+            message: 'user unable to register.'
+        })
+    } catch (error) {
+        return res.status(400).json({
+            success: false,
+            error: error.message,
+            message: 'login failed'
+        })
+    }
+}
