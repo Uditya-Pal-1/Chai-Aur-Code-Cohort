@@ -4,5 +4,8 @@
   },
   "devDependencies": {
     "prettier": "^3.5.2"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
   }
 }
