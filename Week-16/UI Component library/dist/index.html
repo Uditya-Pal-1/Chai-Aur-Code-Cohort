@@ -11,9 +11,9 @@
 </head>
 
 <body class=" bg-black text-gray-100 flex flex-col h-screen">
-    <header class="p-4 border-b border-gray-400" >
+    <header class="py-5 self-center border-gray-400">
         <nav>
-            <ul class="text-lg flex gap-6 items-center">
+            <ul class=" lg:text-lg flex gap-x-3 lg:gap-x-10 items-center text-center">
                 <li class="cursor-pointer hover:text-gray-400">Home</li>
                 <li class="cursor-pointer hover:text-gray-400">Component</li>
                 <li class="cursor-pointer hover:text-gray-400">Blogs</li>
@@ -22,23 +22,73 @@
             </ul>
         </nav>
     </header>
-    <main class="grow flex items-center px-6 relative">
-        <section class="flex items-center w-full justify-between">
-            <div class="w-1/2 pr-30">
-                <h1 class="text-[46px] font-bold mb-4.5">The Basic Components library for beautiful landing pages.</h1>
-                <p class="text-gray-400 mb-8">20+ production-ready components, blocks and templates built with React, Tailwind CSS and Motion.
+    <div class="w-[80vw] h-0.5 bg-gray-500 rounded-sm self-center mb-3 "></div>
+    <main class="grow flex flex-wrap items-center px-1 lg:px-6 md:relative">
+        <section class="flex flex-wrap-reverse items-center w-full justify-between">
+            <div class="px-8 lg:w-1/2 md:pr-30">
+                <h1 class="text-[20px] lg:text-[46px] font-bold mt-6 mb-4.5 py-2">The Basic Components library for
+                    beautiful landing pages.</h1>
+                <p class="text-gray-400 mb-8">20+ production-ready components, blocks and templates built with React,
+                    Tailwind CSS and Motion.
                     Copy, paste, customize, and ship at lightning speed without wrestling with animations or styling.
                 </p>
                 <div class="flex gap-4">
-                    <button class="bg-white text-black px-6 py-2 rounded-lg font-medium hover:cursor-pointer ">Browse Components</button>
-                    <button class="bg-transparent text-white border px-6 py-2 rounded-lg font-medium hover:cursor-pointer"> Get All-Access</button>
+                    <button
+                        class="bg-white text-black px-2.5 py-1 lg:px-6 lg:py-2 rounded-lg font-medium hover:cursor-pointer">Browse
+                        Components</button>
+                    <button
+                        class="bg-transparent text-white border px-2.5 py-1 lg:px-6 lg:py-2 rounded-lg font-medium hover:cursor-pointer">
+                        Get All-Access</button>
                 </div>
             </div>
-            <div class="size-1/3 p-0 rounded-l-lg absolute right-0 top-10">
-                <img class="rounded-tl-[36px] object-cover " src="./assets/hero.webp" alt="">
-                <img class="rounded-bl-[36px] object-cover" src="./assets/designDevelop.webp" alt="">
+            <div class="w-100vw lg:size-[40%] rounded-l-lg lg:absolute lg:right-0 md:top-20">
+                <img class="rounded-md sm:w-screen lg:rounded-l-[36px] object-cover block md:hidden "
+                    src="./assets/hero.webp" alt="">
+                <img class="rounded-md sm:w-screen lg:rounded-l-[36px] object-cover hidden md:block"
+                    src="./assets/designDevelop.webp" alt="">
             </div>
         </section>
+
+
+
+        <section class="w-full flex justify-center py-10 lg:absolute lg:top-[100%] lg:right-0 ">
+            <div
+                class="relative w-[90vw] lg:w-[80vw] h-[400px] lg:h-[500px] overflow-hidden rounded-2xl border border-gray-700 select-none shadow-2xl">
+
+                <div class="absolute inset-0 bg-black text-white flex items-center justify-center">
+                    <div class="text-center px-4">
+                        <h2 class="text-4xl lg:text-6xl font-bold tracking-tight">Dark Mode</h2>
+                        <p class="mt-4 text-gray-400 text-lg">Easy on the eyes, perfect for the night.</p>
+                    </div>
+                </div>
+
+                <div id="light-layer"
+                    class="absolute inset-0 bg-gray-100 text-black flex items-center justify-center pointer-events-none"
+                    style="clip-path: inset(0 50% 0 0);">
+                    <div class="text-center px-4">
+                        <h2 class="text-4xl lg:text-6xl font-bold tracking-tight">Light Mode</h2>
+                        <p class="mt-4 text-gray-600 text-lg">Crisp, clean, and highly readable.</p>
+                    </div>
+                </div>
+
+                <input type="range" min="0" max="100" value="50" id="theme-slider"
+                    class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-20">
+
+                <div id="ruler"
+                    class="absolute top-0 bottom-0 left-1/2 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.5)] -ml-[2px] pointer-events-none z-10 flex items-center justify-center">
+                    <div
+                        class="absolute w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-200">
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                d="M8 8l-4 4 4 4m8-8l4 4-4 4"></path>
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
     </main>
     <footer>
         <section>
@@ -49,5 +99,22 @@
         </section>
     </footer>
 </body>
+<script>
+    const slider = document.getElementById('theme-slider');
+    const lightLayer = document.getElementById('light-layer');
+    const ruler = document.getElementById('ruler');
+
+    // Listen for changes as the user drags the slider
+    slider.addEventListener('input', (e) => {
+        const sliderValue = e.target.value;
+
+        // 1. Move the top layer mask
+        // inset(top right bottom left) -> We dynamically adjust the right inset.
+        lightLayer.style.clipPath = `inset(0 ${100 - sliderValue}% 0 0)`;
+
+        // 2. Move the visual ruler to match
+        ruler.style.left = `${sliderValue}%`;
+    });
+</script>
 
 </html>
