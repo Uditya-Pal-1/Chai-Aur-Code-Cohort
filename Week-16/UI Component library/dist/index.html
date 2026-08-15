@@ -1,19 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UI Component Library</title>
-    <meta name="description" content="UI, UI Component, Web Components, Footer,Header, cards">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../src/output.css">
+    <meta name="description" content="UI, UI Component, Web Components, Footer,Header, cards" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../src/output.css" />
+
+    <!-- PRISM.JS CSS (For VS Code style syntax highlighting) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
 
-<body class=" bg-black text-gray-100 flex flex-col h-screen">
+<body class="dark:bg-black dark:text-gray-100 bg-white text-black flex flex-col min-h-screen overflow-x-hidden">
     <header class="py-5 self-center border-gray-400">
         <nav>
-            <ul class=" lg:text-lg flex gap-x-3 lg:gap-x-10 items-center text-center">
+            <ul class="lg:text-lg flex gap-x-3 lg:gap-x-10 items-center text-center">
                 <li class="cursor-pointer hover:text-gray-400">Home</li>
                 <li class="cursor-pointer hover:text-gray-400">Component</li>
                 <li class="cursor-pointer hover:text-gray-400">Blogs</li>
@@ -22,99 +25,523 @@
             </ul>
         </nav>
     </header>
-    <div class="w-[80vw] h-0.5 bg-gray-500 rounded-sm self-center mb-3 "></div>
-    <main class="grow flex flex-wrap items-center px-1 lg:px-6 md:relative">
-        <section class="flex flex-wrap-reverse items-center w-full justify-between">
-            <div class="px-8 lg:w-1/2 md:pr-30">
-                <h1 class="text-[20px] lg:text-[46px] font-bold mt-6 mb-4.5 py-2">The Basic Components library for
-                    beautiful landing pages.</h1>
-                <p class="text-gray-400 mb-8">20+ production-ready components, blocks and templates built with React,
-                    Tailwind CSS and Motion.
-                    Copy, paste, customize, and ship at lightning speed without wrestling with animations or styling.
+    <div class="w-[80vw] h-px bg-gray-500 rounded-sm self-center mb-10"></div>
+
+    <main class="grow flex flex-col gap-20 items-center px-1 lg:px-6 pb-20 w-full">
+
+        <section
+            class="flex flex-col-reverse lg:flex-row items-center w-full justify-between gap-10 max-w-[90vw] lg:max-w-[80vw] mx-auto">
+            <div class="lg:w-1/2">
+                <h1 class="text-[20px] lg:text-[46px] font-bold mt-6 mb-4 py-2 leading-tight">
+                    The Basic Components library for beautiful landing pages.
+                </h1>
+                <p class="text-gray-400 mb-8 leading-relaxed">
+                    20+ production-ready components, blocks and templates built with React, Tailwind CSS and
+                    Motion. Copy, paste, customize, and ship at lightning speed without wrestling with
+                    animations or styling.
                 </p>
                 <div class="flex gap-4">
                     <button
-                        class="bg-white text-black px-2.5 py-1 lg:px-6 lg:py-2 rounded-lg font-medium hover:cursor-pointer">Browse
-                        Components</button>
+                        class="bg-white text-black px-4 py-2 lg:px-6 lg:py-2 rounded-lg font-medium hover:cursor-pointer transition-transform hover:scale-105">
+                        Browse Components
+                    </button>
                     <button
-                        class="bg-transparent text-white border px-2.5 py-1 lg:px-6 lg:py-2 rounded-lg font-medium hover:cursor-pointer">
-                        Get All-Access</button>
+                        class="bg-transparent text-white border border-gray-600 px-4 py-2 lg:px-6 lg:py-2 rounded-lg font-medium hover:cursor-pointer transition-transform hover:scale-105 hover:bg-white/5">
+                        Get All-Access
+                    </button>
                 </div>
             </div>
-            <div class="w-100vw lg:size-[40%] rounded-l-lg lg:absolute lg:right-0 md:top-20">
-                <img class="rounded-md sm:w-screen lg:rounded-l-[36px] object-cover block md:hidden "
-                    src="./assets/hero.webp" alt="">
-                <img class="rounded-md sm:w-screen lg:rounded-l-[36px] object-cover hidden md:block"
-                    src="./assets/designDevelop.webp" alt="">
+
+            <div class="w-full lg:w-1/2 flex justify-end">
+                <img class="rounded-md w-full lg:w-[90%] lg:rounded-l-[36px] object-cover block md:hidden"
+                    src="./assets/Home Page images/hero.webp" alt="Hero Mobile" />
+                <img class="rounded-md w-full lg:w-[90%] lg:rounded-l-[36px] object-cover hidden md:block shadow-2xl"
+                    src="./assets/Home Page images/designDevelop.webp" alt="Hero Desktop" />
             </div>
         </section>
+        <div class="flex items-center">
+            <h1 class="text-4xl font-bold text-gray-300">Components</h1>
+        </div>
 
+        <section class="w-full flex flex-col items-center max-w-[90vw] lg:max-w-[80vw] mx-auto pt-10">
+            <div class="w-full mb-6">
+                <h2 class="text-2xl font-bold text-white">Theme Reveal Slider</h2>
+                <p class="text-gray-400 text-sm mt-1">
+                    An interactive before/after slider comparing light and dark themes.
+                </p>
+            </div>
 
-
-        <section class="w-full flex justify-center py-10 lg:absolute lg:top-[100%] lg:right-0 ">
             <div
-                class="relative w-[90vw] lg:w-[80vw] h-[400px] lg:h-[500px] overflow-hidden rounded-2xl border border-gray-700 select-none shadow-2xl">
-
-                <div class="absolute inset-0 bg-black text-white flex items-center justify-center">
-                    <div class="text-center px-4">
-                        <h2 class="text-4xl lg:text-6xl font-bold tracking-tight">Dark Mode</h2>
-                        <p class="mt-4 text-gray-400 text-lg">Easy on the eyes, perfect for the night.</p>
-                    </div>
-                </div>
-
-                <div id="light-layer"
-                    class="absolute inset-0 bg-gray-100 text-black flex items-center justify-center pointer-events-none"
-                    style="clip-path: inset(0 50% 0 0);">
-                    <div class="text-center px-4">
-                        <h2 class="text-4xl lg:text-6xl font-bold tracking-tight">Light Mode</h2>
-                        <p class="mt-4 text-gray-600 text-lg">Crisp, clean, and highly readable.</p>
-                    </div>
-                </div>
-
-                <input type="range" min="0" max="100" value="50" id="theme-slider"
-                    class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-20">
-
-                <div id="ruler"
-                    class="absolute top-0 bottom-0 left-1/2 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.5)] -ml-[2px] pointer-events-none z-10 flex items-center justify-center">
+                class="w-full flex flex-col lg:flex-row border border-gray-700 rounded-xl overflow-hidden bg-[#1d1f21] shadow-2xl">
+                <!-- PREVIEW -->
+                <div
+                    class="w-full lg:w-1/2 p-6 lg:p-10 flex items-center justify-center bg-gray-900 border-b lg:border-b-0 lg:border-r border-gray-700">
+                    <!-- ACTUAL SLIDER COMPONENT -->
                     <div
-                        class="absolute w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-200">
-                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                d="M8 8l-4 4 4 4m8-8l4 4-4 4"></path>
-                        </svg>
+                        class="relative w-full h-[350px] overflow-hidden rounded-2xl border border-gray-700 select-none shadow-2xl">
+                        <div class="absolute inset-0 bg-black text-white flex items-center justify-center">
+                            <div class="text-center px-4">
+                                <h2 class="text-3xl lg:text-4xl font-bold tracking-tight">Dark Mode</h2>
+                            </div>
+                        </div>
+                        <div id="light-layer"
+                            class="absolute inset-0 bg-gray-100 text-black flex items-center justify-center pointer-events-none"
+                            style="clip-path: inset(0 50% 0 0)">
+                            <div class="text-center px-4">
+                                <h2 class="text-3xl lg:text-4xl font-bold tracking-tight">Light Mode</h2>
+                            </div>
+                        </div>
+                        <input type="range" min="0" max="100" value="50" id="theme-slider"
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-20" />
+                        <div id="ruler"
+                            class="absolute top-0 bottom-0 left-1/2 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.5)] -ml-[2px] pointer-events-none z-10 flex items-center justify-center">
+                            <div
+                                class="absolute w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-200">
+                                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                        d="M8 8l-4 4 4 4m8-8l4 4-4 4"></path>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-            </div>
-        </section>
+                <!-- CODE -->
+                <div class="w-full lg:w-1/2 relative group min-h-[350px] bg-[#1d1f21]">
+                    <button onclick="copyCode(this, 'slider-code')"
+                        class="absolute top-4 right-4 bg-gray-700 text-gray-200 text-xs px-3 py-1.5 rounded-md border border-gray-600 hover:bg-gray-600 transition-colors opacity-100 lg:opacity-0 group-hover:opacity-100 z-10">
+                        Copy Code
+                    </button>
+                    <!-- whitespace-pre-wrap added below to fix horizontal scrolling -->
+                    <pre class="p-6 overflow-y-auto text-xs lg:text-sm h-[430px] whitespace-pre-wrap"><code id="slider-code" class="language-html">
+&lt;!-- Theme Reveal Slider --&gt;
+&lt;div class="relative w-full h-[350px] overflow-hidden rounded-2xl border border-gray-700 select-none shadow-2xl"&gt;
+    &lt;!-- Dark Mode --&gt;
+    &lt;div class="absolute inset-0 bg-black text-white flex items-center justify-center"&gt;
+        &lt;h2 class="text-3xl lg:text-4xl font-bold tracking-tight"&gt;Dark Mode&lt;/h2&gt;
+    &lt;/div&gt;
 
+    &lt;!-- Light Mode --&gt;
+    &lt;div id="light-layer" class="absolute inset-0 bg-gray-100 text-black flex items-center justify-center pointer-events-none" style="clip-path: inset(0 50% 0 0);"&gt;
+        &lt;h2 class="text-3xl lg:text-4xl font-bold tracking-tight"&gt;Light Mode&lt;/h2&gt;
+    &lt;/div&gt;
 
-    </main>
-    <footer>
-        <section>
+    &lt;!-- Range Slider --&gt;
+    &lt;input type="range" min="0" max="100" value="50" id="theme-slider" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-20"&gt;
+    
+    &lt;!-- Divider Handle --&gt;
+    &lt;div id="ruler" class="absolute top-0 bottom-0 left-1/2 w-1 bg-white shadow-[0_0_10px_rgba(0,0,0,0.5)] -ml-[2px] pointer-events-none z-10 flex items-center justify-center"&gt;
+        &lt;div class="absolute w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-200"&gt;
+            &lt;svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;
+                &lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 8l-4 4 4 4m8-8l4 4-4 4"&gt;&lt;/path&gt;
+            &lt;/svg&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
 
-        </section>
-        <section>
-
-        </section>
-    </footer>
-</body>
-<script>
+&lt;script&gt;
     const slider = document.getElementById('theme-slider');
     const lightLayer = document.getElementById('light-layer');
     const ruler = document.getElementById('ruler');
 
-    // Listen for changes as the user drags the slider
-    slider.addEventListener('input', (e) => {
-        const sliderValue = e.target.value;
-
-        // 1. Move the top layer mask
-        // inset(top right bottom left) -> We dynamically adjust the right inset.
-        lightLayer.style.clipPath = `inset(0 ${100 - sliderValue}% 0 0)`;
-
-        // 2. Move the visual ruler to match
-        ruler.style.left = `${sliderValue}%`;
+    slider.addEventListener('input', (e) =&gt; {
+        lightLayer.style.clipPath = `inset(0 ${100 - e.target.value}% 0 0)`;
+        ruler.style.left = `${e.target.value}%`;
     });
-</script>
+&lt;/script&gt;
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="w-full flex flex-col items-center max-w-[90vw] lg:max-w-[80vw] mx-auto">
+            <div class="w-full mb-6">
+                <h2 class="text-2xl font-bold text-white">Gradient Button</h2>
+                <p class="text-gray-400 text-sm mt-1">A sleek gradient button with hover effects.</p>
+            </div>
+
+            <div
+                class="w-full flex flex-col lg:flex-row border border-gray-700 rounded-xl overflow-hidden bg-[#1d1f21] shadow-2xl">
+                <!-- PREVIEW -->
+                <div
+                    class="w-full lg:w-1/2 p-10 lg:p-16 flex items-center justify-center bg-gray-900 border-b lg:border-b-0 lg:border-r border-gray-700 min-h-[200px]">
+                    <button
+                        class="px-6 py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 transition-all shadow-lg hover:shadow-purple-500/30 hover:-translate-y-0.5">
+                        Get Started Today
+                    </button>
+                </div>
+
+                <!-- CODE -->
+                <div class="w-full lg:w-1/2 relative group min-h-[200px] bg-[#1d1f21]">
+                    <button onclick="copyCode(this, 'button-code')"
+                        class="absolute top-4 right-4 bg-gray-700 text-gray-200 text-xs px-3 py-1.5 rounded-md border border-gray-600 hover:bg-gray-600 transition-colors opacity-100 lg:opacity-0 group-hover:opacity-100 z-10">
+                        Copy Code
+                    </button>
+                    <!-- whitespace-pre-wrap added below to fix horizontal scrolling -->
+                    <pre class="p-6 overflow-y-auto text-xs lg:text-sm h-full max-h-[300px] whitespace-pre-wrap"><code id="button-code" class="language-html">
+&lt;button class="px-6 py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 transition-all shadow-lg hover:shadow-purple-500/30 hover:-translate-y-0.5"&gt;
+    Get Started Today
+&lt;/button&gt;
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="w-full flex flex-col items-center max-w-[90vw] lg:max-w-[80vw] mx-auto pt-10">
+            <div class="w-full mb-6">
+                <h2 class="text-2xl font-bold text-gray-300">Footer</h2>
+                <p class="text-gray-400 text-sm mt-1">Basic Responsive Footer for all display sizes.</p>
+            </div>
+            <div class="w-full flex flex-col lg:flex-row border border-gray-700 rounded-xl overflow-hidden shadow-2xl">
+                <div
+                    class="w-full lg:w-1/2 p-10 flex items-center justify-center bg-gray-900 border-b lg:border-b-0 lg:border-r lg:border-gray-700">
+
+                    <footer class="w-full bottom-0 py-5 text-center border-t border-gray-500 mt-auto">
+                        <div class="text-gray-300 items-center left-0 flex ml-1 lg:ml-4 justify-between">
+                            <h1 class="lg:font-bold text-md lg:ml-10 lg:text-2xl">UI Component Library</h1>
+                            <input
+                                class="py-1 px-2 w-[140px] lg:w-auto lg:ml-10 mr-2 lg:mr-4 text-sm border-gray-500 border rounded-xl focus:outline-none focus:border-blue-600 overflow-hidden"
+                                type="text" placeholder=" @gmail.com" />
+                        </div>
+                        <div class="w-[70%] h-px bg-gray-500 rounded-2xl m-2 mx-auto"></div>
+                        <div
+                            class="w-full text-gray-600 flex flex-wrap justify-between px-5 lg:px-20 align-middle gap-4">
+                            <div>
+                                <h1 class="text-lg text-gray-300 font-bold my-2 lg:mx-10">Pages</h1>
+                                <ul>
+                                    <li>Home</li>
+                                    <li>About</li>
+                                    <li>Contact-Us</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h1 class="text-lg text-gray-300 font-bold my-2 lg:mx-10">Components</h1>
+                                <ul>
+                                    <li>Theme Reveal Slider</li>
+                                    <li>Gradient Button</li>
+                                    <li>Footer</li>
+                                </ul>
+                            </div>
+                            <div class="w-full h-px bg-gray-500"></div>
+                            <div class="copyright text-[12px]">
+                                <span>&copy; Copyright by Uditya Pal. All rights are reserved !! ❣️</span>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+
+                <div class="w-full lg:w-1/2 relative group bg-[#1d1f21] min-h-[250px]">
+                    <button onclick="copyCode(this, 'Footer-1122')"
+                        class="absolute top-4 right-4 bg-gray-700 text-gray-200 text-xs px-3 py-1.5 rounded-md hover:bg-gray-600 opacity-100 lg:opacity-0 group-hover:opacity-100 z-10">
+                        Copy Code
+                    </button>
+                    <pre class="p-6 overflow-y-auto text-xs lg:text-sm h-full whitespace-pre-wrap"><code id="Footer-1122" class='language-html'>
+                        
+        &lt;footer class="w-full py-5 text-center border-t border-gray-500 mt-auto"&gt;
+    &lt;div class="text-gray-300 left-0 flex ml-1 lg:ml-4 justify-between"&gt;
+        &lt;h1 class="lg:font-bold text-md lg:ml-10 lg:text-2xl"&gt;UI Component Library&lt;/h1&gt;
+        &lt;input class="lg:py-1 px-1 lg:ml-10 lg:px-2 mr-1 lg:mr-4 border-gray-500 border rounded-xl overflow-hidden" type="text" placeholder="@gmail.com" /&gt;
+    &lt;/div&gt;
+    &lt;div class="w-full h-px bg-gray-500 rounded-2xl m-2"&gt;&lt;/div&gt;
+    &lt;div class="w-full text-gray-600 flex flex-wrap justify-between px-5 lg:px-20 align-middle gap-4"&gt;
+        &lt;div&gt;
+            &lt;h1 class="text-lg text-gray-300 font-bold my-2 lg:mx-10"&gt;Pages&lt;/h1&gt;
+            &lt;ul&gt;
+                &lt;li&gt;Home&lt;/li&gt;
+                &lt;li&gt;About&lt;/li&gt;
+                &lt;li&gt;Contact-Us&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;h1 class="text-lg text-gray-300 font-bold my-2 lg:mx-10"&gt;Components&lt;/h1&gt;
+            &lt;ul&gt;
+                &lt;li&gt;Theme Reveal Slider&lt;/li&gt;
+                &lt;li&gt;Gradient Button&lt;/li&gt;
+                &lt;li&gt;Footer&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;div class="w-full h-px bg-gray-500"&gt;&lt;/div&gt;
+        &lt;div class="copyright text-[12px]"&gt;
+            &lt;span&gt;&amp;copy; Copyright by Uditya Pal. All rights are reserved !! ❣️&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/footer&gt;
+            </code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="w-full flex flex-col items-center max-w-[90vw] lg:max-w-[80vw] mx-auto">
+            <div class="w-full mb-6">
+                <h2 class="text-2xl font-bold text-gray-200">Navbar</h2>
+                <p class="text-gray-400 text-sm mt-1">A modern, responsive navigation bar with a mobile menu icon.</p>
+            </div>
+            <div class="w-full flex flex-col lg:flex-row border border-gray-700 rounded-xl overflow-hidden shadow-2xl">
+                <div
+                    class="w-full lg:w-1/2 p-6 lg:p-10 flex items-center justify-center rounded-l-xl bg-[#0a0a0a] border-b lg:border-b-0 lg:border-grey-700 min-h-[250px]">
+                    <nav
+                        class="w-full bg-[#161616] border border-gray-700 rounded-xl px-4 py-3 flex justify-between items-center shadow-lg">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="size-8 bg-gradient-to-tr from-purple-500 to-blue-500 rounded-md flex items-center justify-center font-bold text-white">
+                                U</div>
+                            <span class="text-white font-bold text-lg tracking-wide">Brand</span>
+                        </div>
+                        <ul class="hidden md:flex gap-6 text-sm text-gray-400 font-medium">
+                            <li class="hover:text-white cursor-pointer transition-colors">Home</li>
+                            <li class="hover:text-white cursor-pointer transition-colors">Features</li>
+                            <li class="hover:text-white cursor-pointer transition-colors">Pricing</li>
+                        </ul>
+                        <div class="hidden md:block">
+                            <button
+                                class="px-4 py-1.5 text-sm bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors">Login</button>
+                        </div>
+                        <button class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                        </button>
+                    </nav>
+                </div>
+                <div class="w-full lg:w-1/2 relative group bg-[#1d1d21] min-h-[250px]">
+                    <button onclick="copyCode(this, 'navbar-code')"
+                        class="absolute top-4 right-4 bg-gray-700 text-gray-200 text-xs py-1.5 px-3 rounded-md hover:bg-gray-600 opacity-100 lg:opacity-0 group-hover:opacity-100 z-10 transition-colors">
+                        Copy Code
+                    </button>
+                    <pre class="p-6 overflow-y-auto text-xs lg:text-sm h-full max-h[400px] whitespace-pre-wrap"><code id="navbar-code" class="language-html">
+&lt;nav class="w-full bg-[#161616] border border-gray-700 rounded-xl px-4 py-3 flex justify-between items-center shadow-lg"&gt;
+    &lt;!-- Logo Area --&gt;
+    &lt;div class="flex items-center gap-3"&gt;
+        &lt;div class="w-8 h-8 bg-gradient-to-tr from-purple-500 to-blue-500 rounded-md flex items-center justify-center font-bold text-white"&gt;U&lt;/div&gt;
+        &lt;span class="text-white font-bold text-lg tracking-wide"&gt;Brand&lt;/span&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- Desktop Links --&gt;
+    &lt;ul class="hidden md:flex gap-6 text-sm text-gray-400 font-medium"&gt;
+        &lt;li class="hover:text-white cursor-pointer transition-colors"&gt;Home&lt;/li&gt;
+        &lt;li class="hover:text-white cursor-pointer transition-colors"&gt;Features&lt;/li&gt;
+        &lt;li class="hover:text-white cursor-pointer transition-colors"&gt;Pricing&lt;/li&gt;
+    &lt;/ul&gt;
+    
+    &lt;!-- Desktop Login Button --&gt;
+    &lt;div class="hidden md:block"&gt;
+        &lt;button class="px-4 py-1.5 text-sm bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors"&gt;Login&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Mobile Hamburger Icon --&gt;
+    &lt;button class="md:hidden text-gray-300 hover:text-white focus:outline-none"&gt;
+        &lt;svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"&gt;
+            &lt;path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /&gt;
+        &lt;/svg&gt;
+    &lt;/button&gt;
+&lt;/nav&gt;
+                    </code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="w-full flex flex-col items-center max-w-[90vw] lg:max-w-[80vw] mx-auto">
+            <div class="w-full mb-4">
+                <h2 class="text-2xl font-bold text-gray-300">Animated Image Card</h2>
+                <p class="text-gray-400 text-sm mt-1">A content card with an image cover and smooth hover animations.
+                </p>
+            </div>
+            <div class="w-full flex flex-col lg:flex-row border border-gray-700 rounded-xl overflow-hidden shadow-2xl">
+                <div
+                    class="w-full lg:w-1/2 p-6 lg:p-10 flex items-center justify-center bg-[#0a0a0a] border-b lg:border-b-0 lg:border-r lg:border-gray-700 min-h-[400px]">
+                    <div
+                        class="group w-full max-w-sm bg-[#161616] border border-gray-700 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-purple-500/10">
+                        <div class="w-full h-48 overflow-hidden">
+                            <img class="size-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+                                src="./assets/imageSlider/pictureslider1.webp" alt="sliderImage-1">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">Retro Lobby</h3>
+                            <p class="text-gray-400 text-sm mb-5 line-clamp-3">
+                                Explore the oldest retro in spatial computing and feel the premiumness of the old items.
+                                Discover how the things changes according to the time line.
+                            </p>
+                            <button
+                                class="inline-flex items-center gap-2 text-sm font-semibold text-white bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors">
+                                Read More
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor"
+                                    class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 relative group bg-[#1d1f21] min-h-[400px]">
+                    <button onclick="copyCode(this,'card-code')"
+                        class="absolute top-4 right-4 bg-gray-700 text-gray-200 text-xs px-3 py-1.5 rounded-md hover:bg-gray-600 opacity-0 group-hover:opacity-100 z-10 transition-colors">
+                        Copy Code
+                    </button>
+                    <pre class="p-6 overflow-y-auto text-xs lg:text-sm h-full max-h-[500px] whitespace-pre-wrap"><code id="card-code" class="language-html">
+                        &lt;!-- 'group' class allows us to trigger inner animations when the card is hovered --&gt;
+&lt;div class="group w-full max-w-sm bg-[#161616] border border-gray-700 rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-purple-500/10"&gt;
+    
+    &lt;!-- Image Container --&gt;
+    &lt;div class="w-full h-48 overflow-hidden"&gt;
+        &lt;img src="YOUR_IMAGE_URL.jpg" alt="Cover" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" /&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Content Area --&gt;
+    &lt;div class="p-6"&gt;
+        &lt;h3 class="text-xl font-bold text-white mb-2"&gt;Virtual Reality Insights&lt;/h3&gt;
+        &lt;p class="text-gray-400 text-sm mb-5 line-clamp-3"&gt;
+            Explore the latest advancements in spatial computing and eye-tracking technology. Discover how binocular VR is changing the landscape of interactive experiences.
+        &lt;/p&gt;
+
+        &lt;!-- Read More Button --&gt;
+        &lt;button class="inline-flex items-center gap-2 text-sm font-semibold text-white bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors"&gt;
+            Read More
+            &lt;svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"&gt;
+                &lt;path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" /&gt;
+            &lt;/svg&gt;
+        &lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                    </code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="w-full flex flex-col items-center max-w-[90vw] lg:max-w-[80vw] mx-auto">
+            <div class="w-full mb-6">
+                <h2 class="text-2xl font-bold text-gray-300">Auto Image Slider</h2>
+                <p class="text-gray-400 text-sm mt-1">A Smooth, automatically cross-fading image carousel.</p>
+            </div>
+            <div class="w-full flex flex-col lg:flex-row border border-gray-700 rounded-xl overflow-hidden shadow-2xl">
+                <div class="w-full lg:w-1/2 p-6 lg:p-10 flex items-center justify-center bg-[#0a0a0a] border-b lg:border-b-0 lg-border-r lg:border-gray-700 min-h-[400px]">
+                    <div class="relative w-full h-[300px] rounded-2xl overflow-hidden shadow-2xl bg-black">
+                        <img id="slide-1"
+                            class="absolute inset-0 size-full object-cover transition-opacity duration-1000 opacity-100"
+                            src="./assets/imageSlider/pictureslider1.webp" alt="Image Slider 1">
+                        <img id="slide-2"
+                            class="absolute inset-0 size-full object-cover transition-opacity duration-1000 opacity-100"
+                            src="./assets/imageSlider/pictureslider2.webp" alt="Image Slider 2">
+                        <img id="slide-3"
+                            class="absolute inset-0 size-full object-cover transition-opacity duration-1000 opacity-100"
+                            src="./assets/imageSlider/pictureslider3.webp" alt="Image Slider 3">
+                        <img id="slide-4"
+                            class="absolute inset-0 size-full object-cover transition-opacity duration-1000 opacity-100"
+                            src="./assets/imageSlider/pictureslider4.webp" alt="Image Slider 4">
+                        <img id="slide-5"
+                            class="absolute inset-0 size-full object-cover transition-opacity duration-1000 opacity-100"
+                            src="./assets/imageSlider/pictureslider5.webp" alt="Image Slider 5">
+                        <img id="slide-6"
+                            class="absolute inset-0 size-full object-cover transition-opacity duration-1000 opacity-100"
+                            src="./assets/imageSlider/pictureslider6.webp" alt="Image Slider 6">
+                        <img id="slide-7"
+                            class="absolute inset-0 size-full object-cover transition-opacity duration-1000 opacity-100"
+                            src="./assets/imageSlider/pictureslider7.webp" alt="Image Slider 7">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 z-10">
+                            <h3 class="text-white font-bold text-xl">Discover the World</h3>
+                            <p class="text-gray-300 text-sm">Automatic sliding gallery</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 relative group bf-[#1d1f21] min-h-[400px]">
+                    <button onclick="copyCode(this,'auto-slider-code')"
+                        class="absolute top-4 right-4 bg-gray-700 text-gray-200 text-xs px-3 py-1.5 rounded-md hover:bg-gray-600 opacity-100 lg:opacity-0 group-hover:opacity-100 z-10 transition-colors">
+                        Copy Code
+                    </button>
+                <pre class="p-6 overflow-y-auto text-xs lg:text-sm h-full max-h-[500px] whitespace-pre-wrap"><code id="auto-slider-code" class="language-html">
+                    &lt;!-- Auto Fading Slider --&gt;
+&lt;div class="relative w-full h-[300px] rounded-2xl overflow-hidden shadow-2xl bg-black"&gt;
+    &lt;!-- Images --&gt;
+    &lt;img id="slide-1" src="image1.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100" alt="Slide 1"&gt;
+    &lt;img id="slide-2" src="image2.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Slide 2"&gt;
+    &lt;img id="slide-3" src="image3.jpg" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0" alt="Slide 3"&gt;
+    
+    &lt;!-- Gradient Overlay &amp; Text --&gt;
+    &lt;div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6 z-10"&gt;
+        &lt;h3 class="text-white font-bold text-xl"&gt;Discover the World&lt;/h3&gt;
+        &lt;p class="text-gray-300 text-sm"&gt;Automatic sliding gallery&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    // Slider Logic
+    let currentSlide = 1;
+    const totalSlides = 7;
+
+    setInterval(() =&gt; {
+        // Hide current slide
+        document.getElementById(`slide-${currentSlide}`).classList.replace('opacity-100', 'opacity-0');
+        
+        // Move to next slide
+        currentSlide = currentSlide === totalSlides ? 1 : currentSlide + 1;
+        
+        // Show next slide
+        document.getElementById(`slide-${currentSlide}`).classList.replace('opacity-0', 'opacity-100');
+    }, 3000); // Changes every 3 seconds
+&lt;/script&gt;
+                </code></pre>
+            </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="w-full py-10 text-center border-t border-gray-500 mt-auto">
+        <p class="text-gray-500">© 2024 UI Component Library.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+    <script>
+        //theme slider
+        const slider = document.getElementById('theme-slider')
+        const lightLayer = document.getElementById('light-layer')
+        const ruler = document.getElementById('ruler')
+
+        slider.addEventListener('input', (e) => {
+            const sliderValue = e.target.value
+            lightLayer.style.clipPath = `inset(0 ${100 - sliderValue}% 0 0)`
+            ruler.style.left = `${sliderValue}%`
+        })
+        // copy code btn
+        function copyCode(buttonElement, codeId) {
+            const codeText = document.getElementById(codeId).innerText
+            navigator.clipboard
+                .writeText(codeText)
+                .then(() => {
+                    buttonElement.innerText = 'Copied!'
+                    buttonElement.classList.add('bg-green-600', 'text-white', 'border-green-500')
+
+                    setTimeout(() => {
+                        buttonElement.innerText = 'Copy Code'
+                        buttonElement.classList.remove('bg-green-600', 'text-white', 'border-green-500')
+                    }, 2000)
+                })
+                .catch((err) => {
+                    console.error('Failed to copy: ', err)
+                    buttonElement.innerText = 'Error!'
+                })
+        }
+
+        //image slider
+        let currentSlide = 1;
+        const totalSlides = 7;
+
+        function changeImageSlide(){
+            document.getElementById(`slide-${currentSlide}`).classList.replace('opacity-100','opacity-0');
+            currentSlide = currentSlide === totalSlides ? 1 : currentSlide + 1;
+            document.getElementById(`slide-${currentSlide}`).classList.replace('opacity-0','opacity-100');
+            
+        }
+        setTimeout(() =>{
+            changeImageSlide();
+            setInterval(changeImageSlide,3000)
+        },1000)
+    </script>
+</body>
 
 </html>
