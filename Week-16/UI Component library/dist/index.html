@@ -178,8 +178,7 @@
                         class="absolute top-4 right-4 bg-gray-700 text-gray-200 text-xs px-3 py-1.5 rounded-md border border-gray-600 hover:bg-gray-600 transition-colors opacity-100 lg:opacity-0 group-hover:opacity-100 z-10">
                         Copy Code
                     </button>
-                    <!-- whitespace-pre-wrap added below to fix horizontal scrolling -->
-                    <pre class="p-6 overflow-y-auto text-xs lg:text-sm h-full max-h-[300px] whitespace-pre-wrap"><code id="button-code" class="language-html">
+                    <pre class="p-6 overflow-y-auto text-xs lg:text-sm h-[430px] whitespace-pre-wrap"><code id="button-code" class="language-html">
 &lt;button class="px-6 py-3 rounded-lg text-white font-semibold bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 transition-all shadow-lg hover:shadow-purple-500/30 hover:-translate-y-0.5"&gt;
     Get Started Today
 &lt;/button&gt;
@@ -236,7 +235,7 @@
                         class="absolute top-4 right-4 bg-gray-700 text-gray-200 text-xs px-3 py-1.5 rounded-md hover:bg-gray-600 opacity-100 lg:opacity-0 group-hover:opacity-100 z-10">
                         Copy Code
                     </button>
-                    <pre class="p-6 overflow-y-auto text-xs lg:text-sm h-full whitespace-pre-wrap"><code id="Footer-1122" class='language-html'>
+                    <pre class="p-6 overflow-y-auto text-xs lg:text-sm h-[430px] whitespace-pre-wrap"><code id="Footer-1122" class='language-html'>
                         
         &lt;footer class="w-full py-5 text-center border-t border-gray-500 mt-auto"&gt;
     &lt;div class="text-gray-300 left-0 flex ml-1 lg:ml-4 justify-between"&gt;
@@ -311,7 +310,7 @@
                         class="absolute top-4 right-4 bg-gray-700 text-gray-200 text-xs py-1.5 px-3 rounded-md hover:bg-gray-600 opacity-100 lg:opacity-0 group-hover:opacity-100 z-10 transition-colors">
                         Copy Code
                     </button>
-                    <pre class="p-6 overflow-y-auto text-xs lg:text-sm h-full max-h[400px] whitespace-pre-wrap"><code id="navbar-code" class="language-html">
+                    <pre class="p-6 overflow-y-auto text-xs lg:text-sm h-[430px] whitespace-pre-wrap"><code id="navbar-code" class="language-html">
 &lt;nav class="w-full bg-[#161616] border border-gray-700 rounded-xl px-4 py-3 flex justify-between items-center shadow-lg"&gt;
     &lt;!-- Logo Area --&gt;
     &lt;div class="flex items-center gap-3"&gt;
@@ -418,7 +417,8 @@
                 <p class="text-gray-400 text-sm mt-1">A Smooth, automatically cross-fading image carousel.</p>
             </div>
             <div class="w-full flex flex-col lg:flex-row border border-gray-700 rounded-xl overflow-hidden shadow-2xl">
-                <div class="w-full lg:w-1/2 p-6 lg:p-10 flex items-center justify-center bg-[#0a0a0a] border-b lg:border-b-0 lg-border-r lg:border-gray-700 min-h-[400px]">
+                <div
+                    class="w-full lg:w-1/2 p-6 lg:p-10 flex items-center justify-center bg-[#0a0a0a] border-b lg:border-b-0 lg-border-r lg:border-gray-700 min-h-[400px]">
                     <div class="relative w-full h-[300px] rounded-2xl overflow-hidden shadow-2xl bg-black">
                         <img id="slide-1"
                             class="absolute inset-0 size-full object-cover transition-opacity duration-1000 opacity-100"
@@ -453,7 +453,7 @@
                         class="absolute top-4 right-4 bg-gray-700 text-gray-200 text-xs px-3 py-1.5 rounded-md hover:bg-gray-600 opacity-100 lg:opacity-0 group-hover:opacity-100 z-10 transition-colors">
                         Copy Code
                     </button>
-                <pre class="p-6 overflow-y-auto text-xs lg:text-sm h-full max-h-[500px] whitespace-pre-wrap"><code id="auto-slider-code" class="language-html">
+                    <pre class="p-6 overflow-y-auto text-xs lg:text-sm h-full max-h-[500px] whitespace-pre-wrap"><code id="auto-slider-code" class="language-html">
                     &lt;!-- Auto Fading Slider --&gt;
 &lt;div class="relative w-full h-[300px] rounded-2xl overflow-hidden shadow-2xl bg-black"&gt;
     &lt;!-- Images --&gt;
@@ -485,7 +485,80 @@
     }, 3000); // Changes every 3 seconds
 &lt;/script&gt;
                 </code></pre>
+                </div>
             </div>
+        </section>
+
+        <section class="w-full flex flex-col items-center max-w-[90vw] lg:max-w-[80vw] mx-auto">
+            <div class="w-full mb-6">
+                <h2 class="text-2xl font-bold text-gray-300">Video Background Hero</h2>
+                <p class="text-gray-400">A cinematic background video loop with a smart blur overlay and elegant text
+                    reveal.</p>
+            </div>
+            <div class="w-full flex flex-col lg:flex-row border border-gray-700 rounded-xl overflow-hidden shadow-2xl">
+                <div
+                    class="w-full lg:w-1/2 p-6 lg:p-10 flex items-center justify-center bg-[#0a0a0a] border-b lg:border-b-0 lg:border-r lg:border-gray-700 min-h-[400px]">
+                    <div
+                        class="relative w-full h-[350px] lg:h-[400px] rounded-2xl overflow-hidden shadow-2xl group cursor-pointer">
+                        <video autoplay loop muted playsinline
+                            class="absolute inset-0 size-full object-cover transition-transform duration-1000 ease-out group-hover:scale-125"
+                            src="./assets/videoBackground/videoBackground.mp4" type="video/mp4"></video>
+                        <div
+                            class="absolute inset-0 bg-black/10 transition-all duration-700 ease-in-out group-hover:bg-black/30 group-hover:backdrop-blur-[2px]">
+                        </div>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-10">
+                            <h2
+                                class="text-3xl lg:text-5xl font-bold text-white tracking-widest uppercase transition-all duration-700 ease-out translate-y-6 group-hover:-translate-y-2 ">
+                                Explore</h2>
+                            <p
+                                class="text-gray-200 text-sm lg:text-base max-w-md transition-all duration-700 ease-out opacity-0 translate-y-4 group-hover:translate-y-0 group-hover:opacity-100 mt-2">
+                                Let the journey begin. Discover breathtaking destinations with our exclusive travel
+                                guides.</p>
+                            <button
+                                class="mt-6 px-6 py-2 border border-white text-white font-semibold rounded-full hover:bg-white hover:text-black transition-all duration-300 opacity-0 translate-y-4 group-hover:translate-y-0 group-hover:opacity-100 delay-100">Start
+                                Planning</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 relative group bg-[#1d1f21] min-h-[400px]">
+                    <button onclick="copyCode(this, 'video-hero-code')"
+                        class="absolute top-4 right-4 bg-gray-700 text-gray-200 text-xs px-3 py-1.5 rounded-md hover:bg-gray-600 opacity-100 lg:opacity-0 group-hover:opacity-100 z-10 transition-colors">
+                        Copy Code
+                    </button>
+                    <pre class="p-6 overflow-y-auto text-xs lg:text-sm h-full max-h-[500px] whitespace-pre-wrap"><code id="video-hero-code" class="language-html">
+        &lt;!-- Cinematic Video Hero Section --&gt;
+&lt;!-- 'group' class triggers the text reveal and blur animations --&gt;
+&lt;div class="relative w-full h-[400px] rounded-2xl overflow-hidden shadow-2xl group cursor-pointer"&gt;
+    
+    &lt;!-- Background Video with slow zoom --&gt;
+    &lt;video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"&gt;
+        &lt;source src="YOUR_VIDEO_URL.mp4" type="video/mp4"&gt;
+    &lt;/video&gt;
+    
+    &lt;!-- Dark Overlay with blur effect --&gt;
+    &lt;div class="absolute inset-0 bg-black/30 transition-all duration-700 ease-in-out group-hover:bg-black/50 group-hover:backdrop-blur-[2px]"&gt;&lt;/div&gt;
+    
+    &lt;!-- Animated Content --&gt;
+    &lt;div class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 z-10"&gt;
+        
+        &lt;!-- Title: Always visible, slides up --&gt;
+        &lt;h2 class="text-4xl lg:text-6xl font-bold text-white tracking-widest uppercase transition-all duration-700 ease-out translate-y-6 group-hover:-translate-y-2"&gt;
+            Explore
+        &lt;/h2&gt;
+        
+        &lt;!-- Paragraph: Fades in --&gt;
+        &lt;p class="text-gray-200 text-base max-w-lg transition-all duration-700 ease-out opacity-0 translate-y-4 group-hover:translate-y-0 group-hover:opacity-100 mt-2"&gt;
+            Let the journey begin. Discover breathtaking destinations with our exclusive travel guides.
+        &lt;/p&gt;
+        
+        &lt;!-- Button: Delayed fade in --&gt;
+        &lt;button class="mt-8 px-8 py-3 border border-white text-white font-semibold rounded-full hover:bg-white hover:text-black transition-all duration-300 opacity-0 translate-y-4 group-hover:translate-y-0 group-hover:opacity-100 delay-100"&gt;
+            Start Planning
+        &lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                    </code></pre>
+                </div>
             </div>
         </section>
     </main>
@@ -531,16 +604,16 @@
         let currentSlide = 1;
         const totalSlides = 7;
 
-        function changeImageSlide(){
-            document.getElementById(`slide-${currentSlide}`).classList.replace('opacity-100','opacity-0');
+        function changeImageSlide() {
+            document.getElementById(`slide-${currentSlide}`).classList.replace('opacity-100', 'opacity-0');
             currentSlide = currentSlide === totalSlides ? 1 : currentSlide + 1;
-            document.getElementById(`slide-${currentSlide}`).classList.replace('opacity-0','opacity-100');
-            
+            document.getElementById(`slide-${currentSlide}`).classList.replace('opacity-0', 'opacity-100');
+
         }
-        setTimeout(() =>{
+        setTimeout(() => {
             changeImageSlide();
-            setInterval(changeImageSlide,3000)
-        },1000)
+            setInterval(changeImageSlide, 3000)
+        }, 1000)
     </script>
 </body>
 
