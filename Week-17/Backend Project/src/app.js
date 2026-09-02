@@ -5,6 +5,7 @@ import cors from 'cors'
 const app = express();
 app.use(cors())
 app.use(express.json())
+app.use(cookieParser())
 
 // healthcheck router
 import { healthCheck } from "./controllers/healthcheck.controllers";
