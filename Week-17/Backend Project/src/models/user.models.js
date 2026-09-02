@@ -5,11 +5,6 @@ import jwt from 'jsonwebtoken'
 import { type } from 'os';
 
 const UserSchema = new Schema({
-id: {
-    type: String,
-    required: true,
-    unique: true,
-},
 avatar: {
     type: {
         url: String,
@@ -31,6 +26,7 @@ username: {
 email: {
     type: String,
     required: true,
+    unique: true,
     lowercase: true,
     trim: true,
 },
