@@ -1,6 +1,6 @@
 import { Router } from "express";
-import {verifyJwt, getLoggedInUserOrIgnore, validateProjectPermission} from "../middlewares/auth.middlewares.js"
-import { AvailableUserRoles, AvailableTaskStatus, UserRolesEnum } from "../constants/constants.js";
+import {validateProjectPermission} from "../middlewares/auth.middlewares.js"
+import { AvailableUserRoles, UserRolesEnum } from "../constants/constants.js";
 import {validate} from "../middlewares/validator.middlewares.js"
 import {notesValidator} from "../validators/index.validators.js"
 import {getNotes, getNotesById, createNotes,updateNotes, deleteNotes} from "../controllers/note.controllers.js"
