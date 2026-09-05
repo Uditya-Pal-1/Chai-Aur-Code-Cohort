@@ -1,41 +1,44 @@
-const getProject = async(req, res) =>{
- //get all Project
-}
+import { asyncHandler } from "../utils/async-handler"
 
-const getProjectById = async(req, res) =>{
- //get project by Id
-}
+//get all Project
+const getProjects = asyncHandler( async(req, res) =>{
 
-const createProject = async(req, res) =>{
- //create project
-}
+})
 
-const updateProject = async(req, res) =>{
- //update project
-}
+//get project by Id
+const getProjectById = asyncHandler( async(req, res) =>{
+})
 
-const deleteProject = async(req, res) =>{
- //delete project
-}
+//create project
+const createProject = asyncHandler( async(req, res) =>{
+})
 
-const getProjectMembers = async(req, res) =>{
- //get project members
-}
+//update project
+const updateProject = asyncHandler( async(req, res) =>{
+})
 
-const addMemberToProject = async(req, res) =>{
- //add members to project
-} 
+//delete project
+const deleteProject = asyncHandler( async(req, res) =>{
+})
 
-const deleteMember = async(req, res) =>{
- //delete members from project
-}
+//get project members
+const getProjectMembers = asyncHandler( async(req, res) =>{
+})
 
-const updateMemberRole = async(req, res) =>{
- //update member role
-}
+//add members to project
+const addMemberToProject = asyncHandler( async(req, res) =>{
+})
+
+//delete members from project
+const deleteMember = asyncHandler( async(req, res) =>{
+})
+
+//update member role
+const updateMemberRole = asyncHandler( async(req, res) =>{
+})
 
 export {
-    getProject,
+    getProjects,
     getProjectById,
     createProject,
     updateProject,
