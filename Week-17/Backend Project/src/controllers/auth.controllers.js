@@ -3,6 +3,21 @@ import { User } from '../models/user.models.js';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import { sendEmail, emailVerificationMailgenContent, forgotPasswordMailgenContent, } from '../utils/mail.js'
+import { apiResponse } from '../utils/api-response.js';
+import { apiError } from '../utils/api-error.js';
+
+const generateAccessAndRefreshTokens = async (userId) => {
+    try{
+        const user = await User.findById(userId);
+        const accessToken = user.generatedAccessToken();
+        const refreshToken = user.generateRefreshToken();
+        user.refreshToken = refreshToken;
+        await user.save({validateBeforeSave: false})
+        return{accessToken, refreshToken};
+    }catch(error){
+        throw new apiError(500, "something went wrong while generating the access token")
+    }
+}
 
 //registerUser
 const registerUser = asyncHandler(async (req, res) => {
@@ -37,10 +52,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const createdUser = await User.findById(user._id).select('-password');
 
     if (!createdUser) {
-        return res.status(500).json({
-            status: false,
-            message: 'something went false when registering user'
-        })
+        throw new apiError(500, "Something went wrong while registering the user")
     }
     return res.status(200).json({
         status: true,
@@ -76,12 +88,12 @@ const loginUser = asyncHandler(async (req, res) => {
         })
     }
     //generate access token using jwt
-    const accessToken = await user.generateAccessToken();
+    const {accessToken, refreshToken}= await generateAccessAndRefreshTokens(user._id,)
     const loggedInUser = await User.findById(user._id).select('-password')
 
     const options = {
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV ==="production",
     };
 
     return res.status(200).cookie('accessToken', accessToken, options).json({
@@ -221,11 +233,8 @@ const resetForgotPassword = asyncHandler(async (req, res) => {
 const refreshAccessToken = asyncHandler(async (req, res) => {
     const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;
     if (!incomingRefreshToken) {
-        return res.status(401).json({
-            success: false,
-            message: "unautorized request. no refresh token found."
-        })
-    }
+        throw new apiError(401,"unauthorized request")
+        }
     try {
         const decodedToken = jwt.verify(
             incomingRefreshToken,
@@ -233,10 +242,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
         )
         const user = await User.findById(decodedToken?._id)
         if (!user) {
-            return res.status(400).json({
-                success: false,
-                message: "user is invalid"
-            })
+            throw new apiError(401, "Invalid refresh token")
         }
         if (incomingRefreshToken !== user?.refreshToken) {
             return res.status(400).json({
@@ -244,8 +250,8 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
                 message: "Refresh token has been expired or already be used."
             })
         }
-        const accessToken = await user.generateAccessToken();
-        const newRefreshToken = await user.generateRefreshToken();
+        const {accessToken, refreshToken: newRefreshToken} = await user.generateAccessAndRefreshTokens();
+       
         user.refreshToken = newRefreshToken;
         await user.save({ validateBeforeSave: false })
         const options = {
@@ -335,6 +341,12 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
     })
 })
 
+//getCurrentUser
+const getCurrentUser = asyncHandler(async(req, res) => {
+    return res.status(200).json(new apiResponse(200, req.user, "current user fetched successfully"))
+})
+
+
 //getCurrentPassword
 const getCurrentPassword = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user?._id).select('-password')
@@ -362,5 +374,6 @@ export {
     refreshAccessToken,
     forgotPasswordRequest,
     changeCurrentPassword,
+    getCurrentUser,
     getCurrentPassword,
 }

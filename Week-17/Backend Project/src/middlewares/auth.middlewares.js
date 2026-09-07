@@ -5,7 +5,7 @@ import {User} from '../models/user.models.js'
 import {projectMember} from '../models/projectmember.models.js'
 import mongoose from 'mongoose'
 
-export const verifyJwt = asyncHandler(async(req, res, next)=>{
+export const verifyJWT = asyncHandler(async(req, res, next)=>{
    const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer", "")
     if(!token){
         throw new apiError(401, "Unauthorized request");

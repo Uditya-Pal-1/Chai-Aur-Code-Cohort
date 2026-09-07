@@ -1,12 +1,12 @@
 import { Router } from "express";
-import {validateProjectPermission} from "../middlewares/auth.middlewares.js"
+import {validateProjectPermission, verifyJWT} from "../middlewares/auth.middlewares.js"
 import { AvailableUserRoles, UserRolesEnum } from "../constants/constants.js";
 import {validate} from "../middlewares/validator.middlewares.js"
 import {notesValidator} from "../validators/index.validators.js"
 import {getNotes, getNotesById, createNotes,updateNotes, deleteNotes} from "../controllers/note.controllers.js"
 
 const router = Router();
-
+router.use(verifyJWT)
 router.route("/:ProjectId")
 .get(validateProjectPermission(AvailableUserRoles),getNotes)
 .post(validateProjectPermission([UserRolesEnum.ADMIN]),notesValidator(),validate, createNotes);

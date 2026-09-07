@@ -1,10 +1,11 @@
-import { asyncHandler } from "../utils/async-handler"
+import mongoose from "mongoose"
+import { Project } from "../models/project.models.js"
 import { projectMember } from "../models/projectmember.models.js"
+import { User } from '../models/user.models.js'
 import { apiError } from "../utils/api-error.js"
 import { apiResponse } from "../utils/api-response.js"
-import { Project } from "../models/project.models.js"
-import { User } from '../models/user.models.js'
-import mongoose from "mongoose"
+import { asyncHandler } from "../utils/async-handler"
+import {AvailableUserRoles, UserRolesEnum} from "../constants/constants.js"
 
 //get all Project
 const getProjects = asyncHandler(async (req, res) => {
@@ -238,10 +239,50 @@ const getProjectMembers = asyncHandler(async (req, res) => {
 
 //update member role
 const updateMemberRole = asyncHandler(async (req, res) => {
-})
+    const { projectId, userId } = req.params;
+    const {newRole} = req.body;
+    if(!AvailableUserRoles.includes(newRole)){
+        throw new apiError(400, "Invalid role")
+    }
+    let ProjectMember = await projectMember.findOne({
+        project: new mongoose.Types.ObjectId(projectId),
+        user: new mongoose.Types.ObjectId(userId),
+    });
+    if(!ProjectMember){
+        throw new apiError(404,"project member not found");
+    }
+    ProjectMember = projectMember.findByIdandUpdate(
+        ProjectMember._id,
+        {
+            role: newRole,
+        },
+        {new: true},
+    );
+    if(!ProjectMember){
+        throw new apiError(404,"project member not found");
+    }
+    return res.status(200).json(
+        new apiResponse(200, ProjectMember, "project member role updated successfully")
+    )
+});
 
 //delete members from project
 const deleteMember = asyncHandler(async (req, res) => {
+    const {projectId, userId} = req.params;
+    let ProjectMember = await projectMember.findOne({
+        project: new mongoose.Types.ObjectId(projectId),
+        user: new mongoose.Types.ObjectId(userId),
+    });
+    if(!ProjectMember) {
+        throw new apiError(404,"project member not found")
+    }
+    ProjectMember = await projectMember.findByIdAndDelete(projectMember._id)
+    if(!ProjectMember){
+        throw new apiError(404, "project member not found")
+    }
+    return res.status(200).json(
+        new apiResponse(200, ProjectMember, "project member deleted successfully")
+    )
 })
 
 export {
