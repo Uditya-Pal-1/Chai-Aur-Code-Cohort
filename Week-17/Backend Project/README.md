@@ -1,5 +1,3 @@
-<img width="1648" height="888" alt="chai-cohort" src="../assets/diagram.png" />
-
 Write guideline of the projects. this is our practice project so no guideline only practice purpose.
 # 1. Project Setup
 
