@@ -1,0 +1,22 @@
+{
+  "name": "typescript-01",
+  "version": "1.0.0",
+  "description": "typescriptPracticeProject",
+  "license": "ISC",
+  "author": "Uditya Pal",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start":"node dist/index.js",
+    "build": "tsc -p ."
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.5.0"
+  },
+  "dependencies": {
+    "typescript": "^7.0.2",
+    "winston": "^3.19.0",
+    "zod": "^4.5.4"
+  }
+}
