@@ -6,6 +6,8 @@
     "prettier": "^3.5.2"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "@tailwindcss/cli": "^4.3.3",
+    "express": "^5.2.1",
+    "tailwindcss": "^4.3.3"
   }
 }

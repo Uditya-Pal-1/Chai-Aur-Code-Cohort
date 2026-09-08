@@ -42,6 +42,9 @@ Chai Aur Cohort is a full-stack web development course by <a href="#Hitesh choud
   <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" width="20" height="20""")/><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS3</a> - modular css</li> 
 </ul>
 
+<!-- ## Diagram -->
+<!-- <img width="1648" height="888" alt="" src="" /> -->
+
 ## Contributing
 
 Contributions are always welcome!
