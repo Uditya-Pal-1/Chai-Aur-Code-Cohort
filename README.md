@@ -42,8 +42,6 @@ Welcome to my official workspace for the **Chai aur Code Cohort**. It is a full-
 - <a href="">**Projects**: </a> [apply] <br>
 - <a href="">**Blogs**:</a> [showcase] <br>
 
-<br/>
-
 ## 🚀 Tech Stack & Tools
 
 <div align="center">
@@ -134,6 +132,8 @@ Welcome to my official workspace for the **Chai aur Code Cohort**. It is a full-
    ```bash
    git clone [https://github.com/Uditya-Pal-1/Chai-Aur-Code-Cohort.git](https://github.com/Uditya-Pal-1/Chai-Aur-Code-Cohort.git)
 
+
+<hr>
 <!-- ## Diagram -->
 <!-- <img width="1648" height="888" alt="" src="" /> -->
 
