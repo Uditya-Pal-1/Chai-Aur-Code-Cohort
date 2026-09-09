@@ -22,7 +22,7 @@
 
 </div>
 
-<p align="center">
+<p>
   <a href="#introduction">• Introduction</a> 
   <a href="#documentation">• Documentation</a> 
   <a href="#tech-stack"> • Tech Stack</a> 
