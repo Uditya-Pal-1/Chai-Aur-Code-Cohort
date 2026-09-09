@@ -1,3 +1,5 @@
+<img width="1648" height="888" alt="chai-cohort" src="https://github.com/user-attachments/assets/9a5a6b48-9508-4230-ac3a-d3f6a736da38" />
+
 <div align="center">
   <!-- Dynamic Waving Header (Themed in Chai/Orange) -->
   <img src="https://capsule-render.vercel.app/api?type=waving&color=d35400&height=250&section=header&text=Chai%20Aur%20Code%20Cohort&fontSize=60&fontAlignY=35&desc=Assignments,%20Projects,%20and%20Blogs&descAlignY=55&descSize=20&fontColor=ffffff" alt="Header Banner" />
@@ -8,9 +10,6 @@
   </a>
 
   <br />
-<img width="1648" height="888" alt="chai-cohort" src="https://github.com/user-attachments/assets/9a5a6b48-9508-4230-ac3a-d3f6a736da38" />
-
-<h1 align="center">Chai Aur Cohort</h1>
 
 <div align="center"dir="auto">
 
