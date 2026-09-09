@@ -64,67 +64,43 @@ Welcome to my official workspace for the **Chai aur Code Cohort**. It is a full-
 
 ## 📂 Curriculum & Cohort Progression
 
-*Expand the sections below to navigate through my code and projects for each phase of the live batch syllabus.*
+> **🛠️ Phase 1: Web Development Essentials**
+> * **HTML, CSS, and JavaScript:** Building solid foundations in core web development.
+> * **Advanced JavaScript Prep:** Deep dive into closures, promises, `async/await`, and other key execution concepts.
+> * **DOM Manipulation:** Scripting dynamic and highly interactive web pages.
 
-<details>
-<summary><b>🛠️ Phase 1: Web Development Essentials</b></summary>
-<br/>
-<ul>
-  <li><b>HTML, CSS, and JavaScript:</b> Building solid foundations in core web development.</li>
-  <li><b>Advanced JavaScript Prep:</b> Deep dive into closures, promises, <code>async/await</code>, and other key execution concepts.</li>
-  <li><b>DOM Manipulation:</b> Scripting dynamic and highly interactive web pages.</li>
-</ul>
-</details>
+<br />
 
-<details>
-<summary><b>⚛️ Phase 2: Frontend Frameworks</b></summary>
-<br/>
-<ul>
-  <li><b>React:</b> Building reusable UI components, utilizing hooks, and managing state efficiently.</li>
-  <li><b>Next.js:</b> Implementing server-side rendering (SSR), static site generation (SSG), and advanced routing mechanisms.</li>
-</ul>
-</details>
+> **⚛️ Phase 2: Frontend Frameworks**
+> * **React:** Building reusable UI components, utilizing hooks, and managing state efficiently.
+> * **Next.js:** Implementing server-side rendering (SSR), static site generation (SSG), and advanced routing mechanisms.
 
-<details>
-<summary><b>⚙️ Phase 3: Backend Development</b></summary>
-<br/>
-<ul>
-  <li><b>Node.js and Express:</b> Architecting scalable server-side applications and robust REST APIs.</li>
-  <li><b>Socket.IO:</b> Enabling real-time, bi-directional communication for modern web applications.</li>
-</ul>
-</details>
+<br />
 
-<details>
-<summary><b>🗄️ Phase 4: Databases and ORMs</b></summary>
-<br/>
-<ul>
-  <li><b>MongoDB:</b> Working with NoSQL databases for maximum flexibility and rapid development speed.</li>
-  <li><b>PostgreSQL:</b> Mastering relational database architecture for complex, structured data.</li>
-  <li><b>Drizzle and Mongoose:</b> Utilizing modern ORMs for efficient schema and database management.</li>
-</ul>
-</details>
+> **⚙️ Phase 3: Backend Development**
+> * **Node.js and Express:** Architecting scalable server-side applications and robust REST APIs.
+> * **Socket.IO:** Enabling real-time, bi-directional communication for modern web applications.
 
-<details>
-<summary><b>☁️ Phase 5: DevOps and Deployment</b></summary>
-<br/>
-<ul>
-  <li><b>Docker:</b> Containerizing full-stack applications for seamless, environment-agnostic deployment.</li>
-  <li><b>Nginx:</b> Setting up reverse proxies and optimizing web server traffic.</li>
-  <li><b>AWS (ECR, EC2, Load Balancing):</b> Deploying and scaling applications in a production environment.</li>
-</ul>
-</details>
+<br />
 
-<details>
-<summary><b>🚀 Phase 6: Modern Development Workflows</b></summary>
-<br/>
-<ul>
-  <li><b>Mono-repo and TurboRepo:</b> Managing massive, scalable projects effortlessly.</li>
-  <li><b>TypeScript and ESLint:</b> Enforcing clean, maintainable, and error-free code across the stack.</li>
-  <li><b>GitHub CI/CD:</b> Automating testing and staging deployments utilizing GitHub Actions.</li>
-</ul>
-</details>
+> **🗄️ Phase 4: Databases and ORMs**
+> * **MongoDB:** Working with NoSQL databases for maximum flexibility and rapid development speed.
+> * **PostgreSQL:** Mastering relational database architecture for complex, structured data.
+> * **Drizzle and Mongoose:** Utilizing modern ORMs for efficient schema and database management.
 
----
+<br />
+
+> **☁️ Phase 5: DevOps and Deployment**
+> * **Docker:** Containerizing full-stack applications for seamless, environment-agnostic deployment.
+> * **Nginx:** Setting up reverse proxies and optimizing web server traffic.
+> * **AWS (ECR, EC2, Load Balancing):** Deploying and scaling applications in a production environment.
+
+<br />
+
+> **🚀 Phase 6: Modern Development Workflows**
+> * **Mono-repo and TurboRepo:** Managing massive, scalable projects effortlessly.
+> * **TypeScript and ESLint:** Enforcing clean, maintainable, and error-free code across the stack.
+> * **GitHub CI/CD:** Automating testing and staging deployments utilizing GitHub Actions.
 
 ## ⚙️ How to Explore the Code
 
