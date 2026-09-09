@@ -29,6 +29,7 @@
   <a href="#contributing">• Contributing</a>
 </p>
 </div>
+
 ## ☕ Introduction
 
 <p>
@@ -50,7 +51,7 @@ Welcome to my official workspace for the **Chai aur Code Cohort**. It is a full-
   <img width="15" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="40" alt="React" title="React" />
   <img width="15" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" height="40" alt="Tailwind CSS" title="Tailwind CSS" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" height="40" alt="Tailwind CSS" title="Tailwind CSS" />
   <img width="15" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" height="40" alt="Node.js" title="Node.js" />
   <img width="15" />
@@ -62,6 +63,70 @@ Welcome to my official workspace for the **Chai aur Code Cohort**. It is a full-
 </div>
 
 <br />
+
+## 📂 Curriculum & Cohort Progression
+
+*Expand the sections below to navigate through my code and projects for each phase of the live batch syllabus.*
+
+<details>
+<summary><b>🛠️ Phase 1: Web Development Essentials</b></summary>
+<br/>
+<ul>
+  <li><b>HTML, CSS, and JavaScript:</b> Building solid foundations in core web development.</li>
+  <li><b>Advanced JavaScript Prep:</b> Deep dive into closures, promises, <code>async/await</code>, and other key execution concepts.</li>
+  <li><b>DOM Manipulation:</b> Scripting dynamic and highly interactive web pages.</li>
+</ul>
+</details>
+
+<details>
+<summary><b>⚛️ Phase 2: Frontend Frameworks</b></summary>
+<br/>
+<ul>
+  <li><b>React:</b> Building reusable UI components, utilizing hooks, and managing state efficiently.</li>
+  <li><b>Next.js:</b> Implementing server-side rendering (SSR), static site generation (SSG), and advanced routing mechanisms.</li>
+</ul>
+</details>
+
+<details>
+<summary><b>⚙️ Phase 3: Backend Development</b></summary>
+<br/>
+<ul>
+  <li><b>Node.js and Express:</b> Architecting scalable server-side applications and robust REST APIs.</li>
+  <li><b>Socket.IO:</b> Enabling real-time, bi-directional communication for modern web applications.</li>
+</ul>
+</details>
+
+<details>
+<summary><b>🗄️ Phase 4: Databases and ORMs</b></summary>
+<br/>
+<ul>
+  <li><b>MongoDB:</b> Working with NoSQL databases for maximum flexibility and rapid development speed.</li>
+  <li><b>PostgreSQL:</b> Mastering relational database architecture for complex, structured data.</li>
+  <li><b>Drizzle and Mongoose:</b> Utilizing modern ORMs for efficient schema and database management.</li>
+</ul>
+</details>
+
+<details>
+<summary><b>☁️ Phase 5: DevOps and Deployment</b></summary>
+<br/>
+<ul>
+  <li><b>Docker:</b> Containerizing full-stack applications for seamless, environment-agnostic deployment.</li>
+  <li><b>Nginx:</b> Setting up reverse proxies and optimizing web server traffic.</li>
+  <li><b>AWS (ECR, EC2, Load Balancing):</b> Deploying and scaling applications in a production environment.</li>
+</ul>
+</details>
+
+<details>
+<summary><b>🚀 Phase 6: Modern Development Workflows</b></summary>
+<br/>
+<ul>
+  <li><b>Mono-repo and TurboRepo:</b> Managing massive, scalable projects effortlessly.</li>
+  <li><b>TypeScript and ESLint:</b> Enforcing clean, maintainable, and error-free code across the stack.</li>
+  <li><b>GitHub CI/CD:</b> Automating testing and staging deployments utilizing GitHub Actions.</li>
+</ul>
+</details>
+
+---
 
 ## ⚙️ How to Explore the Code
 
