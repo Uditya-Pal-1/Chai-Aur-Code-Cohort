@@ -1,3 +1,13 @@
+<div align="center">
+  <!-- Dynamic Waving Header (Themed in Chai/Orange) -->
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=d35400&height=250&section=header&text=Chai%20Aur%20Code%20Cohort&fontSize=60&fontAlignY=35&desc=Assignments,%20Projects,%20and%20Blogs&descAlignY=55&descSize=20&fontColor=ffffff" alt="Header Banner" />
+  
+  <!-- Animated Typing Effect -->
+  <a href="https://github.com/Uditya-Pal-1/Chai-Aur-Code-Cohort">
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=d35400&center=true&vCenter=true&width=600&lines=From+Newbie+to+Expert+Developer;Full+Stack+Web+Development;Assignments+%26+Code+Solutions;Tech+Blogs+%26+Notes" alt="Typing SVG" />
+  </a>
+
+  <br />
 <img width="1648" height="888" alt="chai-cohort" src="https://github.com/user-attachments/assets/9a5a6b48-9508-4230-ac3a-d3f6a736da38" />
 
 <h1 align="center">Chai Aur Cohort</h1>
@@ -20,60 +30,19 @@
   <a href="#contributing">• Contributing</a>
 </p>
 
-## Introduction
+## ☕ Introduction
 
 <p>
-Chai Aur Cohort is a full-stack web development course by <a href="#Hitesh choudhary"> Hitesh Choudhary </a> & <a href="#Piyush Garg"> Piyush Garg </a>. From basics to full-stack ninja, this repository documents my in-depth learning journey within the program.
+Welcome to my official workspace for the **Chai aur Code Cohort**. It is a full-stack web development course by <a href="#Hitesh choudhary"> Hitesh Choudhary </a> & <a href="#Piyush Garg"> Piyush Garg </a>. This repository is a documented journey of my evolution from a newbie to an expert full-stack developer. It contains all my daily coursework, hands-on assignments, milestone projects, and technical blogs curated throughout the program.
 </p>
 
-## Documentation
+## 📃 Documentation
 
 - <a href="">**Assignments**: </a> [learn] <br>
 - <a href="">**Projects**: </a> [apply] <br>
 - <a href="">**Blogs**:</a> [showcase] <br>
 
 <br/>
-
-## Tech Stack
-
-<ul align="left" style="list-style-type:none">
-  <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" width="20" height="20""")/><a href="https://git-scm.com/">Git</a> - versioning</li>
-  <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" width="20" height="20""")/><a href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML5</a> - structuring</li>
-  <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" width="20" height="20""")/><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS3</a> - modular css</li> 
-</ul>
-
-<!-- ## Diagram -->
-<!-- <img width="1648" height="888" alt="" src="" /> -->
-
-## Contributing
-
-Contributions are always welcome!
-See <a href="CONTRIBUTING.md"> CONTRIBUTING.md </a> for ways to get started.
-
-## License
-
-This project is licensed under the <a href="LICENSE"> MIT License </a>.  Feel free to learn, add upon, and share my work!
-
-<hr>
-<div align="center">
-  <!-- Dynamic Waving Header (Themed in Chai/Orange) -->
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=d35400&height=250&section=header&text=Chai%20Aur%20Code%20Cohort&fontSize=60&fontAlignY=35&desc=Assignments,%20Projects,%20and%20Blogs&descAlignY=55&descSize=20&fontColor=ffffff" alt="Header Banner" />
-  
-  <!-- Animated Typing Effect -->
-  <a href="https://github.com/Uditya-Pal-1/Chai-Aur-Code-Cohort">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=d35400&center=true&vCenter=true&width=600&lines=From+Newbie+to+Expert+Developer;Full+Stack+Web+Development;Assignments+%26+Code+Solutions;Tech+Blogs+%26+Notes" alt="Typing SVG" />
-  </a>
-
-  <br />
-
-  <!-- Dynamic GitHub Status Badges -->
-  <img src="https://img.shields.io/github/repo-size/Uditya-Pal-1/Chai-Aur-Code-Cohort?style=for-the-badge&color=4CAF50" alt="Repo Size" />
-  <img src="https://img.shields.io/github/languages/count/Uditya-Pal-1/Chai-Aur-Code-Cohort?style=for-the-badge&color=2196F3" alt="Languages" />
-  <img src="https://img.shields.io/github/last-commit/Uditya-Pal-1/Chai-Aur-Code-Cohort?style=for-the-badge&color=FF9800" alt="Last Commit" />
-</div>
-
-## ☕ About This Repository
-Welcome to my official workspace for the **Chai aur Code Cohort**. This repository is a documented journey of my evolution from a newbie to an expert full-stack developer. It contains all my daily coursework, hands-on assignments, milestone projects, and technical blogs curated throughout the program.
 
 ## 🚀 Tech Stack & Tools
 
@@ -94,6 +63,27 @@ Welcome to my official workspace for the **Chai aur Code Cohort**. This reposito
 </div>
 
 <br />
+
+## ⚙️ How to Explore the Code
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/Uditya-Pal-1/Chai-Aur-Code-Cohort.git](https://github.com/Uditya-Pal-1/Chai-Aur-Code-Cohort.git)
+
+<!-- ## Diagram -->
+<!-- <img width="1648" height="888" alt="" src="" /> -->
+
+## Contributing
+
+Contributions are always welcome!
+See <a href="CONTRIBUTING.md"> CONTRIBUTING.md </a> for ways to get started.
+
+## License
+
+This project is licensed under the <a href="LICENSE"> MIT License </a>.  Feel free to learn, add upon, and share my work!
+
+<hr>
+
 
 ## 📂 Curriculum & Cohort Progression
 
@@ -157,9 +147,3 @@ As part of my learning process, I regularly document my findings and deep-dives 
 *(Note: Replace the "#" links with actual links to your Markdown files or Hashnode/Medium blog posts as you write them).*
 
 ---
-
-## ⚙️ How to Explore the Code
-
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/Uditya-Pal-1/Chai-Aur-Code-Cohort.git](https://github.com/Uditya-Pal-1/Chai-Aur-Code-Cohort.git)
