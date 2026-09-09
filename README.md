@@ -22,13 +22,13 @@
 
 </div>
 
-<p>
+<p align="center">
   <a href="#introduction">• Introduction</a> 
   <a href="#documentation">• Documentation</a> 
   <a href="#tech-stack"> • Tech Stack</a> 
   <a href="#contributing">• Contributing</a>
 </p>
-
+</div>
 ## ☕ Introduction
 
 <p>
@@ -82,67 +82,3 @@ See <a href="CONTRIBUTING.md"> CONTRIBUTING.md </a> for ways to get started.
 This project is licensed under the <a href="LICENSE"> MIT License </a>.  Feel free to learn, add upon, and share my work!
 
 <hr>
-
-
-## 📂 Curriculum & Cohort Progression
-
-*Expand the sections below to navigate through my code and notes for each phase of the cohort.*
-
-<details>
-<summary><b>🛠️ Phase 1: Foundation (HTML, CSS & Tailwind)</b></summary>
-<br/>
-<ul>
-  <li>Semantic HTML architecture and accessibility.</li>
-  <li>Advanced CSS Grid & Flexbox layouts.</li>
-  <li>Utility-first styling and responsive design with Tailwind CSS.</li>
-  <li><b>Assignments:</b> UI Clones, Responsive Landing Pages.</li>
-</ul>
-</details>
-
-<details>
-<summary><b>🧠 Phase 2: Core & Advanced JavaScript</b></summary>
-<br/>
-<ul>
-  <li>Execution context, Call Stack, and Memory Management.</li>
-  <li>DOM Manipulation and Event Listeners.</li>
-  <li>Asynchronous JS: Callbacks, Promises, and the Fetch API.</li>
-  <li>Object-Oriented Programming (Classes, Prototypes, `this` keyword).</li>
-</ul>
-</details>
-
-<details>
-<summary><b>⚛️ Phase 3: Frontend Mastery (React.js)</b></summary>
-<br/>
-<ul>
-  <li>Component architecture, JSX, and Props.</li>
-  <li>React Hooks (`useState`, `useEffect`, `useRef`, `useContext`).</li>
-  <li>State management (Context API & Redux Toolkit).</li>
-  <li>React Router for Single Page Applications (SPAs).</li>
-</ul>
-</details>
-
-<details>
-<summary><b>⚙️ Phase 4: Backend Engineering (Node.js & MongoDB)</b></summary>
-<br/>
-<ul>
-  <li>Setting up Express.js servers and routing.</li>
-  <li>RESTful API design and Postman testing.</li>
-  <li>Database modeling with MongoDB and Mongoose.</li>
-  <li>Authentication (JWT, bcrypt) and error handling middleware.</li>
-</ul>
-</details>
-
----
-
-## 📝 Technical Blogs & Notes
-As part of my learning process, I regularly document my findings and deep-dives into complex topics. 
-
-| Date | Topic / Title | Description | Link |
-| :--- | :--- | :--- | :--- |
-| *WIP* | Understanding the JS Call Stack | A breakdown of how V8 engine executes JavaScript behind the scenes. | [Read Here](#) |
-| *WIP* | Why Tailwind CSS? | Moving from raw CSS to utility classes for rapid development. | [Read Here](#) |
-| *WIP* | Demystifying Promises | How `async/await` makes API calls predictable and readable. | [Read Here](#) |
-
-*(Note: Replace the "#" links with actual links to your Markdown files or Hashnode/Medium blog posts as you write them).*
-
----
