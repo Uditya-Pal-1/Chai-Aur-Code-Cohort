@@ -6,3 +6,4 @@ yarn-error.log*
 package-lock.json
 package.json
 dist
+/src/generated/prisma
