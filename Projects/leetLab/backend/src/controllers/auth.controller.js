@@ -61,88 +61,81 @@ const register = async(req, res)=>{
 };
 
 const login = async(req, res)=>{
-    const {email, password} = req.body || {};
-    try{
-        if(!email || !password){
-            return res.status(400).json({
-                error: "Email and password are required"
-            });
+   const {email, password} = req.body;
+   try{
+    const user = await db.user.findUnique({
+        where: {
+            email
         }
-        const user = await db.user.findUnique({
-            where: { email }
-        });
-        if(!user){
-            return res.status(400).json({
-                error: "Invalid credentials"
-            });
-        }
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if(!isPasswordValid){
-            return res.status(400).json({
-                error: "Invalid credentials"
-            });
-        }
-        const token = jwt.sign({id: user.id},
-            process.env.JWT_SECRET, {expiresIn: "7d"}
-        );
-        res.cookie('jwt', token, {
-            httpOnly: true,
-            sameSite: 'strict',
-            secure: process.env.NODE_ENV !== 'development',
-            maxAge: 1000*60*60*24*7
-        });
-        res.status(200).json({
-            success: true,
-            message: "Logged in successfully",
-            user: {
-                id: user.id,
-                email: user.email,
-                name: user.name,
-                role: user.role,
-                image: user.image,
-            }
-        });
-    }catch(error){
-        console.error("Error logging in:", error);
-        res.status(500).json({
-            error: "Error logging in"
-        });
+    })
+    if(!user){
+        return res.status(401).json({
+            error:"User not Found"
+        })
     }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if(!isMatch){
+        return res.status(401).json({
+            error:"Invalid Credentials"
+        })
+    }
+    const token = jwt.sign({id:user.id},process.env.JWT_SECRET,{expiresIn:"7d"});
+    res.cookie('jwt',token,{
+        httpOnly: true,
+        sameSite:"strict",
+        secure:process.env.NODE_ENV !== 'development',
+        maxAge: 1000*60*60*24*7
+    })
+    res.status(200).json({
+        success: true,
+        message:"User loggedIn Successfully",
+        user:{
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            role: user.role,
+            image: user.image
+        }
+    })
+   }catch(error){
+    console.error("Error LoggingIn User:",error);
+    res.status(500).json({
+        error: "Error Logging in User"
+    })
+   }
 };
 
 const logout = async(req, res)=>{
-    try {
-        res.clearCookie('jwt');
+    try{
+        res.clearCookie("jwt",{
+            httpOnly: true,
+            sameSite:"strict",
+            secure:process.env.NODE_ENV !== 'development',
+        })
         res.status(200).json({
             success: true,
-            message: "Logged out successfully"
-        });
-    } catch(error) {
-        console.error("Error logging out:", error);
+            message: "User Logged Out"
+        })
+    }catch(error){
+        console.error("Error logging out user:",error);
         res.status(500).json({
-            error: "Error logging out"
-        });
+            error:"error in logging out user."
+        })
     }
 };
 
 const check = async(req, res)=>{
-    try {
-        const token = req.cookies?.jwt;
-        if (!token) {
-            return res.status(401).json({ error: "Not authenticated" });
-        }
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        const user = await db.user.findUnique({
-            where: { id: decoded.id },
-            select: { id: true, email: true, name: true, role: true, image: true }
+    try{
+        res.status(200).json({
+            success: true,
+            message: "User Authenticated Successfully",
+            user: req.user
         });
-        if (!user) {
-            return res.status(404).json({ error: "User not found" });
-        }
-        res.status(200).json({ success: true, user });
-    } catch (error) {
-        console.error("Error checking auth status:", error);
-        res.status(401).json({ error: "Invalid token" });
+    }catch(error){
+        console.error("Error Checking User:", error);
+        res.status(500).json({
+            error:"Error Checking User"
+        })
     }
 };
 
