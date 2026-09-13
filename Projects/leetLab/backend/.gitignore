@@ -6,4 +6,9 @@ yarn-error.log*
 package-lock.json
 package.json
 dist
+.agents
+.claude
+.cursor
+.devin
+.windsurf
 /src/generated/prisma

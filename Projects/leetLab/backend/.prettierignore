@@ -1,3 +1,9 @@
 node_modules
 package.json
 package-lock.json
+pisma.config.ts
+.agents
+.claude
+.cursor
+.devin
+.windsurf
