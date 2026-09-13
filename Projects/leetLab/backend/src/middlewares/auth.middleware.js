@@ -42,7 +42,7 @@ const authMiddleware = async(req, res, next)=>{
     }
 }
 
-const checkAdmin = async(req, res)=>{
+const checkAdmin = async(req, res, next)=>{
     try{
         const userId = req.user.id;
         const user = await db.user.findUnique({
