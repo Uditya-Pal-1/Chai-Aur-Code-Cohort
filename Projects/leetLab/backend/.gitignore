@@ -11,6 +11,4 @@ dist
 .cursor
 .devin
 .windsurf
-.cursor/skills/prisma-composer
-.devin/skills/prisma-composer
 /src/generated/prisma
