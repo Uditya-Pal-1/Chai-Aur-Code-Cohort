@@ -4,7 +4,7 @@ import { getLanguageName, pollBatchResults, submitBatch } from "../libs/judge0.l
 export const executeCode = async (req, res) => {
     try {
         const { source_code, language_id, stdin, expected_outputs, problemId } = req.body;
-        const userId = req.user.Id;
+        const userId = req.user.id;
         if (
             !Array.isArray(stdin) ||
             stdin.length === 0 ||
@@ -29,6 +29,7 @@ export const executeCode = async (req, res) => {
         console.log(results);
 
         let allPassed = true;
+
         const detailedResults = results.map((result, i) => {
             let stdout = result.stdout?.trim();
             const expected_output = expected_outputs[i]?.trim();
@@ -50,7 +51,8 @@ export const executeCode = async (req, res) => {
                 passed,
                 stdout,
                 expected: expected_output,
-                stderr: result.compile_output || null,
+                stderr: result.stderr || null,
+                compileOutput: result.compile_output || null,
                 status: statusDesc,
                 memory: result.memory ? `${result.memory} KB` : undefined,
                 time: result.time ? `${result.time} s` : undefined
@@ -69,7 +71,7 @@ export const executeCode = async (req, res) => {
                 stdout: JSON.stringify(detailedResults.map((r) => r.stdout)),
                 stderr: detailedResults.some((r) => r.stderr) ? JSON.stringify(detailedResults.map((r) => r.stderr)) : null,
                 compileOutput: detailedResults.some((r) => r.compile_output) ? JSON.stringify(detailedResults.map((r) => r.compile_output)) : null,
-                status: allPassed ? "Accepted" : "wrong Answer",
+                status: allPassed ? "Accepted" : "Wrong Answer",
                 memory: detailedResults.some((r) => r.memory) ? JSON.stringify(detailedResults.map((r) => r.memory)) : null,
                 time: detailedResults.some((r) => r.time) ? JSON.stringify(detailedResults.map((r) => r.time)) : null,
             },
@@ -112,7 +114,7 @@ export const executeCode = async (req, res) => {
                 id: submission.id,
             },
             include: {
-                testCase: true,
+                testCases: true,
             },
         });
 

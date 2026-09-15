@@ -1,7 +1,7 @@
-import {db} from "../libs/db.js"
+import { db } from "../libs/db.js"
 import { getJudge0LanguageId, submitBatch, pollBatchResults } from "../libs/judge0.lib.js";
 
-const createProblem = async(req, res)=>{
+const createProblem = async (req, res) => {
     // checkAdmin middleware already ensures only ADMIN can reach here
     const {
         title,
@@ -15,11 +15,15 @@ const createProblem = async(req, res)=>{
         referenceSolutions,
     } = req.body;
 
-    try{
-        for(const [language, solutionCode] of Object.entries(referenceSolutions)){
+    try {
+        if (!testcases || !referenceSolutions) {
+            return res.status(400).json({ error: "Testcases and ReferenceSolution are required" })
+        }
+
+        for (const [language, solutionCode] of Object.entries(referenceSolutions)) {
             const languageId = getJudge0LanguageId(language);
-            if(!languageId){
-                return res.status(400).json({error: `Language ${language} is not supported`});
+            if (!languageId) {
+                return res.status(400).json({ error: `Language ${language} is not supported` });
             }
 
             const submissions = testcases.map(({ input, output }) => ({
@@ -30,13 +34,13 @@ const createProblem = async(req, res)=>{
             }));
 
             const submissionResults = await submitBatch(submissions);
-            const tokens = submissionResults.map((res)=>res.token);
+            const tokens = submissionResults.map((res) => res.token);
             const results = await pollBatchResults(tokens);
 
-            for (let i = 0; i < results.length; i++){
+            for (let i = 0; i < results.length; i++) {
                 const result = results[i];
                 console.log("Result --", result);
-                if(result.status.id !== 3){
+                if (result.status.id !== 3) {
                     return res.status(400).json({
                         error: `Testcase ${i + 1} failed for language ${language}`,
                         details: {
@@ -71,18 +75,18 @@ const createProblem = async(req, res)=>{
             message: "Problem Created Successfully",
             problem: newProblem,
         });
-    }catch(error){
+    } catch (error) {
         console.log(error);
         return res.status(500).json({
-            error:"Error while Creating Problem",
+            error: "Error while Creating Problem",
         });
     }
 };
 
-const getAllProblems = async(req, res)=>{
-    try{
+const getAllProblems = async (req, res) => {
+    try {
         const problems = await db.problem.findMany({
-            select:{
+            select: {
                 id: true,
                 title: true,
                 difficulty: true,
@@ -98,7 +102,7 @@ const getAllProblems = async(req, res)=>{
             message: "Problems fetched successfully",
             problems,
         });
-    }catch(error){
+    } catch (error) {
         console.error("Error fetching problems:", error);
         return res.status(500).json({
             error: "Error fetching problems",
@@ -106,14 +110,14 @@ const getAllProblems = async(req, res)=>{
     }
 };
 
-const getProblemById = async(req, res)=>{
+const getProblemById = async (req, res) => {
     const { id } = req.params;
-    try{
+    try {
         const problem = await db.problem.findUnique({
             where: { id }
         });
 
-        if(!problem){
+        if (!problem) {
             return res.status(404).json({
                 error: "Problem not found",
             });
@@ -124,7 +128,7 @@ const getProblemById = async(req, res)=>{
             message: "Problem fetched successfully",
             problem,
         });
-    }catch(error){
+    } catch (error) {
         console.error("Error fetching problem:", error);
         return res.status(500).json({
             error: "Error fetching problem",
@@ -132,7 +136,7 @@ const getProblemById = async(req, res)=>{
     }
 };
 
-const updateProblem = async(req, res)=>{
+const updateProblem = async (req, res) => {
     const { id } = req.params;
     const {
         title,
@@ -146,18 +150,21 @@ const updateProblem = async(req, res)=>{
         referenceSolutions,
     } = req.body;
 
-    try{
+    try {
         const existingProblem = await db.problem.findUnique({ where: { id } });
-        if(!existingProblem){
+        if (!existingProblem) {
             return res.status(404).json({ error: "Problem not found" });
         }
 
         // Re-validate updated reference solutions against testcases if provided
-        if(referenceSolutions && testcases){
-            for(const [language, solutionCode] of Object.entries(referenceSolutions)){
+        if (referenceSolutions || testcases) {
+            const solutionsToTest = referenceSolutions || existingProblem.referenceSolutions;
+            const testcasesToUse = testcases || existingProblem.testcases;
+            
+            for (const [language, solutionCode] of Object.entries(referenceSolutions)) {
                 const languageId = getJudge0LanguageId(language);
-                if(!languageId){
-                    return res.status(400).json({error: `Language ${language} is not supported`});
+                if (!languageId) {
+                    return res.status(400).json({ error: `Language ${language} is not supported` });
                 }
 
                 const submissions = testcases.map(({ input, output }) => ({
@@ -168,12 +175,12 @@ const updateProblem = async(req, res)=>{
                 }));
 
                 const submissionResults = await submitBatch(submissions);
-                const tokens = submissionResults.map((r)=>r.token);
+                const tokens = submissionResults.map((r) => r.token);
                 const results = await pollBatchResults(tokens);
 
-                for(let i = 0; i < results.length; i++){
+                for (let i = 0; i < results.length; i++) {
                     const result = results[i];
-                    if(result.status.id !== 3){
+                    if (result.status.id !== 3) {
                         return res.status(400).json({
                             error: `Testcase ${i + 1} failed for language ${language}`,
                             details: {
@@ -209,7 +216,7 @@ const updateProblem = async(req, res)=>{
             message: "Problem updated successfully",
             problem: updatedProblem,
         });
-    }catch(error){
+    } catch (error) {
         console.error("Error updating problem:", error);
         return res.status(500).json({
             error: "Error updating problem",
@@ -217,11 +224,11 @@ const updateProblem = async(req, res)=>{
     }
 };
 
-const deleteProblem = async(req, res)=>{
+const deleteProblem = async (req, res) => {
     const { id } = req.params;
-    try{
+    try {
         const existingProblem = await db.problem.findUnique({ where: { id } });
-        if(!existingProblem){
+        if (!existingProblem) {
             return res.status(404).json({ error: "Problem not found" });
         }
 
@@ -231,7 +238,7 @@ const deleteProblem = async(req, res)=>{
             success: true,
             message: "Problem deleted successfully",
         });
-    }catch(error){
+    } catch (error) {
         console.error("Error deleting problem:", error);
         return res.status(500).json({
             error: "Error deleting problem",
@@ -239,16 +246,32 @@ const deleteProblem = async(req, res)=>{
     }
 };
 
-const getAllProblemsSolvedByUser = async(req, res)=>{
-    try{
+const getAllProblemsSolvedByUser = async (req, res) => {
+    try {
+        const solvedRecords = await db.problemSolved.findMany({
+            where: {
+                userId: req.user.id
+            },
+            include: {
+                problem: {
+                    select: {
+                        id: true,
+                        title: true,
+                        difficulty: true,
+                        tags: true,
+                    }
+                }
+            }
+        })
+        const solvedProblems = solvedRecords.map(record => record.problem);
         // TODO: Add a Submission model in schema.prisma to track solved problems
         // For now, returns a placeholder until Submission model is added
         return res.status(200).json({
             success: true,
             message: "Solved problems fetched successfully",
-            solvedProblems: [],
+            solvedProblems
         });
-    }catch(error){
+    } catch (error) {
         console.error("Error fetching solved problems:", error);
         return res.status(500).json({
             error: "Error fetching solved problems",
@@ -256,4 +279,4 @@ const getAllProblemsSolvedByUser = async(req, res)=>{
     }
 };
 
-export {createProblem, getAllProblems, getProblemById, updateProblem, deleteProblem, getAllProblemsSolvedByUser}
+export { createProblem, getAllProblems, getProblemById, updateProblem, deleteProblem, getAllProblemsSolvedByUser }

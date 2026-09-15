@@ -1,15 +1,22 @@
 import express from 'express'
 import { authMiddleware } from '../middlewares/auth.middleware.js'
-import { addProblemToPlayList, createPlayList, deletePlayList, getPlayAllListDetails, getPlayListDetails, removeProblemFromPlaylist } from '../controllers/playlist.controller.js';
+import {
+    addProblemToPlayList,
+    createPlayList,
+    deletePlayList,
+    getPlayAllListDetails,
+    getPlayListDetails,
+    removeProblemFromPlayList
+} from '../controllers/playlist.controller.js';
 
 const playlistRoutes = express.Router();
 
 playlistRoutes.post("/create-playlist", authMiddleware, createPlayList)
 playlistRoutes.get("/", authMiddleware, getPlayAllListDetails)
-playlistRoutes.get("/:playlistId", authMiddleware, getPlayListDetails)
+playlistRoutes.get("/:playListId", authMiddleware, getPlayListDetails)
 
-playlistRoutes.post("/:playlistId/add-problem", authMiddleware, addProblemToPlayList)
-playlistRoutes.delete("/playlistId", authMiddleware, deletePlayList)
-playlistRoutes.delete("/:playListId/remove-problem", authMiddleware, removeProblemFromPlaylist)
+playlistRoutes.post("/:playListId/add-problem", authMiddleware, addProblemToPlayList)
+playlistRoutes.delete("/:playListId", authMiddleware, deletePlayList)
+playlistRoutes.delete("/:playListId/remove-problem", authMiddleware, removeProblemFromPlayList)
 
 export default playlistRoutes;

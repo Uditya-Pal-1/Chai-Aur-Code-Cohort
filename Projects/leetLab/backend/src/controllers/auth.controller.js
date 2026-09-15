@@ -63,6 +63,11 @@ const register = async(req, res)=>{
 const login = async(req, res)=>{
    const {email, password} = req.body;
    try{
+    if(!email || !password){
+        return res.status(400).json({
+            error: "Email or Password required"
+        });
+    }
     const user = await db.user.findUnique({
         where: {
             email
@@ -70,7 +75,7 @@ const login = async(req, res)=>{
     })
     if(!user){
         return res.status(401).json({
-            error:"User not Found"
+            error:"Invalid Credentials"
         })
     }
     const isMatch = await bcrypt.compare(password, user.password);
