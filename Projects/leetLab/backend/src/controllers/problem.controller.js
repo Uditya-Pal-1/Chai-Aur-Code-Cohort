@@ -85,17 +85,15 @@ const createProblem = async (req, res) => {
 
 const getAllProblems = async (req, res) => {
     try {
-        const problems = await db.problem.findMany({
-            select: {
-                id: true,
-                title: true,
-                difficulty: true,
-                tags: true,
-                constraints: true,
-                examples: true,
-                createdAt: true,
-            }
-        });
+    const problems = await db.problem.findMany({
+      include: {
+        solvedBy: {
+          where: {
+            userId: req.user.id,
+          },
+        },
+      },
+    });
 
         return res.status(200).json({
             success: true,
