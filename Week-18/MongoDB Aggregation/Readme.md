@@ -13,7 +13,7 @@
 ---
 
 ## 📖 About This Repository
-This repository contains a structured set of challenges and solutions designed to master the **MongoDB Aggregation Framework**. It progresses from basic matching and counting to complex array manipulations, regex filtering, and multi-stage data transformations.
+This repository contains a structured set of challenges and solutions designed to master the **MongoDB Aggregation Framework**. It progresses from basic matching and counting to complex array manipulations, regex filtering, multi-stage data transformations, and cross-collection joins.
 
 ## 🗄️ Dataset Architecture
 The exercises are built on top of three core collections representing a reading platform:
@@ -183,6 +183,55 @@ The exercises are built on top of three core collections representing a reading 
 </div>
 
 ---
+
+### 1️⃣6️⃣ Cross-Collection Joins (`$lookup`) & Array Unpacking
+> **Objective:** Combine book records with their corresponding author details to get a complete picture in a single query, then unpack the resulting array.
+> **Operators Used:** `$lookup`, `$addFields`, `$arrayElemAt`
+
+💡 **What is `$lookup`?**  
+In MongoDB NoSQL databases, data is often separated into different collections (like Books and Authors). The `$lookup` operator works exactly like a `JOIN` in a traditional SQL database. It allows you to grab related data from another collection and embed it directly into your current results. 
+
+🛠️ **How to practice this:**
+1. Open your MongoDB database client.
+2. Click on the **`books`** collection to open it.
+3. Navigate to the **Aggregations** tab.
+4. Type or paste the pipeline code into the text editor.
+
+#### 🏗️ The `$lookup` & `$addFields` Blueprint
+Here is the core blueprint for writing a lookup stage. Because `$lookup` always returns an **array** of matches, we chain it with an `$addFields` stage using `$arrayElemAt` to cleanly extract the first object from that array:
+
+<div align="center">
+  <img width="900" alt="Example:- lookup in MongoDB Aggregation" src="./Assets/Q-lookup-a.png" />
+</div>
+
+#### 🌍 Real-World Implementation Preview:
+<div align="center">
+  <img width="900" alt="Example:- lookup in MongoDB Aggregation" src="./Assets/Q-lookup-b.png" />
+</div>
+
+### 💻 Code Example
+```javascript
+[
+  {
+    $lookup: {
+      from: "authors", // The target collection to join
+      localField: "author_id", // The reference ID in your CURRENT collection
+      foreignField: "_id", // The matching ID in the TARGET collection
+      as: "author_details" // The new array field where joined data is saved
+    }
+  },
+  {
+    $addFields: {
+      author_details: {
+        $arrayElemAt: ["$author_details", 0] // Extracts the object at index 0
+      }
+    }
+  }
+]
+ ```
+
+ <br>
+ 
 
 <div align="center">
   <i>Happy Querying! 🚀 Built for the Chai Cohort</i>
