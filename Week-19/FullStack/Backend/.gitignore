@@ -1,0 +1,12 @@
+.env
+node_modules/
+/generated/prisma
+
+.agents/
+.claude/
+.windsurf/
+skills-lock.json
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

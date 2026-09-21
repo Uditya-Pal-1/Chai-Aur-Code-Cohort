@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "updatedAt" DROP DEFAULT,
+ALTER COLUMN "phone" DROP NOT NULL;
