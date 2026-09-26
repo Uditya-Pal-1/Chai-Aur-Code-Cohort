@@ -39,3 +39,4 @@ npm run dev
 ```
 
 *Open your browser and visit `http://localhost:5173` to explore the interactive playground.*
+THE JOURNEY OF A MERN DEVELOPER ❣️
