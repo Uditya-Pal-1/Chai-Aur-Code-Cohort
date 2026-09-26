@@ -38,5 +38,6 @@ npm install
 npm run dev
 ```
 
-*Open your browser and visit `http://localhost:5173` to explore the interactive playground.*
+*Open your browser and visit `http://localhost:5173` to explore the interactive playground.
+<br/>
 THE JOURNEY OF A MERN DEVELOPER ❣️
