@@ -198,6 +198,11 @@ npm run dev
 
 ---
 
+## 🖼️ Media & Visuals
+
+  <img src="./Assets/Pose/pose6.jpeg" alt="DOM Challenges Banner" width="750" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" />
+
+---
 ## 👥 Author & Acknowledgments
 
 - **Author**: Uditya Pal
