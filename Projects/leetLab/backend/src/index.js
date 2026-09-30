@@ -24,5 +24,5 @@ app.use('/api/v1/problems', problemRoutes);
 app.use('/api/v1/submission', submissionRoutes)
 
 app.listen(process.env.PORT, ()=>{
-    console.log('Server is running on Port 8080')
+    console.log('Server is running....')
 })
