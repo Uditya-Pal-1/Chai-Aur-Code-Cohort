@@ -1,2 +1,51 @@
-pnpm-lock.yaml
+# Package Manager Lockfiles (Prevents merge conflict noise)
 package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
+
+# Dependency Directories
+node_modules/
+.pnpm-store/
+
+# Build & Bundler Outputs
+dist/
+build/
+out/
+.next/
+.nuxt/
+.svelte-kit/
+.turbo/
+.cache/
+coverage/
+
+# Auto-Generated Code & Schema Artifacts
+# (Formatting these can break code generation or waste CI time)
+**/routeTree.gen.ts
+**/generated/
+**/__generated__/
+*.min.js
+*.min.css
+
+# Database, Migrations & SQLite
+*.sqlite
+*.sqlite-journal
+prisma/migrations/
+**/migrations/*.sql
+
+# Public Static Assets & Media (Binary / Non-formattable files)
+public/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+*.pdf
+*.zip
+
+# OS, IDE, & Environment Secrets
+.DS_Store
+.env
+.env.*
+!.env.example

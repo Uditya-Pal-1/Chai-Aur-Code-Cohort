@@ -1,5 +1,5 @@
 <div>
-<h1 align="center">Blogs Archive</h1>
+<h1 align="center">Blogs</h1>
 <p align="center">Showcase of my journey to building a solid Foundation.</p>
 </br>
 </hr>
@@ -24,7 +24,6 @@
 </hr>
 </div>
 
-
 </br>
 <h2><a href="https://css-display.hashnode.dev/understanding-css-display-property"> CSS Display Properties </a></h2>
 <div align="center">
@@ -33,7 +32,6 @@
 </hr>
 </div>
 
-
   </br>
 <h2><a href="https://specificityalgorithm.hashnode.dev/definition-of-specificity"> Specificity Algorithm </a></h2>
 <div align="center">
@@ -41,24 +39,3 @@
   </br>
 </hr>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
