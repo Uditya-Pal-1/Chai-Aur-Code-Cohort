@@ -41,12 +41,14 @@ A modern, fast, and responsive React frontend application built with **Vite 8**,
 ## 🛠️ Tech Stack
 
 ### Core Framework & Libraries
+
 - **[React 19](https://react.dev/)**: JavaScript library for building user interfaces.
 - **[Vite 8](https://vitejs.dev/)**: Next-generation frontend tooling.
 - **[React Router v8](https://reactrouter.com/)**: Standard client-side routing library for React.
 - **[Tailwind CSS v4](https://tailwindcss.com/)**: Utility-first CSS framework.
 
 ### Development Tools
+
 - **[ESLint 10](https://eslint.org/)**: Pluggable JavaScript linter.
 - **[Prettier](https://prettier.io/)**: Opinionated code formatter.
 - **[@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react)**: Official Vite plugin for React.
@@ -84,12 +86,14 @@ Frontend/
 ### Prerequisites
 
 Ensure you have the following installed on your machine:
+
 - **Node.js**: `v18.0.0` or higher
 - **npm**: `v9.0.0` or higher
 
 ### Installation
 
 1. **Clone the repository**:
+
    ```bash
    git clone https://github.com/your-username/fullstack-practice-frontend.git
    cd FullStack Practice/Frontend
@@ -114,31 +118,32 @@ The application will be accessible at `http://localhost:5173` (or the port speci
 
 In the project directory, you can run:
 
-| Command | Description |
-| :--- | :--- |
-| `npm run dev` | Starts the development server with HMR. |
-| `npm run build` | Compiles and optimizes assets for production deployment into `dist/`. |
-| `npm run preview` | Locally previews the production build. |
-| `npm run lint` | Executes ESLint to check for code quality and linting errors. |
+| Command           | Description                                                           |
+| :---------------- | :-------------------------------------------------------------------- |
+| `npm run dev`     | Starts the development server with HMR.                               |
+| `npm run build`   | Compiles and optimizes assets for production deployment into `dist/`. |
+| `npm run preview` | Locally previews the production build.                                |
+| `npm run lint`    | Executes ESLint to check for code quality and linting errors.         |
 
 ---
 
 ## 🔗 API Integration
 
-Communication with the backend API is abstracted via the `ApiClient` class located in [`Services/apiClient.js`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-19/FullStack%20Practice/Frontend/Services/apiClient.js).
+Communication with the backend API is abstracted via the `ApiClient` class located in [`Services/apiClient.js`](./Services/apiClient.js).
 
 ### Base Configuration
+
 - **Base URL**: `http://127.0.0.1:3000/api/v1`
-- **Credentials Mode**: `include` *(Supports HTTP-only cookie session authentication)*
+- **Credentials Mode**: `include` _(Supports HTTP-only cookie session authentication)_
 - **Headers**: `"Content-Type": "application/json"`, `"Accept": "application/json"`
 
 ### Available API Service Methods
 
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `signup(name, email, password)` | `POST /users/register` | Registers a new user account. |
-| `login(email, password)` | `POST /users/login` | Authenticates existing user credentials. |
-| `getProfile()` | `GET /users/me` | Fetches authenticated user profile data. |
+| Method                          | Endpoint               | Description                              |
+| :------------------------------ | :--------------------- | :--------------------------------------- |
+| `signup(name, email, password)` | `POST /users/register` | Registers a new user account.            |
+| `login(email, password)`        | `POST /users/login`    | Authenticates existing user credentials. |
+| `getProfile()`                  | `GET /users/me`        | Fetches authenticated user profile data. |
 
 ---
 
@@ -151,5 +156,4 @@ Communication with the backend API is abstracted via the `ApiClient` class locat
 
 ## 📜 License
 
-This project is open-source and available under the [MIT License](LICENSE).
-
+This project is open-source and available under the [MIT License](../../../LICENSE).

@@ -46,13 +46,13 @@ This project serves as a structured baseline for building scalable HTTP backend 
 
 ## 🛠️ Tech Stack
 
-| Technology | Purpose |
-| :--- | :--- |
-| **[TypeScript](https://www.typescriptlang.org/)** | Typed JavaScript superset for reliable server-side code |
-| **[Node.js](https://nodejs.org/)** | Asynchronous event-driven JavaScript runtime |
-| **[Express.js](https://expressjs.com/)** | Fast, unopinionated web framework for Node.js |
-| **[Zod](https://zod.dev/)** | TypeScript-first schema validation for environment variables |
-| **[Winston](https://github.com/winstonjs/winston)** | Multi-transport async logging framework |
+| Technology                                          | Purpose                                                      |
+| :-------------------------------------------------- | :----------------------------------------------------------- |
+| **[TypeScript](https://www.typescriptlang.org/)**   | Typed JavaScript superset for reliable server-side code      |
+| **[Node.js](https://nodejs.org/)**                  | Asynchronous event-driven JavaScript runtime                 |
+| **[Express.js](https://expressjs.com/)**            | Fast, unopinionated web framework for Node.js                |
+| **[Zod](https://zod.dev/)**                         | TypeScript-first schema validation for environment variables |
+| **[Winston](https://github.com/winstonjs/winston)** | Multi-transport async logging framework                      |
 
 ---
 
@@ -85,12 +85,14 @@ TypeScript-01/
 ### Prerequisites
 
 Ensure you have the following installed on your machine:
+
 - **Node.js** (v18.0.0 or higher)
 - **npm** (v9.0.0 or higher)
 
 ### Installation
 
 1. Clone the repository and navigate to the project directory:
+
    ```bash
    git clone <repository-url>
    cd TypeScript-01
@@ -115,10 +117,10 @@ PORT=8000
 
 In the project directory, you can run:
 
-| Command | Description |
-| :--- | :--- |
+| Command         | Description                                                            |
+| :-------------- | :--------------------------------------------------------------------- |
 | `npm run build` | Compiles TypeScript source files into executable JavaScript in `dist/` |
-| `npm start` | Executes the compiled application from `dist/index.js` |
+| `npm start`     | Executes the compiled application from `dist/index.js`                 |
 
 ---
 
@@ -151,4 +153,4 @@ Check whether the HTTP server is running and responding.
 ## 👤 Author & License
 
 - **Author**: Uditya Pal
-- **License**: [ISC](LICENSE)
+- **License**: [MIT](../../LICENSE)

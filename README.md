@@ -57,7 +57,7 @@ Chai-Aur-Code-Cohort/
 ├── Projects/                        → bigger product-style builds and case studies
 │   ├── README.md
 │   ├── leetLab/                     → major full-stack project
-│   └── MasterJI/
+│   └── AtellixUI/                   → planned project space
 ├── Week-00/                         → setup and basics
 ├── Week-01/                         → HTML/CSS learning
 ├── Week-02/                         → DOM and browser fundamentals
@@ -207,17 +207,19 @@ This repository also includes learning notes and written reflections that help c
 
 ---
 
-## Tech Stack
+## Technologies Learned & Practiced
 
-- HTML5
-- CSS3
-- JavaScript
-- React
-- Node.js
-- Express
-- MongoDB / PostgreSQL
-- Prisma
-- Git / GitHub
+The cohort work moves from web fundamentals into frontend, backend, and full-stack applications. These are the technologies and concepts documented across the weekly exercises and projects:
+
+| Area                        | Technologies and concepts                                                                                 | Explore                                                                        |
+| --------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Web foundations             | HTML5, CSS3, page structure, layouts, and browser fundamentals                                            | [Week-01](Week-01), [Week-02](Week-02), [Week-03](Week-03)                     |
+| JavaScript                  | Modern JavaScript, functions, arrays and objects, loops, scope, closures, async patterns, DOM, and events | [Week-04](Week-04), [Week-08](Week-08), [Week-11](Week-11), [Week-13](Week-13) |
+| Frontend development        | React, components, hooks, state, Vite, React Router, and Tailwind CSS                                     | [Week-19](Week-19)                                                             |
+| Backend development         | Node.js, Express, REST APIs, middleware, authentication, JWT cookies, and password hashing                | [Week-16](Week-16), [Week-17](Week-17), [LeetLab](Projects/leetLab)            |
+| Databases and data modeling | MongoDB aggregation, PostgreSQL, Prisma, schemas, and migrations                                          | [Week-18](Week-18), [LeetLab](Projects/leetLab)                                |
+| TypeScript and validation   | TypeScript fundamentals, typed Express applications, and Zod validation                                   | [Week-18](Week-18)                                                             |
+| Developer workflow          | Git, GitHub, npm/pnpm, ESLint, and Prettier                                                               | [Week-00](Week-00), [repository tooling](package.json)                         |
 
 ---
 

@@ -1,5 +1,6 @@
 import { db } from "../libs/db.js"
 import { getJudge0LanguageId, submitBatch, pollBatchResults } from "../libs/judge0.lib.js";
+import { toPublicProblem } from "../libs/problem.utils.js";
 
 const createProblem = async (req, res) => {
     // checkAdmin middleware already ensures only ADMIN can reach here
@@ -85,20 +86,22 @@ const createProblem = async (req, res) => {
 
 const getAllProblems = async (req, res) => {
     try {
-    const problems = await db.problem.findMany({
-      include: {
-        solvedBy: {
-          where: {
-            userId: req.user.id,
-          },
-        },
-      },
-    });
+        const problems = await db.problem.findMany({
+            include: {
+                solvedBy: {
+                    where: {
+                        userId: req.user.id,
+                    },
+                },
+            },
+        });
+
+        const publicProblems = req.user.role === 'ADMIN' ? problems : problems.map(toPublicProblem);
 
         return res.status(200).json({
             success: true,
             message: "Problems fetched successfully",
-            problems,
+            problems: publicProblems,
         });
     } catch (error) {
         console.error("Error fetching problems:", error);
@@ -121,10 +124,12 @@ const getProblemById = async (req, res) => {
             });
         }
 
+        const responseProblem = req.user.role === 'ADMIN' ? problem : toPublicProblem(problem);
+
         return res.status(200).json({
             success: true,
             message: "Problem fetched successfully",
-            problem,
+            problem: responseProblem,
         });
     } catch (error) {
         console.error("Error fetching problem:", error);
@@ -158,7 +163,7 @@ const updateProblem = async (req, res) => {
         if (referenceSolutions || testcases) {
             const solutionsToTest = referenceSolutions || existingProblem.referenceSolutions;
             const testcasesToUse = testcases || existingProblem.testcases;
-            
+
             for (const [language, solutionCode] of Object.entries(referenceSolutions)) {
                 const languageId = getJudge0LanguageId(language);
                 if (!languageId) {

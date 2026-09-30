@@ -1,79 +1,105 @@
 import axios from 'axios';
 
-const getJudge0LanguageId = (language)=>{
+const POLL_INTERVAL_MS = 1000;
+const POLL_TIMEOUT_MS = 60000;
+const REQUEST_TIMEOUT_MS = 15000;
+
+const createJudge0Error = (message, cause) => {
+    const error = new Error(message, { cause });
+    error.statusCode = 502;
+    return error;
+};
+
+const getJudge0Url = () => {
+    if (!process.env.JUDGE0_API_URL) {
+        throw createJudge0Error('Judge0 is not configured.');
+    }
+
+    return process.env.JUDGE0_API_URL.replace(/\/+$/, '');
+};
+
+const getJudge0LanguageId = (language) => {
     const languageMap = {
         "PYTHON": 71,
-        "JAVA":62,
-        "JAVASCRIPT":63,
+        "JAVA": 62,
+        "JAVASCRIPT": 63,
+        "TYPESCRIPT": 74,
     }
     return languageMap[language.toUpperCase()];
 }
 
 
-const sleep = (ms) => new Promise((resolve)=>setTimeout(resolve, ms))
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
-const pollBatchResults = async(tokens)=>{
+const pollBatchResults = async (tokens) => {
     try {
-        // If we are using mock tokens because Judge0 was unreachable, return mock successes
-        if (tokens.length > 0 && String(tokens[0]).startsWith("mock-token")) {
-            console.warn("Using mock tokens, returning simulated success.");
-            return tokens.map(t => ({ status: { id: 3, description: "Accepted" } }));
+        if (!Array.isArray(tokens) || tokens.length === 0 || tokens.some((token) => !token)) {
+            throw new Error('Judge0 submission tokens are required.');
         }
 
-        while(true){
-            const  {data}  = await axios.get(`${process.env.JUDGE0_API_URL}/submissions/batch`,{
+        const deadline = Date.now() + POLL_TIMEOUT_MS;
+        while (Date.now() < deadline) {
+            const { data } = await axios.get(`${getJudge0Url()}/submissions/batch`, {
                 params: {
                     tokens: tokens.join(","),
                     base64_encoded: false,
-                }
-            })
+                },
+                timeout: REQUEST_TIMEOUT_MS,
+            });
             const results = data.submissions;
-            
-            const isAllDone = results.every( (r)=>r.status.id !== 1 && r.status.id !==2 )
-            if(isAllDone) {
-                // Check if we hit the WSL2 cgroup internal error (id: 13, rb_sysopen /box)
-                // In local dev, we might want to bypass it so problem creation works
-                for (let r of results) {
-                    if (r.status && r.status.id === 13) {
-                        console.warn("WSL2 Cgroup Error detected in Judge0. Mocking successful testcase to unblock local development.");
-                        r.status.id = 3; // Mock accepted
-                    }
-                }
+
+            if (!Array.isArray(results) || results.length !== tokens.length) {
+                throw new Error('Judge0 returned an invalid batch response.');
+            }
+
+            const isAllDone = results.every((result) => ![1, 2].includes(result.status?.id));
+            if (isAllDone) {
                 return results;
             }
-            await sleep(1000);
+
+            await sleep(Math.min(POLL_INTERVAL_MS, deadline - Date.now()));
         }
+
+        throw new Error('Judge0 execution timed out.');
     } catch (error) {
-        console.error("Error in pollBatchResults:", error.message);
-        throw error;
+        if (error.statusCode) throw error;
+        throw createJudge0Error('Unable to retrieve Judge0 execution results.', error);
     }
 }
 
-const submitBatch = async(submissions)=>{
+const submitBatch = async (submissions) => {
     try {
-        const {data} = await axios.post(`${process.env.JUDGE0_API_URL}/submissions/batch?base64_encoded=false`,{submissions})
-        console.log("Submission Results:", data)
-        return data
-    } catch (error) {
-        console.error("Error in submitBatch (Is Judge0 running?):", error.message);
-        // If Judge0 is down or unreachable (ECONNREFUSED), mock response to avoid 500 error
-        if (error.message.includes("ECONNREFUSED")) {
-            console.warn("Judge0 is unreachable! Mocking successful submission to unblock local dev.");
-            return submissions.map((s, i) => ({ token: `mock-token-${i}` }));
+        if (!Array.isArray(submissions) || submissions.length === 0) {
+            throw new Error('At least one Judge0 submission is required.');
         }
-        throw error;
+
+        const { data } = await axios.post(
+            `${getJudge0Url()}/submissions/batch?base64_encoded=false`,
+            { submissions },
+            { timeout: REQUEST_TIMEOUT_MS },
+        );
+        const batch = Array.isArray(data) ? data : data?.submissions;
+
+        if (!Array.isArray(batch) || batch.length !== submissions.length || batch.some((item) => !item.token)) {
+            throw new Error('Judge0 returned an invalid submission response.');
+        }
+
+        return batch;
+    } catch (error) {
+        if (error.statusCode) throw error;
+        throw createJudge0Error('Unable to submit code to Judge0.', error);
     }
 }
 
-const getLanguageName = async(languageId)=>{
-const LANGUAGE_NAMES = {
-    74: "TypeScript",
-    63: "JavaScript",
-    71: "Python",
-    62: "Java",
-}
-return LANGUAGE_NAMES[languageId] || 'Unknown'
+const getLanguageName = (languageId) => {
+    const LANGUAGE_NAMES = {
+        74: "TypeScript",
+        63: "JavaScript",
+        71: "Python",
+        62: "Java",
+    }
+    return LANGUAGE_NAMES[languageId] || 'Unknown'
 
 }
 
-export {getJudge0LanguageId, submitBatch, pollBatchResults, getLanguageName}
+export { getJudge0LanguageId, submitBatch, pollBatchResults, getLanguageName }

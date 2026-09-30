@@ -1,6 +1,7 @@
 <div align="center">
 
 # 🚀 Week 11: Machine Coding, Closures & Polyfills
+
 <p align="center">
   <b>Unlocking JavaScript's Inner Engine: From Scoping & Closures to Custom Promises and Polyfills</b>
 </p>
@@ -18,11 +19,11 @@
 
 ## 📖 The Storyline: "Behind the V8 Curtain"
 
-> *Every developer starts JavaScript by writing code that works by "magic." You call `.map()`, `.reduce()`, or `new Promise()`, and things just happen. But what actually occurs beneath the execution context?*
-> 
-> *In **Week 11**, the journey shifted from just **using** JavaScript to **deconstructing** it. Facing the intimidating concepts of Lexical Scoping, Closure memory retention, Rate Limiting (Debouncing & Throttling), and Async Architecture, the mission was clear: **Build everything from scratch**.*
-> 
-> *By writing custom polyfills for array methods, constructing a ground-up `MyPromise` class with full callback queues, and harnessing closures to statefully power a UI Color Engine, the magic dissolved into deep engineering confidence!* ⚡✨
+> _Every developer starts JavaScript by writing code that works by "magic." You call `.map()`, `.reduce()`, or `new Promise()`, and things just happen. But what actually occurs beneath the execution context?_
+>
+> _In **Week 11**, the journey shifted from just **using** JavaScript to **deconstructing** it. Facing the intimidating concepts of Lexical Scoping, Closure memory retention, Rate Limiting (Debouncing & Throttling), and Async Architecture, the mission was clear: **Build everything from scratch**._
+>
+> _By writing custom polyfills for array methods, constructing a ground-up `MyPromise` class with full callback queues, and harnessing closures to statefully power a UI Color Engine, the magic dissolved into deep engineering confidence!_ ⚡✨
 
 ---
 
@@ -69,17 +70,23 @@ Week-11/
 ## 🛠️ Deep Dive into Modules
 
 ### 1. 🧠 Lexical Scoping & Closures
-Located in [`Lexical_ScopingAndClosures/`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-11/Lexical_ScopingAndClosures)
-- **[`Lexical_Scoping.js`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-11/Lexical_ScopingAndClosures/Lexical_Scoping.js)**: Demonstrates parent-child variable lookup across execution frames.
-- **[`counter.js`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-11/Lexical_ScopingAndClosures/counter.js)** & **[`createCounter.js`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-11/Lexical_ScopingAndClosures/createCounter.js)**: Creates stateful counters and logger singletons where local variables persist across multiple calls without polluting the global namespace.
+
+Located in [`Lexical_ScopingAndClosures/`](./Lexical_ScopingAndClosures)
+
+- **[`Lexical_Scoping.js`](./Lexical_ScopingAndClosures/Lexical_Scoping.js)**: Demonstrates parent-child variable lookup across execution frames.
+- **[`counter.js`](./Lexical_ScopingAndClosures/counter.js)** & **[`createCounter.js`](./Lexical_ScopingAndClosures/createCounter.js)**: Creates stateful counters and logger singletons where local variables persist across multiple calls without polluting the global namespace.
 
 ### 2. ⚡ Machine Coding: Debouncing & Throttling
-Located in [`Machine_Coding/`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-11/Machine_Coding)
-- **[`01.js (Debounce)`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-11/Machine_Coding/01.js)**: Cancels previous execution timer (`clearTimeout`) on repeated triggers to execute only after a specified delay period.
-- **[`02.js (Throttle)`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-11/Machine_Coding/02.js)**: Locks execution during an active window, ensuring functions fire at most once every specified delay interval.
+
+Located in [`Machine_Coding/`](./Machine_Coding)
+
+- **[`01.js (Debounce)`](./Machine_Coding/01.js)**: Cancels previous execution timer (`clearTimeout`) on repeated triggers to execute only after a specified delay period.
+- **[`02.js (Throttle)`](./Machine_Coding/02.js)**: Locks execution during an active window, ensuring functions fire at most once every specified delay interval.
 
 ### 3. ⚙️ Polyfills & Custom `MyPromise` Engine
-Located in [`Eleven.js`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-11/Eleven.js)
+
+Located in [`Eleven.js`](./Eleven.js)
+
 ```javascript
 // Custom Polyfill for Array.prototype.myMap
 Array.prototype.myMap = function (cb) {
@@ -107,7 +114,9 @@ class MyPromise {
 ```
 
 ### 4. 🎨 Mini-Project: Closure-Powered Color Changer
-Located in [`miniProject/`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-11/miniProject)
+
+Located in [`miniProject/`](./miniProject)
+
 - Encapsulates private state inside `colorApp()` using closure returned methods (`setColor` & `applyColor`).
 - Validates user-entered custom hex strings using Regex (`/^#([0-9A-F]{3}){1,2}$/i`) before applying live dynamic changes to the document body background.
 
@@ -135,11 +144,13 @@ Located in [`miniProject/`](file:///d:/VS%20Code/Web%20Development%20Course/Chai
 ## 🚀 How to Run Locally
 
 1. **Clone or Navigate to Directory**:
+
    ```bash
-   cd "d:/VS Code/Web Development Course/Chai-Aur-Code-Cohort/Week-11"
+   cd Week-11
    ```
 
 2. **Run Machine Coding & Polyfill Scripts with Node.js**:
+
    ```bash
    node Lexical_ScopingAndClosures/counter.js
    node Machine_Coding/01.js
@@ -147,7 +158,8 @@ Located in [`miniProject/`](file:///d:/VS%20Code/Web%20Development%20Course/Chai
    ```
 
 3. **Launch the Mini Project**:
-   - Open [`miniProject/index.html`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-11/miniProject/index.html) in any modern web browser or start a Live Server.
+
+- Open [`miniProject/index.html`](./miniProject/index.html) in any modern web browser or start a Live Server.
 
 ---
 

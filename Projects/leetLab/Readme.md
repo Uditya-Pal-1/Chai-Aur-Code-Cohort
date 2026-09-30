@@ -29,21 +29,25 @@ The platform includes a robust **Judge0 code execution engine** integration for 
 ## ✨ Key Features
 
 ### 💻 Code Compilation & Execution Engine
+
 - **Multi-Test Case Batch Execution**: Submits code solution batches to the Judge0 execution engine for isolated evaluation.
 - **Detailed Test Case Diagnostics**: Displays memory usage, execution time, stdio outputs, stderr, and compilation errors per test case.
 - **Automated Solved Tracking**: Automatically updates user statistics and marks problems as solved upon passing all test cases.
 
 ### 🛡️ User Authentication & Role Management
+
 - **Secure Authentication**: JWT-based session management using HTTP-only cookies and bcrypt password encryption.
 - **Role-Based Authorization**: Distinct permissions for regular **Users** and platform **Admins**.
 - **User Dashboard**: Track user profile details, solved problems count, and submission history.
 
 ### 📝 Problem Management & Administration
+
 - **Admin Dashboard**: Full CRUD capabilities for creating, updating, and deleting coding problems.
 - **Comprehensive Problem Specifications**: Support for difficulty levels (`EASY`, `MEDIUM`, `HARD`), tags, sample inputs/outputs, constraints, hints, code starter snippets, and editorial solutions.
 - **Flexible Test Case Builder**: Define custom hidden and public test cases per problem.
 
 ### 📚 Custom Problem Playlists
+
 - **Curated Study Plans**: Create, update, and manage personalized problem playlists (e.g., "Top 75 Interview Questions", "Dynamic Programming Essentials").
 - **Organized Learning**: Add or remove problems seamlessly from playlists.
 
@@ -52,6 +56,7 @@ The platform includes a robust **Judge0 code execution engine** integration for 
 ## 🛠 Tech Stack
 
 ### Frontend
+
 - **Framework**: React 19 + Vite 8
 - **Styling**: Tailwind CSS v4 + DaisyUI v5
 - **Routing**: React Router v7
@@ -59,6 +64,7 @@ The platform includes a robust **Judge0 code execution engine** integration for 
 - **Icons**: Lucide React
 
 ### Backend
+
 - **Runtime**: Node.js (ES Modules)
 - **Framework**: Express.js v5
 - **ORM**: Prisma v7
@@ -92,11 +98,11 @@ erDiagram
     User ||--o{ Submission : "submits"
     User ||--o{ ProblemSolved : "solves"
     User ||--o{ Playlist : "owns"
-    
+
     Problem ||--o{ Submission : "has"
     Problem ||--o{ ProblemSolved : "tracks"
     Problem ||--o{ ProblemInPlaylist : "belongs to"
-    
+
     Submission ||--o{ TestCaseResult : "produces"
     Playlist ||--o{ ProblemInPlaylist : "contains"
 
@@ -144,7 +150,8 @@ erDiagram
 Follow these instructions to set up **LeetLab** locally on your machine.
 
 ### 📋 Prerequisites
-- **Node.js**: `v18.x` or higher installed
+
+- **Node.js**: `v20.19+` or `v22.12+` (required by Vite 8)
 - **npm** or **pnpm**
 - **PostgreSQL**: Running instance locally or cloud-hosted (Neon / Supabase / Aiven)
 - **Judge0 API Key** (RapidAPI) or a self-hosted Judge0 instance
@@ -154,12 +161,14 @@ Follow these instructions to set up **LeetLab** locally on your machine.
 ### ⚙️ Installation & Setup
 
 #### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/Uditya-Pal-1/Chai-Aur-Code-Cohort.git
 cd Projects/leetLab
 ```
 
 #### 2. Backend Setup
+
 ```bash
 cd backend
 
@@ -171,6 +180,7 @@ cp .env.sample .env
 ```
 
 Edit `.env` and populate your credentials:
+
 ```env
 PORT=8080
 DATABASE_URL="postgresql://user:password@localhost:5432/leetlab_db?schema=public"
@@ -178,23 +188,27 @@ JWT_SECRET="your_jwt_super_secret_key"
 ```
 
 Generate Prisma Client & apply migrations:
+
 ```bash
-# Push schema to database
-npx prisma db push
+# Apply local migrations
+npx prisma migrate dev
 
 # Generate Prisma Client
 npx prisma generate
 ```
 
 Start the backend server:
+
 ```bash
 npm run dev
 ```
+
 > Server running at: `http://localhost:8080`
 
 ---
 
 #### 3. Frontend Setup
+
 Open a new terminal window:
 
 ```bash
@@ -207,15 +221,18 @@ npm install
 cp .env.sample .env
 ```
 
-Edit `.env` (if applicable):
+The Vite dev server proxies `/api` to the backend at `http://localhost:8080`. Keep the API base path same-origin:
+
 ```env
-VITE_API_BASE_URL="http://localhost:8080/api/v1"
+VITE_API_BASE_URL="/api/v1"
 ```
 
 Start the Vite development server:
+
 ```bash
 npm run dev
 ```
+
 > Application running at: `http://localhost:5173`
 
 ---
@@ -223,36 +240,40 @@ npm run dev
 ## 📡 API Reference
 
 ### 🗝️ Authentication Endpoints (`/api/v1/auth`)
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/signup` | Public | Register a new user |
-| `POST` | `/login` | Public | Authenticate user & receive JWT cookie |
-| `POST` | `/logout` | Authenticated | Clear authentication cookie |
-| `GET` | `/me` | Authenticated | Fetch current logged-in user profile |
+
+| Method | Endpoint  | Access        | Description                            |
+| :----- | :-------- | :------------ | :------------------------------------- |
+| `POST` | `/signup` | Public        | Register a new user                    |
+| `POST` | `/login`  | Public        | Authenticate user & receive JWT cookie |
+| `POST` | `/logout` | Authenticated | Clear authentication cookie            |
+| `GET`  | `/me`     | Authenticated | Fetch current logged-in user profile   |
 
 ### 🧩 Problem Endpoints (`/api/v1/problems`)
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/` | Public | Fetch all coding problems |
-| `GET` | `/:id` | Public | Fetch single problem details by ID |
-| `POST` | `/create` | Admin | Create a new problem with testcases & snippets |
-| `PUT` | `/:id` | Admin | Update problem details |
-| `DELETE` | `/:id` | Admin | Delete a problem |
+
+| Method   | Endpoint  | Access | Description                                    |
+| :------- | :-------- | :----- | :--------------------------------------------- |
+| `GET`    | `/`       | Public | Fetch all coding problems                      |
+| `GET`    | `/:id`    | Public | Fetch single problem details by ID             |
+| `POST`   | `/create` | Admin  | Create a new problem with testcases & snippets |
+| `PUT`    | `/:id`    | Admin  | Update problem details                         |
+| `DELETE` | `/:id`    | Admin  | Delete a problem                               |
 
 ### ⚡ Code Execution & Submissions
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/api/v1/execute-code` | Authenticated | Batch execute code test cases via Judge0 |
-| `POST` | `/api/v1/submission` | Authenticated | Submit problem solution & record attempt |
-| `GET` | `/api/v1/submission/:problemId` | Authenticated | Fetch user submission history for a problem |
+
+| Method | Endpoint                        | Access        | Description                                 |
+| :----- | :------------------------------ | :------------ | :------------------------------------------ |
+| `POST` | `/api/v1/execute-code`          | Authenticated | Batch execute code test cases via Judge0    |
+| `POST` | `/api/v1/submission`            | Authenticated | Submit problem solution & record attempt    |
+| `GET`  | `/api/v1/submission/:problemId` | Authenticated | Fetch user submission history for a problem |
 
 ### 🎵 Playlist Endpoints (`/api/v1/playlist`)
-| Method | Endpoint | Access | Description |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/` | Authenticated | Get all playlists for logged-in user |
-| `POST` | `/` | Authenticated | Create a new problem playlist |
-| `POST` | `/add-problem` | Authenticated | Add a problem to a playlist |
-| `DELETE` | `/:playlistId` | Authenticated | Delete a playlist |
+
+| Method   | Endpoint       | Access        | Description                          |
+| :------- | :------------- | :------------ | :----------------------------------- |
+| `GET`    | `/`            | Authenticated | Get all playlists for logged-in user |
+| `POST`   | `/`            | Authenticated | Create a new problem playlist        |
+| `POST`   | `/add-problem` | Authenticated | Add a problem to a playlist          |
+| `DELETE` | `/:playlistId` | Authenticated | Delete a playlist                    |
 
 ---
 
@@ -305,6 +326,7 @@ Contributions are welcome! If you'd like to improve **LeetLab**:
 ## 👤 Author
 
 **Uditya Pal**
+
 - GitHub: [@Uditya-Pal-1](https://github.com/Uditya-Pal-1)
 - Cohort: Chai aur Code Web Development Cohort
 

@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(CookieParser());
 
-app.get("/",(req,res)=>{
+app.get("/", (req, res) => {
     res.send("Hello guys welcome to leetLab 🔥")
 })
 
@@ -23,6 +23,7 @@ app.use('/api/v1/playlist', playlistRoutes)
 app.use('/api/v1/problems', problemRoutes);
 app.use('/api/v1/submission', submissionRoutes)
 
-app.listen(process.env.PORT, ()=>{
-    console.log('Server is running....')
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`)
 })

@@ -1,23 +1,43 @@
 import { db } from '../libs/db.js';
 import { getLanguageName, pollBatchResults, submitBatch } from "../libs/judge0.lib.js"
+import { getExecutionTestCases, toPublicExecutionResults } from '../libs/problem.utils.js';
 
 export const executeCode = async (req, res) => {
     try {
-        const { source_code, language_id, stdin, expected_outputs, problemId } = req.body;
+        const { source_code, language_id, problemId } = req.body || {};
         const userId = req.user.id;
+        const languageId = Number(language_id);
         if (
-            !Array.isArray(stdin) ||
-            stdin.length === 0 ||
-            !Array.isArray(expected_outputs) ||
-            expected_outputs.length !== stdin.length
+            typeof source_code !== 'string' ||
+            source_code.length === 0 ||
+            !Number.isInteger(languageId) ||
+            getLanguageName(languageId) === 'Unknown' ||
+            typeof problemId !== 'string' ||
+            problemId.length === 0
 
         ) {
-            return res.status(400).json({ error: "Invalid or Missing test cases" });
+            return res.status(400).json({ error: "Invalid or missing execution details" });
         }
 
+        const problem = await db.problem.findUnique({
+            where: { id: problemId },
+            select: { testcases: true },
+        });
+
+        if (!problem) {
+            return res.status(404).json({ error: 'Problem not found' });
+        }
+
+        const testCases = getExecutionTestCases(problem);
+        if (!testCases) {
+            return res.status(500).json({ error: 'Problem test cases are not configured correctly' });
+        }
+
+        const stdin = testCases.map((testCase) => testCase.input);
+        const expectedOutputs = testCases.map((testCase) => testCase.output);
         const submissions = stdin.map((input) => ({
             source_code,
-            language_id,
+            language_id: languageId,
             stdin: input,
         }));
 
@@ -25,24 +45,12 @@ export const executeCode = async (req, res) => {
         const tokens = submitResponse.map((res) => res.token);
 
         const results = await pollBatchResults(tokens);
-        console.log("Result----")
-        console.log(results);
-
-        let allPassed = true;
+        let allPassed = results.length === stdin.length;
 
         const detailedResults = results.map((result, i) => {
-            let stdout = result.stdout?.trim();
-            const expected_output = expected_outputs[i]?.trim();
-
-            // Handle WSL2 mocked success
-            let passed = stdout === expected_output;
-            let statusDesc = result.status?.description;
-
-            if (result.message && result.message.includes('rb_sysopen')) {
-                passed = true;
-                stdout = expected_output;
-                statusDesc = 'Accepted';
-            }
+            const stdout = result.stdout?.trim() ?? '';
+            const expectedOutput = expectedOutputs[i].trim();
+            const passed = result.status?.id === 3 && stdout === expectedOutput;
 
             if (!passed) allPassed = false;
 
@@ -50,27 +58,25 @@ export const executeCode = async (req, res) => {
                 testCase: i + 1,
                 passed,
                 stdout,
-                expected: expected_output,
+                expected: expectedOutput,
                 stderr: result.stderr || null,
                 compileOutput: result.compile_output || null,
-                status: statusDesc,
+                status: result.status?.description ?? 'Execution Error',
                 memory: result.memory ? `${result.memory} KB` : undefined,
                 time: result.time ? `${result.time} s` : undefined
             };
         });
-
-        console.log(detailedResults);
 
         const submission = await db.submission.create({
             data: {
                 userId,
                 problemId,
                 sourceCode: source_code,
-                language: getLanguageName(language_id),
+                language: getLanguageName(languageId),
                 stdin: stdin.join("\n"),
                 stdout: JSON.stringify(detailedResults.map((r) => r.stdout)),
                 stderr: detailedResults.some((r) => r.stderr) ? JSON.stringify(detailedResults.map((r) => r.stderr)) : null,
-                compileOutput: detailedResults.some((r) => r.compile_output) ? JSON.stringify(detailedResults.map((r) => r.compile_output)) : null,
+                compileOutput: detailedResults.some((result) => result.compileOutput) ? JSON.stringify(detailedResults.map((result) => result.compileOutput)) : null,
                 status: allPassed ? "Accepted" : "Wrong Answer",
                 memory: detailedResults.some((r) => r.memory) ? JSON.stringify(detailedResults.map((r) => r.memory)) : null,
                 time: detailedResults.some((r) => r.time) ? JSON.stringify(detailedResults.map((r) => r.time)) : null,
@@ -99,7 +105,7 @@ export const executeCode = async (req, res) => {
             stdout: result.stdout,
             expected: result.expected,
             stderr: result.stderr,
-            compileOutput: result.compile_output,
+            compileOutput: result.compileOutput,
             status: result.status,
             memory: result.memory,
             time: result.time,
@@ -109,19 +115,13 @@ export const executeCode = async (req, res) => {
             data: testCaseResults,
         });
 
-        const submissionWithTestCase = await db.submission.findUnique({
-            where: {
-                id: submission.id,
-            },
-            include: {
-                testCases: true,
-            },
-        });
-
-        return res.status(200).json({ allPassed, results: detailedResults });
+        const publicResults = toPublicExecutionResults(detailedResults);
+        return res.status(200).json({ allPassed, results: publicResults });
 
     } catch (error) {
         console.error("Error executing code:", error);
-        return res.status(500).json({ error: "Internal Server Error" });
+        const statusCode = error.statusCode ?? 500;
+        const message = statusCode === 502 ? 'Code execution service unavailable' : 'Internal Server Error';
+        return res.status(statusCode).json({ error: message });
     }
 }

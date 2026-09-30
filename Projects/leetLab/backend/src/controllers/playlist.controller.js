@@ -18,7 +18,7 @@ const createPlayList = async (req, res) => {
             playList,
         });
     } catch (error) {
-        if(error.code === 'P2002'){
+        if (error.code === 'P2002') {
             return res.status(400).json("you already have a playlist with this name.")
         }
         console.error("Error creating playlist: ", error);
@@ -36,7 +36,14 @@ const getPlayAllListDetails = async (req, res) => {
             include: {
                 problems: {
                     include: {
-                        problem: true,
+                        problem: {
+                            select: {
+                                id: true,
+                                title: true,
+                                difficulty: true,
+                                tags: true,
+                            },
+                        },
                     }
                 }
             }
@@ -60,7 +67,14 @@ const getPlayListDetails = async (req, res) => {
             include: {
                 problems: {
                     include: {
-                        problem: true,
+                        problem: {
+                            select: {
+                                id: true,
+                                title: true,
+                                difficulty: true,
+                                tags: true,
+                            },
+                        },
                     },
                 },
             },
@@ -90,9 +104,9 @@ const addProblemToPlayList = async (req, res) => {
             return res.status(400).json({ error: "Invalid or missing problemIds" });
         }
         const playlistExists = await db.playlist.findFirst({
-            where: {id: playListId, userId: req.user.id}
+            where: { id: playListId, userId: req.user.id }
         })
-        if(!playlistExists){
+        if (!playlistExists) {
             return res.status(404).json({ error: "Playlist does not exist" })
         }
         console.log(
@@ -147,17 +161,17 @@ const removeProblemFromPlayList = async (req, res) => {
     const { problemIds } = req.body;
 
     try {
-        if(!Array.isArray(problemIds) || problemIds.length === 0) {
+        if (!Array.isArray(problemIds) || problemIds.length === 0) {
             return res.status(400).json({ error: "Invalid or missing problemIds" });
         }
         const playListExists = await db.playlist.findFirst({
-            where:{id:playListId, userId:req.user.id}
+            where: { id: playListId, userId: req.user.id }
         });
-        if(!playListExists){
+        if (!playListExists) {
             return res.status(404).json({ error: "Playlist does not exist" })
         }
         const deleteProblem = await db.problemInPlaylist.deleteMany({
-            where:{
+            where: {
                 playListId,
                 problemId: {
                     in: problemIds,

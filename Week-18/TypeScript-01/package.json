@@ -2,12 +2,12 @@
   "name": "typescript-01",
   "version": "1.0.0",
   "description": "typescriptPracticeProject",
-  "license": "ISC",
+  "license": "MIT",
   "author": "Uditya Pal",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start":"node dist/index.js",
+    "start": "node dist/index.js",
     "build": "tsc -p ."
   },
   "devDependencies": {

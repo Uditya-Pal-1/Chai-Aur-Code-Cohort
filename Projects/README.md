@@ -16,10 +16,10 @@ The projects in this folder are answers to that question. They capture the journ
 
 ## Project Map
 
-| Project      | Status                | What it is                                                                      | Documentation                                  |
-| ------------ | --------------------- | ------------------------------------------------------------------------------- | ---------------------------------------------- |
-| **LeetLab**  | In active development | A full-stack online judge and algorithm practice platform inspired by LeetCode. | [Read the project README](./leetLab/Readme.md) |
-| **MasterJI** | Planned               | A reserved space for a future project and its supporting assets.                | [Open the project folder](./MasterJI/)         |
+| Project       | Status                | What it is                                                                      | Documentation                                  |
+| ------------- | --------------------- | ------------------------------------------------------------------------------- | ---------------------------------------------- |
+| **LeetLab**   | In active development | A full-stack online judge and algorithm practice platform inspired by LeetCode. | [Read the project README](./leetLab/Readme.md) |
+| **AtellixUI** | Planned               | Reserved space for future AtellixUI project work.                               | [Open the project folder](./AtellixUI/)        |
 
 ## Featured Project: LeetLab
 
@@ -75,12 +75,12 @@ The backend owns authentication, problem management, submissions, playlists, and
 
 An authenticated code submission moves through these stages:
 
-1. The React client sends source code, language, problem information, and optional standard input to `POST /api/v1/execute-code`.
+1. The React client sends source code, language ID, and problem ID to `POST /api/v1/execute-code`.
 2. The authentication middleware reads the JWT from the HTTP-only cookie and attaches the authenticated user to the request.
-3. The execution controller maps the requested language to a Judge0 language ID and builds one submission per test case.
+3. The execution controller loads the problem's test cases from PostgreSQL and builds one Judge0 submission per stored test case; clients cannot provide or replace expected outputs.
 4. The Judge0 adapter submits the batch and polls `/submissions/batch` until every result reaches a terminal status.
 5. The controller aggregates the results, persists the submission and individual `TestCaseResult` records, and marks the problem as solved when all test cases pass.
-6. The API returns structured execution details so the frontend can render accepted, wrong-answer, compilation, runtime, memory, and timing states.
+6. The API returns structured execution details without exposing expected outputs, so the frontend can render accepted, wrong-answer, compilation, runtime, memory, and timing states.
 
 ```mermaid
 sequenceDiagram
@@ -145,16 +145,16 @@ All application routes are mounted under `/api/v1`. Except for registration and 
 
 #### Execution, submissions, and playlists
 
-| Resource       | Routes                                                                         | Purpose                                   |
-| -------------- | ------------------------------------------------------------------------------ | ----------------------------------------- |
-| Code execution | `POST /execute-code`                                                           | Execute submitted code against test cases |
-| Submissions    | `GET /submission/get-all-submissions`                                          | Retrieve the current user's submissions   |
-| Submissions    | `GET /submission/get-submissions/:problemId`                                   | Retrieve submissions for one problem      |
-| Submissions    | `GET /submission/get-submissions-count/:problemId`                             | Retrieve submission count for one problem |
-| Playlists      | `POST /playlist/create-playlist`, `GET /playlist`, `GET /playlist/:playListId` | Create and inspect playlists              |
-| Playlists      | `POST /playlist/:playListId/add-problem`                                       | Add a problem to a playlist               |
-| Playlists      | `DELETE /playlist/:playListId/remove-problem`                                  | Remove a problem from a playlist          |
-| Playlists      | `DELETE /playlist/:playListId`                                                 | Delete a playlist                         |
+| Resource       | Routes                                                                         | Purpose                                                |
+| -------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------ |
+| Code execution | `POST /execute-code`                                                           | Execute submitted code against server-owned test cases |
+| Submissions    | `GET /submission/get-all-submissions`                                          | Retrieve the current user's submissions                |
+| Submissions    | `GET /submission/get-submissions/:problemId`                                   | Retrieve submissions for one problem                   |
+| Submissions    | `GET /submission/get-submissions-count/:problemId`                             | Retrieve submission count for one problem              |
+| Playlists      | `POST /playlist/create-playlist`, `GET /playlist`, `GET /playlist/:playListId` | Create and inspect playlists                           |
+| Playlists      | `POST /playlist/:playListId/add-problem`                                       | Add a problem to a playlist                            |
+| Playlists      | `DELETE /playlist/:playListId/remove-problem`                                  | Remove a problem from a playlist                       |
+| Playlists      | `DELETE /playlist/:playListId`                                                 | Delete a playlist                                      |
 
 ### Authorization Flow
 
@@ -163,7 +163,7 @@ The backend applies authorization in two layers:
 - `authMiddleware` verifies the JWT cookie and rejects unauthenticated requests before controllers run.
 - `checkAdmin` protects problem creation, updates, and deletion so only users with `role: ADMIN` can change the problem catalog.
 
-Passwords are hashed with `bcryptjs`; the application does not use the raw password for subsequent requests. The client sends cookies with requests, so local development must use a frontend and backend configuration that permits credentials to be included.
+Passwords are hashed with `bcryptjs`; the application does not use the raw password for subsequent requests. The client sends HTTP-only cookies with requests. In local development, Vite proxies `/api` to the backend on port `8080`, keeping auth requests same-origin.
 
 ### Code Execution Adapter
 
@@ -175,7 +175,7 @@ The Judge0 adapter currently maps these application language names to Judge0 IDs
 | Java                 |      `62` |
 | Python               |      `71` |
 
-The adapter submits a batch, stores the returned tokens, and polls once per second until no result is in the queued or processing state. It also exposes a language-name helper for displaying execution results. In local development, the adapter contains fallback behavior for an unreachable Judge0 service; production deployments should configure a reliable Judge0 endpoint instead of depending on mocked results.
+The adapter submits a batch, stores the returned tokens, and polls once per second for up to 60 seconds. Judge0 failures return a `502` response; the API does not fabricate accepted results or save failed provider calls as successful submissions. Configure a reachable Judge0 endpoint before running code submissions.
 
 ## Getting Started
 
@@ -183,7 +183,7 @@ The commands below are for LeetLab. For the complete feature list and API refere
 
 ### Prerequisites
 
-- Node.js 18 or newer
+- Node.js 20.19+ or 22.12+ (required by the LeetLab Vite 8 frontend)
 - npm or pnpm
 - A PostgreSQL database
 - A Judge0 API key or a self-hosted Judge0 instance
@@ -240,6 +240,12 @@ npm run lint
 npm run build
 ```
 
+Run backend unit tests from `leetLab/backend`:
+
+```bash
+npm test
+```
+
 The backend currently exposes a development server through `npm run dev`. Backend changes should be checked against the configured PostgreSQL database and Judge0 endpoint, with special attention to authentication cookies, role checks, and submission persistence.
 
 ## Repository Structure
@@ -252,7 +258,7 @@ Projects/
 |   |-- Readme.md             # LeetLab product documentation
 |   |-- backend/              # Express API, Prisma schema, and controllers
 |   `-- frontend/             # React application and UI components
-`-- MasterJI/                 # Reserved space for a future project
+`-- AtellixUI/                # Planned project space
 ```
 
 ## Development Principles

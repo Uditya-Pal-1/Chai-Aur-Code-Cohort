@@ -2,16 +2,16 @@
   <img src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/typescript/typescript.png" width="100" alt="TypeScript Logo" />
   <img src="https://webimages.mongodb.com/_com_assets/cms/kuyjf3vea2hg34taa-horizontal_default_slate_blue.svg?auto=format%252Ccompress" width="220" alt="MongoDB Logo" />
 
-  # 🚀 Week 18: Advanced MongoDB Aggregation & Enterprise TypeScript
+# 🚀 Week 18: Advanced MongoDB Aggregation & Enterprise TypeScript
 
-  **Chai Aur Code Cohort — Full-Stack Web Development & System Design**
+**Chai Aur Code Cohort — Full-Stack Web Development & System Design**
 
-  [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](#)
-  [![MongoDB](https://img.shields.io/badge/MongoDB-Aggregation_Framework-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](#)
-  [![Express.js](https://img.shields.io/badge/Express.js-5.0-000000?style=for-the-badge&logo=express&logoColor=white)](#)
-  [![Zod](https://img.shields.io/badge/Zod-Schema_Validation-3E67B1?style=for-the-badge&logo=zod&logoColor=white)](#)
-  [![Winston](https://img.shields.io/badge/Winston-Logging_Framework-5A0099?style=for-the-badge)](#)
-  [![Cohort](https://img.shields.io/badge/Chai_Cohort-Week_18-FF9900?style=for-the-badge)](#)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](#)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Aggregation_Framework-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](#)
+[![Express.js](https://img.shields.io/badge/Express.js-5.0-000000?style=for-the-badge&logo=express&logoColor=white)](#)
+[![Zod](https://img.shields.io/badge/Zod-Schema_Validation-3E67B1?style=for-the-badge&logo=zod&logoColor=white)](#)
+[![Winston](https://img.shields.io/badge/Winston-Logging_Framework-5A0099?style=for-the-badge)](#)
+[![Cohort](https://img.shields.io/badge/Chai_Cohort-Week_18-FF9900?style=for-the-badge)](#)
 
 </div>
 
@@ -40,11 +40,13 @@
 - [👤 Author & Acknowledgments](#-author--acknowledgments)
 
 ---
+
 ## 🖼️ Media & Visuals
 
   <img src="./pose6.jpeg" alt="DOM Challenges Banner" width="750" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);" />
 
 ---
+
 ## 🔍 Overview
 
 Welcome to **Week 18** of the **Chai Aur Code Cohort**. This week focuses on two major pillars of modern backend development:
@@ -89,17 +91,17 @@ Week-18/
 
 ## 🍃 Module 1: MongoDB Aggregation Pipeline Masterclass
 
-The [MongoDB Aggregation](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-18/MongoDB%20Aggregation) module covers data analytics and pipeline transformations on NoSQL document databases.
+The [MongoDB Aggregation](./MongoDB%20Aggregation) module covers data analytics and pipeline transformations on NoSQL document databases.
 
 ### Dataset Architecture
 
 The aggregation exercises are executed against three interconnected collections:
 
-| Collection Script | Record Type | Key Fields |
-| :--- | :--- | :--- |
-| [`Users.mongodb.js`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-18/MongoDB%20Aggregation/Users.mongodb.js) | User Profiles | `_id`, `name`, `age`, `gender`, `company`, `email`, `tags`, `favoriteFruit`, `isActive` |
-| [`Books.mongodb.js`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-18/MongoDB%20Aggregation/Books.mongodb.js) | Book Catalog | `_id`, `title`, `author_id`, `genre`, `price` |
-| [`Author.mongodb.js`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-18/MongoDB%20Aggregation/Author.mongodb.js) | Author Directory | `_id`, `name`, `birth_year`, `nationality` |
+| Collection Script                                                | Record Type      | Key Fields                                                                              |
+| :--------------------------------------------------------------- | :--------------- | :-------------------------------------------------------------------------------------- |
+| [`Users.mongodb.js`](./MongoDB%20Aggregation/Users.mongodb.js)   | User Profiles    | `_id`, `name`, `age`, `gender`, `company`, `email`, `tags`, `favoriteFruit`, `isActive` |
+| [`Books.mongodb.js`](./MongoDB%20Aggregation/Books.mongodb.js)   | Book Catalog     | `_id`, `title`, `author_id`, `genre`, `price`                                           |
+| [`Author.mongodb.js`](./MongoDB%20Aggregation/Author.mongodb.js) | Author Directory | `_id`, `name`, `birth_year`, `nationality`                                              |
 
 ### Core Pipeline Operators
 
@@ -119,8 +121,8 @@ Here is a summary of key aggregation challenges covered in the module:
 3. **Top 5 Favorite Fruits**: `$group` by `$favoriteFruit` $\rightarrow$ `$sort` descending $\rightarrow$ `$limit: 5`
 4. **Gender Categorization**: `$group` by `$gender` with accumulated count `$sum: 1`
 5. **Array Tag Length Calculation**:
-   - *Approach A (Unwind)*: `$unwind: "$tags"` $\rightarrow$ `$group` by user `_id`
-   - *Approach B (Add Fields - Optimized)*: `$addFields: { tagCount: { $size: "$tags" } }` $\rightarrow$ `$group` by `$avg: "$tagCount"`
+   - _Approach A (Unwind)_: `$unwind: "$tags"` $\rightarrow$ `$group` by user `_id`
+   - _Approach B (Add Fields - Optimized)_: `$addFields: { tagCount: { $size: "$tags" } }` $\rightarrow$ `$group` by `$avg: "$tagCount"`
 6. **Positional Index Match**: Find users where the 2nd tag is `"ad"` (`$match: { "tags.1": "ad" }`)
 7. **Exact Array Set Match**: `$match: { tags: { $all: ["enim", "id"] } }`
 
@@ -152,17 +154,17 @@ Joining the `books` collection with `authors` using `$lookup` and flattening the
 
 ## ⚡ Module 2: Enterprise TypeScript & Express Server Template
 
-The [TypeScript-01](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-18/TypeScript-01) directory demonstrates an enterprise backend architecture built with Express.js and TypeScript.
+The [TypeScript-01](./TypeScript-01) directory demonstrates an enterprise backend architecture built with Express.js and TypeScript.
 
 ### Architecture & Design Highlights
 
 - **Native ES Modules**: Configured with `"type": "module"` in `package.json` and `"moduleResolution": "NodeNext"` in `tsconfig.json`.
-- **Factory Design Pattern**: The `createApp()` function in [`src/app/index.ts`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-18/TypeScript-01/src/app/index.ts) decouples application creation from HTTP server startup ([`src/index.ts`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-18/TypeScript-01/src/index.ts)).
+- **Factory Design Pattern**: The `createApp()` function in [`src/app/index.ts`](./TypeScript-01/src/app/index.ts) decouples application creation from HTTP server startup ([`src/index.ts`](./TypeScript-01/src/index.ts)).
 - **Class-Based Controllers**: Handler methods encapsulated within controller classes (e.g., `HealthController`).
 
 ### Type-Safe Environment Variables (`Zod`)
 
-Environment configuration ([`src/env.ts`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-18/TypeScript-01/src/env.ts)) validates runtime variables against a Zod schema before server initialization:
+Environment configuration ([`src/env.ts`](./TypeScript-01/src/env.ts)) validates runtime variables against a Zod schema before server initialization:
 
 ```typescript
 import { z } from "zod";
@@ -184,7 +186,7 @@ export const env = createEnv(process.env);
 
 ### Structured Logging (`Winston`)
 
-Application logging ([`src/logger.ts`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-18/TypeScript-01/src/logger.ts)) is managed via Winston with JSON formatting:
+Application logging ([`src/logger.ts`](./TypeScript-01/src/logger.ts)) is managed via Winston with JSON formatting:
 
 ```typescript
 import winston from "winston";
@@ -203,7 +205,7 @@ logger.add(
 
 ### Modular Routing & Class Controllers
 
-Health check endpoint implementation ([`src/app/routes/health/controller.ts`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-18/TypeScript-01/src/app/routes/health/controller.ts)):
+Health check endpoint implementation ([`src/app/routes/health/controller.ts`](./TypeScript-01/src/app/routes/health/controller.ts)):
 
 ```typescript
 import type { Request, Response } from "express";
@@ -223,7 +225,7 @@ export default HealthController;
 
 ## 📘 Module 3: TypeScript Core Fundamentals
 
-The [Typescript rough](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-18/Typescript%20rough) folder demonstrates core type system concepts in [`hello.ts`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-18/Typescript%20rough/hello.ts).
+The [Typescript rough](./Typescript%20rough) folder demonstrates core type system concepts in [`hello.ts`](./Typescript%20rough/hello.ts).
 
 ### Type Annotations & Function Signatures
 
@@ -293,6 +295,7 @@ npm start
 ```
 
 Once started, test the health check endpoint:
+
 ```bash
 curl http://localhost:8000/health
 # Response: {"status":"healthy"}
@@ -301,8 +304,8 @@ curl http://localhost:8000/health
 ### 2️⃣ Running MongoDB Aggregation Queries
 
 1. Open your database GUI (e.g., MongoDB Compass, VS Code MongoDB Extension).
-2. Seed your database using [`Users.mongodb.js`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-18/MongoDB%20Aggregation/Users.mongodb.js), [`Books.mongodb.js`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-18/MongoDB%20Aggregation/Books.mongodb.js), and [`Author.mongodb.js`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-18/MongoDB%20Aggregation/Author.mongodb.js).
-3. Execute the aggregation pipeline stages outlined in [`MongoDB Aggregation/Readme.md`](file:///d:/VS%20Code/Web%20Development%20Course/Chai-Aur-Code-Cohort/Week-18/MongoDB%20Aggregation/Readme.md).
+2. Seed your database using [`Users.mongodb.js`](./MongoDB%20Aggregation/Users.mongodb.js), [`Books.mongodb.js`](./MongoDB%20Aggregation/Books.mongodb.js), and [`Author.mongodb.js`](./MongoDB%20Aggregation/Author.mongodb.js).
+3. Execute the aggregation pipeline stages outlined in [`MongoDB Aggregation/Readme.md`](./MongoDB%20Aggregation/Readme.md).
 
 ---
 
@@ -310,10 +313,10 @@ curl http://localhost:8000/health
 
 Inside `TypeScript-01/package.json`:
 
-| Script | Command | Description |
-| :--- | :--- | :--- |
-| `build` | `tsc` | Transpiles TypeScript files into JavaScript in `dist/` |
-| `start` | `node dist/index.js` | Launches the built Node.js server |
+| Script  | Command              | Description                                            |
+| :------ | :------------------- | :----------------------------------------------------- |
+| `build` | `tsc`                | Transpiles TypeScript files into JavaScript in `dist/` |
+| `start` | `node dist/index.js` | Launches the built Node.js server                      |
 
 ---
 
