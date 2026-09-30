@@ -14,6 +14,17 @@ Week 00 is where a project gets its memory. You make a change, save a checkpoint
 [![LinkedIn](https://img.shields.io/badge/Connect-LinkedIn-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/udityapal)
 [![Email](https://img.shields.io/badge/Contact-Email-D14836?style=flat&logo=gmail&logoColor=white)](mailto:udityapal2024@gmail.com)
 
+## 📚 Week 00 Study Materials
+
+Download the class references and revisit the session materials:
+
+| Resource                                                                | Open                                                                             |
+| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| **Git and GitHub reference** (`github.pdf`)                             | [📄 Open PDF](./github.pdf)                                                      |
+| **Additional class notes** (`Git_and_Github_lyst1736093713658 (1).pdf`) | [📄 Open PDF](./Git_and_Github_lyst1736093713658%20%281%29.pdf)                  |
+| Git and GitHub class screenshot 1                                       | [View image](./Git_GitHub%20Master%20Class/Screenshot%202026-01-17%20163739.png) |
+| Git and GitHub class screenshot 2                                       | [View image](./Git_GitHub%20Master%20Class/Screenshot%202026-01-17%20163847.png) |
+
 ## The first contribution
 
 Imagine you have spotted a typo in a project README. It is a tiny change, but it can teach you the whole collaboration loop. You start with a copy of the project, create a branch for your fix, save the change as a commit, and publish the branch. On GitHub, you open a pull request so the change can be discussed and merged.
@@ -233,15 +244,6 @@ For a first contribution, the most useful sequence is usually `git status` → `
 - **A push is rejected:** check `git status` and `git remote -v`; you may need to bring your branch up to date or confirm you have permission to push.
 
 When in doubt, pause and run `git status`. It is often the quickest way to see what Git expects next.
-
-## Week 00 study materials
-
-These files are included alongside this guide:
-
-- [Git and GitHub reference PDF](./github.pdf)
-- [Additional class notes PDF](./Git_and_Github_lyst1736093713658%20%281%29.pdf)
-- [Class screenshot 1](./Git_GitHub%20Master%20Class/Screenshot%202026-01-17%20163739.png)
-- [Class screenshot 2](./Git_GitHub%20Master%20Class/Screenshot%202026-01-17%20163847.png)
 
 ## Keep going
 

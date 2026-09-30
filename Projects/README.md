@@ -8,20 +8,21 @@ This directory is where concepts leave the notebook and become working software.
 
 </div>
 
-## The Story
+## Portfolio Overview
 
-Every useful application begins with a small question: _Can this idea become something people can actually use?_
+This directory contains standalone application work built from the concepts practiced in the cohort. LeetLab is the current implementation; AtellixDo and AtellixUI are planned products with briefs, not completed applications.
 
-The projects in this folder are answers to that question. They capture the journey from architecture sketches and database models to APIs, interfaces, authentication, and real user workflows. Some projects are already taking shape; others are waiting for their first meaningful commit. Together, they form a practical record of learning by building.
+## Project Index
 
-## Project Map
+| Project       | Status         | Focus                                                       | Documentation                                                   | Demo          |
+| ------------- | -------------- | ----------------------------------------------------------- | --------------------------------------------------------------- | ------------- |
+| **LeetLab**   | In development | Coding problems, submissions, execution, and playlists      | [Project README](./leetLab/Readme.md) · [PRD](./leetLab/PRD.md) | Not deployed  |
+| **AtellixDo** | Planned        | Task management with optional, human-reviewed AI assistance | [Project brief](./AtellixDo/README.md)                          | Not available |
+| **AtellixUI** | Planned        | Reusable UI components and interactive documentation        | [Project brief](./AtellixUI/README.md)                          | Not available |
 
-| Project       | Status                | What it is                                                                      | Documentation                                  |
-| ------------- | --------------------- | ------------------------------------------------------------------------------- | ---------------------------------------------- |
-| **LeetLab**   | In active development | A full-stack online judge and algorithm practice platform inspired by LeetCode. | [Read the project README](./leetLab/Readme.md) |
-| **AtellixUI** | Planned               | Reserved space for future AtellixUI project work.                               | [Open the project folder](./AtellixUI/)        |
+**Status definitions:** “In development” means implementation exists but still needs end-to-end verification. “Planned” means only a brief exists in this repository.
 
-## Featured Project: LeetLab
+## LeetLab: Product Overview
 
 LeetLab is the first major project in this collection: a platform designed to make coding practice feel structured, measurable, and rewarding. A learner can discover a problem, write a solution, submit it for execution, inspect test-case results, and track progress over time. An administrator can create problems, manage test cases, and curate playlists for focused study.
 
@@ -29,12 +30,13 @@ The product is built around a simple loop:
 
 ```text
 Choose a problem -> Write a solution -> Run it against test cases
-		^                                             |
 		|                                             v
 Review the result <- Save the submission <- Track progress
 ```
 
-### Current Capabilities
+### Implemented Scope
+
+The repository contains code for these workflows; end-to-end behavior still depends on configured services and verification. LeetLab is not currently deployed.
 
 - JWT authentication with HTTP-only cookies
 - User and administrator roles
@@ -68,6 +70,9 @@ flowchart LR
 ```
 
 The backend owns authentication, problem management, submissions, playlists, and execution orchestration. PostgreSQL stores the durable application state, while Judge0 evaluates submitted code in an isolated execution environment.
+
+<details>
+<summary>Technical reference: request lifecycle, data model, API, authorization, and Judge0</summary>
 
 ## Technical Design
 
@@ -177,6 +182,8 @@ The Judge0 adapter currently maps these application language names to Judge0 IDs
 
 The adapter submits a batch, stores the returned tokens, and polls once per second for up to 60 seconds. Judge0 failures return a `502` response; the API does not fabricate accepted results or save failed provider calls as successful submissions. Configure a reachable Judge0 endpoint before running code submissions.
 
+</details>
+
 ## Getting Started
 
 The commands below are for LeetLab. For the complete feature list and API reference, see the [LeetLab README](./leetLab/Readme.md).
@@ -254,11 +261,12 @@ The backend currently exposes a development server through `npm run dev`. Backen
 Projects/
 |-- README.md                 # This project index
 |-- Assets/                   # Shared and project-specific visual assets
+|-- AtellixDo/                # Planned task and todo management application
+|-- AtellixUI/                # Planned reusable component library
 |-- leetLab/
 |   |-- Readme.md             # LeetLab product documentation
 |   |-- backend/              # Express API, Prisma schema, and controllers
 |   `-- frontend/             # React application and UI components
-`-- AtellixUI/                # Planned project space
 ```
 
 ## Development Principles
@@ -295,7 +303,7 @@ See the repository-level [contribution guidelines](../CONTRIBUTING.md) before su
 
 ## License
 
-This project collection is distributed under the repository's [ISC license](../LICENSE).
+The cohort repository is distributed under the [MIT License](../LICENSE). Check each project's package metadata and third-party licenses before redistributing a project independently.
 
 <div align="center">
 

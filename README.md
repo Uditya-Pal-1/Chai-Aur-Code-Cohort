@@ -57,6 +57,7 @@ Chai-Aur-Code-Cohort/
 ├── Projects/                        → bigger product-style builds and case studies
 │   ├── README.md
 │   ├── leetLab/                     → major full-stack project
+│   ├── AtellixDo/                    → planned task and todo application
 │   └── AtellixUI/                   → planned project space
 ├── Week-00/                         → setup and basics
 ├── Week-01/                         → HTML/CSS learning

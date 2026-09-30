@@ -2,7 +2,7 @@
 
 # ⚡ LeetLab
 
-**An Enterprise-Grade Full-Stack Online Judge & Algorithmic Problem Solving Platform**
+**A Full-Stack Online Judge & Algorithm Practice Platform**
 
 [![React](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-v20+-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
@@ -12,7 +12,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![License](https://img.shields.io/badge/License-ISC-blue?style=for-the-badge)](LICENSE)
 
-[Features](#-key-features) • [Tech Stack](#-tech-stack) • [Database Schema](#-database-schema) • [API Documentation](#-api-documentation) • [Getting Started](#-getting-started) • [Folder Structure](#-folder-structure)
+[Features](#-key-features) • [Wireframes](#-wireframes) • [Architecture](#-architecture--system-flow) • [Data Flow](#-data-flow) • [Tech Stack](#-tech-stack) • [PRD](./PRD.md)
 
 ---
 
@@ -23,6 +23,8 @@
 **LeetLab** is a full-stack, feature-rich online coding platform inspired by LeetCode. Built with modern web technologies, LeetLab enables developers to practice algorithmic problem-solving, compile and test code in real-time, track problem submissions, and organize custom problem playlists.
 
 The platform includes a robust **Judge0 code execution engine** integration for batch test case processing, role-based access control (User/Admin), and complete problem-management workflows.
+
+For product goals, requirements, release scope, and acceptance criteria, see the [LeetLab Product Requirements Document](./PRD.md). LeetLab is an active learning project; deployment and production readiness have not been verified.
 
 ---
 
@@ -84,6 +86,92 @@ graph TD
     B -->|Execute Code Request| E[Judge0 Code Execution API]
     E -->|Batch Results & Telemetry| B
     B -->|JSON Response & Stats| A
+```
+
+---
+
+## 🧭 Wireframes
+
+These structural wireframes describe the intended information hierarchy; they are not screenshots of implemented screens.
+
+### Learner Problem Workspace
+
+```mermaid
+flowchart TB
+    Header[Top bar: LeetLab, search, profile]
+    Header --> Workspace
+    subgraph Workspace[Problem workspace]
+        direction LR
+        List[Problem list and filters]
+        Statement[Problem statement, examples, constraints]
+        Editor[Code editor and language selector]
+        Controls[Run, submit, custom input]
+        Results[Test results, status, time, memory]
+        List --> Statement
+        Statement --> Editor
+        Editor --> Controls
+        Controls --> Results
+    end
+```
+
+### Admin Problem Editor
+
+```mermaid
+flowchart TB
+    Admin[Admin navigation]
+    Admin --> Form[Problem metadata: title, difficulty, tags]
+    Form --> Content[Description, constraints, examples, hints]
+    Content --> PublicCases[Public sample cases]
+    Content --> PrivateCases[Private test cases and expected outputs]
+    PrivateCases --> Solutions[Reference solutions by language]
+    Solutions --> Validate[Validate reference solutions]
+    Validate --> Save[Save problem]
+```
+
+---
+
+## 🔄 Data Flow
+
+Private test cases and reference solutions stay on the server. The browser sends source code, language ID, and problem ID; the API loads the stored test cases and compares results before returning a response without expected outputs.
+
+```mermaid
+flowchart LR
+    Learner[Learner browser] -->|Credentials and requests| API[Express API]
+    Admin[Admin browser] -->|Problem authoring| API
+    API --> Auth[JWT and role checks]
+    Auth --> Users[(Users)]
+    API --> Problems[(Problems and private test cases)]
+    API --> Judge[Judge0 execution service]
+    Problems -->|Stored inputs and expected outputs| API
+    API -->|Source code and stored inputs| Judge
+    Judge -->|stdout, stderr, status, metrics| API
+    API --> Results[(Submissions and test-case results)]
+    API --> Solved[(Solved-problem records)]
+    API -->|Filtered result payload| Learner
+```
+
+### Code Submission Sequence
+
+```mermaid
+sequenceDiagram
+    actor Learner
+    participant UI as React client
+    participant API as Express API
+    participant DB as PostgreSQL
+    participant Judge as Judge0
+    Learner->>UI: Submit source, language, and problem ID
+    UI->>API: POST /api/v1/execute-code with session cookie
+    API->>API: Verify session and validate request
+    API->>DB: Load stored problem test cases
+    DB-->>API: Inputs and expected outputs
+    API->>Judge: Submit code for each stored input
+    Judge-->>API: Tokens and terminal results
+    API->>API: Compare accepted status and stdout
+    API->>DB: Persist submission and test-case results
+    opt Every stored test case passes
+        API->>DB: Upsert solved-problem record
+    end
+    API-->>UI: Return pass/fail details without expected outputs
 ```
 
 ---
@@ -241,39 +329,43 @@ npm run dev
 
 ### 🗝️ Authentication Endpoints (`/api/v1/auth`)
 
-| Method | Endpoint  | Access        | Description                            |
-| :----- | :-------- | :------------ | :------------------------------------- |
-| `POST` | `/signup` | Public        | Register a new user                    |
-| `POST` | `/login`  | Public        | Authenticate user & receive JWT cookie |
-| `POST` | `/logout` | Authenticated | Clear authentication cookie            |
-| `GET`  | `/me`     | Authenticated | Fetch current logged-in user profile   |
+| Method | Endpoint    | Access        | Description                            |
+| :----- | :---------- | :------------ | :------------------------------------- |
+| `POST` | `/register` | Public        | Register a new user                    |
+| `POST` | `/login`    | Public        | Authenticate user & receive JWT cookie |
+| `POST` | `/logout`   | Authenticated | Clear authentication cookie            |
+| `GET`  | `/check`    | Authenticated | Fetch current logged-in user profile   |
 
 ### 🧩 Problem Endpoints (`/api/v1/problems`)
 
-| Method   | Endpoint  | Access | Description                                    |
-| :------- | :-------- | :----- | :--------------------------------------------- |
-| `GET`    | `/`       | Public | Fetch all coding problems                      |
-| `GET`    | `/:id`    | Public | Fetch single problem details by ID             |
-| `POST`   | `/create` | Admin  | Create a new problem with testcases & snippets |
-| `PUT`    | `/:id`    | Admin  | Update problem details                         |
-| `DELETE` | `/:id`    | Admin  | Delete a problem                               |
+| Method   | Endpoint               | Access        | Description                                   |
+| :------- | :--------------------- | :------------ | :-------------------------------------------- |
+| `GET`    | `/get-all-problems`    | Authenticated | Fetch available coding problems               |
+| `GET`    | `/get-problem/:id`     | Authenticated | Fetch a problem by ID                         |
+| `POST`   | `/create-problem`      | Admin         | Create a problem with test cases and snippets |
+| `PUT`    | `/update-problem/:id`  | Admin         | Update problem details                        |
+| `DELETE` | `/delete-problem/:id`  | Admin         | Delete a problem                              |
+| `GET`    | `/get-solved-problems` | Authenticated | Fetch the current user's solved problems      |
 
 ### ⚡ Code Execution & Submissions
 
-| Method | Endpoint                        | Access        | Description                                 |
-| :----- | :------------------------------ | :------------ | :------------------------------------------ |
-| `POST` | `/api/v1/execute-code`          | Authenticated | Batch execute code test cases via Judge0    |
-| `POST` | `/api/v1/submission`            | Authenticated | Submit problem solution & record attempt    |
-| `GET`  | `/api/v1/submission/:problemId` | Authenticated | Fetch user submission history for a problem |
+| Method | Endpoint                                              | Access        | Description                            |
+| :----- | :---------------------------------------------------- | :------------ | :------------------------------------- |
+| `POST` | `/api/v1/execute-code`                                | Authenticated | Execute code against stored test cases |
+| `GET`  | `/api/v1/submission/get-all-submissions`              | Authenticated | Fetch the current user's submissions   |
+| `GET`  | `/api/v1/submission/get-submissions/:problemId`       | Authenticated | Fetch submissions for one problem      |
+| `GET`  | `/api/v1/submission/get-submissions-count/:problemId` | Authenticated | Fetch submission count for a problem   |
 
 ### 🎵 Playlist Endpoints (`/api/v1/playlist`)
 
-| Method   | Endpoint       | Access        | Description                          |
-| :------- | :------------- | :------------ | :----------------------------------- |
-| `GET`    | `/`            | Authenticated | Get all playlists for logged-in user |
-| `POST`   | `/`            | Authenticated | Create a new problem playlist        |
-| `POST`   | `/add-problem` | Authenticated | Add a problem to a playlist          |
-| `DELETE` | `/:playlistId` | Authenticated | Delete a playlist                    |
+| Method   | Endpoint                                      | Access        | Description                      |
+| :------- | :-------------------------------------------- | :------------ | :------------------------------- |
+| `GET`    | `/api/v1/playlist/`                           | Authenticated | Get the current user's playlists |
+| `POST`   | `/api/v1/playlist/create-playlist`            | Authenticated | Create a playlist                |
+| `GET`    | `/api/v1/playlist/:playListId`                | Authenticated | Get playlist details             |
+| `POST`   | `/api/v1/playlist/:playListId/add-problem`    | Authenticated | Add problems to a playlist       |
+| `DELETE` | `/api/v1/playlist/:playListId`                | Authenticated | Delete a playlist                |
+| `DELETE` | `/api/v1/playlist/:playListId/remove-problem` | Authenticated | Remove problems from a playlist  |
 
 ---
 
@@ -306,6 +398,12 @@ leetLab/
 │
 └── Readme.md                    # Main Project Documentation
 ```
+
+---
+
+## 📄 Product Requirements
+
+See [PRD.md](./PRD.md) for the product problem, target users, requirements, success measures, risks, and release acceptance criteria.
 
 <img width="1648" height="888" alt="Folder Structure Diagram" src="../Assets/leetLab assets/FolderStructure.png" />
 
