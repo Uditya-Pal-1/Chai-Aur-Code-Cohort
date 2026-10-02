@@ -1,0 +1,656 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}</style><style>:root{color-scheme:light dark;--md-bg:#fff;--md-text:rgba(0,0,0,.8);--md-muted:rgba(0,0,0,.6);--md-fill:rgba(0,0,0,.04);--md-fill-strong:rgba(0,0,0,.06);--md-rule:rgba(0,0,0,.1);--md-rule-strong:rgba(0,0,0,.16);--md-link:hsl(210 100% 45%)}@media (prefers-color-scheme:dark){:root:where(:not([data-theme="light"])){--md-bg:#0d0d0d;--md-text:rgba(255,255,255,.85);--md-muted:rgba(255,255,255,.6);--md-fill:rgba(255,255,255,.06);--md-fill-strong:rgba(255,255,255,.09);--md-rule:rgba(255,255,255,.14);--md-rule-strong:rgba(255,255,255,.22);--md-link:hsl(210 100% 72%)}}:root[data-theme="dark"]{color-scheme:dark;--md-bg:#0d0d0d;--md-text:rgba(255,255,255,.85);--md-muted:rgba(255,255,255,.6);--md-fill:rgba(255,255,255,.06);--md-fill-strong:rgba(255,255,255,.09);--md-rule:rgba(255,255,255,.14);--md-rule-strong:rgba(255,255,255,.22);--md-link:hsl(210 100% 72%)}:root[data-theme="light"]{color-scheme:light}@media print{:root,:root[data-theme="dark"]{color-scheme:light;--md-bg:#fff;--md-text:rgba(0,0,0,.8);--md-muted:rgba(0,0,0,.6);--md-fill:rgba(0,0,0,.04);--md-fill-strong:rgba(0,0,0,.06);--md-rule:rgba(0,0,0,.1);--md-rule-strong:rgba(0,0,0,.16);--md-link:hsl(210 100% 45%)}}body{background:var(--md-bg);color:var(--md-text);max-width:720px;margin:0 auto;padding:32px;display:flex;flex-direction:column;gap:10px;font:14px/1.55 -apple-system,BlinkMacSystemFont,'SF Pro','Segoe UI',sans-serif;overflow-wrap:break-word}body>:first-child{margin-top:0}h1,h2,h3,h4,h5,h6{margin:6px 0 0;line-height:1.25;font-weight:600;text-wrap:balance}h1{font-size:1.35em}h2{font-size:1.15em;color:var(--md-muted)}h3,h4,h5,h6{font-size:1em}p,ul,ol,blockquote,table,pre,hr{margin:0}strong{font-weight:600}a{color:var(--md-link);text-decoration:none}a:hover{text-decoration:underline}ul,ol{display:flex;flex-direction:column;gap:6px;padding-left:22px}ul{list-style:disc}ol{list-style:decimal}:is(li,td,th)>*+:is(p,ul,ol,blockquote){margin-top:6px}blockquote{display:flex;flex-direction:column;gap:10px;border-left:2px solid var(--md-rule);padding-left:10px;color:var(--md-muted)}:not(pre)>code{background:var(--md-fill);padding:1px 3px;border-radius:4px;font:.92em 'SF Mono',ui-monospace,Menlo,Consolas,monospace}a>code{background:none;color:inherit}pre{background:var(--md-fill);padding:10px 12px;border-radius:6px;overflow-x:auto;font:12px/1.5 'SF Mono',ui-monospace,Menlo,Consolas,monospace;margin-block:4px}pre code{background:none;padding:0;font:inherit}table{width:100%;border-collapse:separate;border-spacing:2px;font:inherit}th,td{padding:6px 8px;border-radius:3px;text-align:left;vertical-align:top}th{background:var(--md-fill-strong);font-weight:600}td{background:var(--md-fill)}:is(th,td) :not(pre)>code{background:transparent}hr{border:0;border-top:1px solid var(--md-rule-strong);margin-block:10px}img{max-width:100%;height:auto;border-radius:4px}</style>
+</head><body>
+<h1>AtellixUI — Product Requirements &amp; Architecture Document (v2.0)</h1>
+<blockquote>
+<p><strong>Tagline:</strong> From component library to design-to-code ecosystem.
+<strong>Status:</strong> Draft for build · <strong>Owner:</strong> Founder / Lead Engineer · <strong>Last updated:</strong> Oct 2026</p>
+</blockquote>
+<hr>
+<h2>1. Executive Summary</h2>
+<p>AtellixUI is a dark-mode-first, accessible React component system that grows into an end-to-end <strong>design-to-code platform</strong>. It has four layers:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Product</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>AtellixUI Core</strong></td>
+<td>Open-source headless primitives + design tokens (React, Tailwind, Framer Motion)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Atellix Studio</strong></td>
+<td>Visual customizer + AI prompt-to-component engine</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Atellix Inspector</strong></td>
+<td>Chrome extension (MV3): extract tokens from any site, preview components in Shadow DOM</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Atellix Cloud</strong></td>
+<td>Visual builder, team design systems, enterprise governance</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Problem:</strong> Static libraries (MUI, Chakra) are rigid; AI generators (v0-style tools) produce inconsistent, off-brand code.
+<strong>Solution:</strong> One token system powers components, the visual editor, the AI generator and the browser extension, so every output is on-brand, typed and accessible.</p>
+<p><strong>Vision:</strong> the &quot;Figma + Vercel v0 + Webflow&quot; of the React world, with spatial (3D) UI as a differentiator.</p>
+<hr>
+<h2>2. Goals, Non-Goals, Success Metrics</h2>
+<p><strong>Goals</strong></p>
+<ul>
+<li>Ship a core bundle under <strong>12 kB gzipped</strong> with WCAG 2.1 AA primitives.</li>
+<li>Prompt-to-component in <strong>under 8 s</strong> (p95) that passes lint, type-check and sanitization.</li>
+<li>10,000 npm weekly downloads within 12 months of v1.0.</li>
+</ul>
+<p><strong>Non-goals (v2.0):</strong> Native mobile (React Native), Vue/Svelte ports, full Figma replacement.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target (12 mo)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>npm weekly downloads</td>
+<td>10,000</td>
+</tr>
+<tr>
+<td>GitHub stars</td>
+<td>5,000</td>
+</tr>
+<tr>
+<td>Studio monthly active users</td>
+<td>3,000</td>
+</tr>
+<tr>
+<td>Free → Pro conversion</td>
+<td>3–5%</td>
+</tr>
+<tr>
+<td>Lighthouse (docs site)</td>
+<td>95+</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>3. Personas</h2>
+<table>
+<thead>
+<tr>
+<th>Persona</th>
+<th>Need</th>
+<th>Key feature</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Full-stack dev</strong></td>
+<td>Ship polished UI fast</td>
+<td>Copy-paste components, CLI</td>
+</tr>
+<tr>
+<td><strong>Design engineer</strong></td>
+<td>Pixel-perfect, animated UI</td>
+<td>Token editor, Framer Motion presets</td>
+</tr>
+<tr>
+<td><strong>Startup founder</strong></td>
+<td>MVP in a weekend</td>
+<td>Prompt-to-UI, templates</td>
+</tr>
+<tr>
+<td><strong>Enterprise team lead</strong></td>
+<td>Consistency across 100+ apps</td>
+<td>Managed design system, audit logs</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>4. Functional Requirements</h2>
+<h3>4.1 Core Library</h3>
+<ol>
+<li><strong>Dynamic design tokens</strong> – CSS variables; runtime theme swap (Dark / Light / System / Brand) without full re-render.</li>
+<li><strong>Accessible primitives</strong> – keyboard navigation, ARIA, focus traps, built on unstyled headless roots.</li>
+<li><strong>Micro-interactions</strong> – spring physics (Framer Motion) for hover, sheet, toast, accordion layout.</li>
+<li><strong>Spatial components (Three.js)</strong> – <code>&lt;SpatialHero&gt;</code>, <code>&lt;GlowOrb&gt;</code>, <code>&lt;ParallaxCardStack&gt;</code> using React Three Fiber, lazy-loaded so core stays light.</li>
+<li><strong>Export engine</strong> – TSX, JSX, Tailwind v4 CSS, headless hooks.</li>
+</ol>
+<h3>4.2 Atellix Studio</h3>
+<ol>
+<li><strong>AST property manipulator</strong> – panel edits radius, type, spacing, tokens → updates the Abstract Syntax Tree live.</li>
+<li><strong>Prompt-to-component</strong> – LLM constrained by the user's tokens; output validated by Babel AST + sanitizer.</li>
+<li><strong>Version history &amp; share links.</strong></li>
+</ol>
+<h3>4.3 Chrome Extension (MV3)</h3>
+<ol>
+<li>Hover-inspect any element → map computed styles to nearest Atellix tokens.</li>
+<li>Side Panel sandbox using the extracted palette.</li>
+<li>Shadow DOM live injector (<code>&lt;atellix-shadow-root&gt;</code>) for zero CSS leakage.</li>
+</ol>
+<hr>
+<h2>5. Non-Functional Requirements</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Performance</td>
+<td>Core &lt; 12 kB gz; AST edits re-render &lt; 100 ms; 3D modules lazy-loaded</td>
+</tr>
+<tr>
+<td>Reliability</td>
+<td>Shadow DOM isolation; API availability 99.9%</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>DOMPurify + AST allow-list on all AI output; MV3 CSP; no <code>eval</code>; rate limiting; secrets server-side only</td>
+</tr>
+<tr>
+<td>Accessibility</td>
+<td>WCAG 2.1 AA, tested with axe + manual screen-reader pass</td>
+</tr>
+<tr>
+<td>Compatibility</td>
+<td>React 18/19, Tailwind 3/4, Chrome / Edge / Brave</td>
+</tr>
+<tr>
+<td>DX</td>
+<td>Fully typed, tree-shakeable, ESM + CJS</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>6. System Architecture</h2>
+<h3>6.1 High-level architecture</h3>
+<pre class="mermaid">flowchart LR
+  subgraph Browser[&#34;Browser&#34;]
+    PAGE[&#34;Active Web Page&#34;]
+    CS[&#34;Content Script - Style Extractor&#34;]
+    SP[&#34;Side Panel - React&#34;]
+    SH[&#34;Shadow DOM Injector&#34;]
+  end
+  subgraph Web[&#34;Atellix Web&#34;]
+    DOCS[&#34;Next.js Docs and Studio&#34;]
+    R3F[&#34;Three.js / R3F Previews&#34;]
+  end
+  subgraph Backend[&#34;Backend - Node.js + Express&#34;]
+    GW[&#34;API Gateway - auth, rate limit&#34;]
+    TN[&#34;Token Normalizer&#34;]
+    AI[&#34;AI Generation Engine&#34;]
+    AST[&#34;Babel AST Parser and Sanitizer&#34;]
+    DB[(&#34;MongoDB&#34;)]
+    CACHE[(&#34;Redis Cache&#34;)]
+  end
+  LLM[&#34;LLM API - OpenAI / Gemini&#34;]
+
+  PAGE --&gt; CS --&gt; SP
+  SP --&gt; GW
+  DOCS --&gt; GW
+  GW --&gt; TN --&gt; AI --&gt; LLM
+  LLM --&gt; AI --&gt; AST
+  AST --&gt; GW
+  GW --&gt; DB
+  GW --&gt; CACHE
+  GW --&gt; SP
+  SP --&gt; SH --&gt; PAGE
+  DOCS --- R3F
+</pre>
+<h3>6.2 Prompt-to-component sequence</h3>
+<pre class="mermaid">sequenceDiagram
+  actor U as User
+  participant X as Extension / Studio
+  participant G as API Gateway
+  participant T as Token Normalizer
+  participant A as AI Engine
+  participant S as AST Sanitizer
+  U-&gt;&gt;X: Inspect element + type prompt
+  X-&gt;&gt;G: POST /api/v2/generate (tokens, prompt)
+  G-&gt;&gt;T: Normalize computed CSS to tokens
+  T-&gt;&gt;A: Tokens + system constraints
+  A-&gt;&gt;A: LLM call, JSON schema mode
+  A-&gt;&gt;S: Raw TSX
+  S-&gt;&gt;S: Parse, allow-list, DOMPurify, type-check
+  S--&gt;&gt;G: Safe component + propsSchema
+  G--&gt;&gt;X: 200 OK
+  X--&gt;&gt;U: Live preview in Shadow DOM
+</pre>
+<h3>6.3 Technology stack</h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Technology</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Language</td>
+<td>TypeScript 5+</td>
+<td>Strict types</td>
+</tr>
+<tr>
+<td>UI</td>
+<td>React 18/19</td>
+<td>Components</td>
+</tr>
+<tr>
+<td>Styling</td>
+<td>Tailwind 3/4 + CSS variables</td>
+<td>Tokens</td>
+</tr>
+<tr>
+<td>Animation</td>
+<td>Framer Motion</td>
+<td>Springs, layout, gestures</td>
+</tr>
+<tr>
+<td>3D</td>
+<td>Three.js + React Three Fiber + drei</td>
+<td>Spatial UI</td>
+</tr>
+<tr>
+<td>Class merge</td>
+<td>clsx + tailwind-merge</td>
+<td>Avoid class clashes</td>
+</tr>
+<tr>
+<td>Bundler</td>
+<td>tsup</td>
+<td>ESM/CJS + <code>.d.ts</code></td>
+</tr>
+<tr>
+<td>Monorepo</td>
+<td>Turborepo + pnpm</td>
+<td>Caching, linking</td>
+</tr>
+<tr>
+<td>Docs</td>
+<td>Next.js App Router + Shiki</td>
+<td>Live showcase</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>Node.js, Express, MongoDB, Redis</td>
+<td>API, storage, cache</td>
+</tr>
+<tr>
+<td>Testing</td>
+<td>Vitest, Testing Library, Playwright, axe</td>
+<td>Unit, e2e, a11y</td>
+</tr>
+<tr>
+<td>CI/CD</td>
+<td>GitHub Actions + Vercel</td>
+<td>Publish + deploy</td>
+</tr>
+</tbody>
+</table>
+<h3>6.4 Delivery pipeline</h3>
+<pre class="mermaid">flowchart TD
+  A[&#34;git push main&#34;] --&gt; B[&#34;Lint + Type-check&#34;]
+  B --&gt; C[&#34;Unit + a11y tests&#34;]
+  C --&gt; D[&#34;tsup build: CJS, ESM, d.ts&#34;]
+  D --&gt; E[&#34;Changesets version bump&#34;]
+  E --&gt; F[&#34;Publish @atellix/ui to npm&#34;]
+  A --&gt; G[&#34;Vercel build: docs and Studio&#34;]
+  G --&gt; H[&#34;Live at atellix-ui.vercel.app&#34;]
+</pre>
+<hr>
+<h2>7. Repository &amp; File Structure</h2>
+<pre><code class="language-text">atellix/
+├─ apps/
+│  ├─ docs/                    # Next.js docs + Studio
+│  │  ├─ app/
+│  │  │  ├─ (marketing)/page.tsx
+│  │  │  ├─ components/[slug]/page.tsx
+│  │  │  └─ studio/page.tsx
+│  │  └─ components/playground/ # live props controller
+│  ├─ api/                     # Express backend
+│  │  └─ src/
+│  │     ├─ routes/generate.ts
+│  │     ├─ services/{normalizer,aiEngine,sanitizer}.ts
+│  │     ├─ models/{User,Theme,Component}.ts
+│  │     └─ middleware/{auth,rateLimit}.ts
+│  └─ extension/               # Chrome MV3
+│     ├─ manifest.json
+│     ├─ background.ts
+│     ├─ contentScript.ts
+│     ├─ sidepanel/            # React side panel
+│     └─ injector/shadowRoot.ts
+├─ packages/
+│  ├─ ui/                      # @atellix/ui
+│  │  └─ src/{primitives,spatial,tokens,hooks,utils}/
+│  ├─ tokens/                  # design-token JSON + transformers
+│  ├─ cli/                     # npx atellix add button
+│  └─ config/                  # shared eslint, tsconfig, tailwind
+├─ turbo.json
+├─ pnpm-workspace.yaml
+└─ .github/workflows/{ci,release}.yml
+</code></pre>
+<hr>
+<h2>8. Data Contracts</h2>
+<h3>8.1 <code>DomStylePayload</code> (extension → backend)</h3>
+<pre><code class="language-json">{
+  &#34;sourceUrl&#34;: &#34;https://example.com&#34;,
+  &#34;targetElement&#34;: &#34;button&#34;,
+  &#34;styles&#34;: {
+    &#34;backgroundColor&#34;: &#34;rgb(99,102,241)&#34;,
+    &#34;color&#34;: &#34;rgb(255,255,255)&#34;,
+    &#34;fontFamily&#34;: &#34;Inter, sans-serif&#34;,
+    &#34;fontSize&#34;: &#34;14px&#34;,
+    &#34;padding&#34;: &#34;8px 16px&#34;,
+    &#34;borderRadius&#34;: &#34;8px&#34;,
+    &#34;boxShadow&#34;: &#34;none&#34;
+  }
+}
+</code></pre>
+<p>Required: <code>sourceUrl</code>, <code>targetElement</code>, <code>styles.backgroundColor</code>, <code>styles.color</code>, <code>styles.borderRadius</code>.</p>
+<h3>8.2 <code>POST /api/v2/generate</code></h3>
+<pre><code class="language-json">{
+  &#34;prompt&#34;: &#34;Glassmorphic card with title, subtext and action button&#34;,
+  &#34;themeTokens&#34;: { &#34;primaryColor&#34;: &#34;#6366F1&#34;, &#34;surfaceBg&#34;: &#34;rgba(15,23,42,0.6)&#34;, &#34;borderRadius&#34;: &#34;0.75rem&#34;, &#34;blurRatio&#34;: &#34;12px&#34; },
+  &#34;format&#34;: &#34;tsx&#34;
+}
+</code></pre>
+<p>Response: <code>{ status, componentName, code, propsSchema[] }</code>.
+Errors: <code>400</code> invalid payload · <code>401</code> unauthenticated · <code>422</code> sanitizer rejected code · <code>429</code> rate limited.</p>
+<h3>8.3 Data model</h3>
+<pre class="mermaid">erDiagram
+  USER ||--o{ THEME : owns
+  USER ||--o{ COMPONENT : creates
+  THEME ||--o{ COMPONENT : styles
+  USER ||--o{ TEAM_MEMBER : joins
+  TEAM ||--o{ TEAM_MEMBER : has
+  TEAM ||--o{ THEME : shares
+  USER { string id string email string plan }
+  THEME { string id json tokens string name }
+  COMPONENT { string id string code json propsSchema int version }
+  TEAM { string id string name }
+</pre>
+<hr>
+<h2>9. Wireframes</h2>
+<h3>9.1 Atellix Studio (web)</h3>
+<pre><code class="language-text">┌────────────────────────────────────────────────────────────────────────┐
+│ ◈ Atellix Studio     [Components] [Templates] [Docs]     (Avatar ▾)    │
+├───────────────┬─────────────────────────────────┬──────────────────────┤
+│ COMPONENTS    │  LIVE CANVAS                    │  PROPERTIES          │
+│ ▸ Button      │  ┌───────────────────────────┐  │  Radius   [━━●━━] 12 │
+│ ▸ Card        │  │      ┌───────────────┐    │  │  Padding  [━●━━━] 16 │
+│ ▾ Glass Panel │  │      │  Glass Card   │    │  │  Font     [Inter ▾]  │
+│ ▸ Accordion   │  │      │  [ Action ]   │    │  │  Primary  [■ #6366F1]│
+│ ▸ Toast       │  │      └───────────────┘    │  │  Blur     [━━━●━] 12 │
+│               │  └───────────────────────────┘  │  Theme [Dark|Light]  │
+│               │  [Desktop] [Tablet] [Mobile]    │                      │
+├───────────────┴─────────────────────────────────┴──────────────────────┤
+│ ✦ Prompt: &#34;Build a SaaS analytics dashboard in dark mode&#34;   [Generate] │
+├────────────────────────────────────────────────────────────────────────┤
+│ CODE  [TSX|JSX|CSS]                                  [Copy] [Export]   │
+└────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3>9.2 Chrome Side Panel</h3>
+<pre><code class="language-text">┌──────────────────────────┐
+│ ◈ Atellix Inspector  [⚙] │
+├──────────────────────────┤
+│ [● Inspect mode ON]      │
+│ Selected: &lt;button&gt;       │
+│ ─ Extracted Tokens ─     │
+│ bg      ■ #6366F1        │
+│ text    ■ #FFFFFF        │
+│ radius  8px  → rounded-lg│
+│ shadow  none             │
+├──────────────────────────┤
+│ Prompt:                  │
+│ ┌──────────────────────┐ │
+│ │ Pricing card, 3 tiers│ │
+│ └──────────────────────┘ │
+│ [ Generate ]  [Inject ▸] │
+├──────────────────────────┤
+│ Preview (Shadow DOM)     │
+│ ┌──────────────────────┐ │
+│ │      component       │ │
+│ └──────────────────────┘ │
+│ [Copy TSX]  [Save]       │
+└──────────────────────────┘
+</code></pre>
+<h3>9.3 Spatial landing hero (Three.js)</h3>
+<pre><code class="language-text">┌──────────────────────────────────────────────────────┐
+│  ◈ Atellix        Docs  Studio  Pricing   [Get Started]│
+│                                                      │
+│        Build UI at the speed of thought.            │
+│     ╭─────╮   ◯ floating glass panels                │
+│     │ 3D  │   ◯ glowing orb follows cursor           │
+│     ╰─────╯   ◯ parallax depth on scroll             │
+│   [ Try Studio ]   [ npm i @atellix/ui ]             │
+└──────────────────────────────────────────────────────┘
+</code></pre>
+<p>Rules: respect <code>prefers-reduced-motion</code>, cap DPR at 2, fall back to a static image when WebGL is unavailable.</p>
+<hr>
+<h2>10. Security &amp; Privacy</h2>
+<pre class="mermaid">flowchart LR
+  RAW[&#34;LLM output&#34;] --&gt; P[&#34;Babel parse&#34;]
+  P --&gt; W[&#34;Allow-list: tags, props, imports&#34;]
+  W --&gt; D[&#34;DOMPurify&#34;]
+  D --&gt; T[&#34;TS type-check&#34;]
+  T --&gt; OK[&#34;Safe to render&#34;]
+  W -.reject.-&gt; X[&#34;422 error&#34;]
+  T -.reject.-&gt; X
+</pre>
+<ul>
+<li>Block <code>dangerouslySetInnerHTML</code>, <code>eval</code>, dynamic imports, remote scripts.</li>
+<li>Extension requests the minimum permissions; <code>&lt;all_urls&gt;</code> is justified and documented; no page data is stored without user consent.</li>
+<li>Strict CSP, JWT with short expiry, per-user rate limits, audit logs for Enterprise.</li>
+</ul>
+<hr>
+<h2>11. Business Model &amp; Scale Strategy</h2>
+<pre class="mermaid">flowchart TD
+  A[&#34;Open-source Core - free, builds trust&#34;] --&gt; B[&#34;Studio Pro - AI credits, $12 per month&#34;]
+  B --&gt; C[&#34;Templates marketplace - one-time purchases&#34;]
+  C --&gt; D[&#34;Teams - shared design systems, $29 per seat&#34;]
+  D --&gt; E[&#34;Enterprise - SSO, audit logs, private cloud, custom&#34;]
+  E --&gt; F[&#34;Visual Builder + CMS - no-code publish to production&#34;]
+</pre>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Price</th>
+<th>Includes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Free</td>
+<td>$0</td>
+<td>Core library, 20 AI generations/mo</td>
+</tr>
+<tr>
+<td>Pro</td>
+<td>~$12/mo</td>
+<td>Unlimited tokens, 500 generations, export</td>
+</tr>
+<tr>
+<td>Team</td>
+<td>~$29/seat</td>
+<td>Shared themes, review flow</td>
+</tr>
+<tr>
+<td>Enterprise</td>
+<td>Custom</td>
+<td>SSO, governance, SLA</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Billion-dollar path (comparable: Vercel, Figma, Webflow):</strong></p>
+<ol>
+<li>Win developers with open source (distribution).</li>
+<li>Monetize AI generation on top of your own tokens (differentiation).</li>
+<li>Add a visual builder so non-engineers publish (expand the market).</li>
+<li>Sell managed design systems to enterprises (high contract value).</li>
+</ol>
+<p><strong>Moat:</strong> the token graph + usage data → better, on-brand generations over time.</p>
+<hr>
+<h2>12. Roadmap</h2>
+<pre class="mermaid">gantt
+  dateFormat YYYY-MM-DD
+  title AtellixUI Delivery Plan
+  section Foundation
+  Tokens + primitives          :a1, 2026-01-01, 90d
+  npm release v0.1             :a2, after a1, 14d
+  section Studio
+  AST customizer               :b1, 2026-04-01, 90d
+  Prompt-to-component          :b2, after b1, 45d
+  section Extension
+  Inspector + side panel       :c1, 2026-07-01, 60d
+  Shadow DOM injector          :c2, after c1, 45d
+  section Ecosystem
+  Spatial Three.js pack        :d1, 2026-10-01, 45d
+  AtellixDo V2 showcase app    :d2, after d1, 60d
+  Teams + Cloud beta           :d3, after d2, 60d
+</pre>
+<p><strong>Portfolio sequence:</strong> AtellixUI → AI Career Navigator (React Flow, Express, MongoDB) → Real-time collaborative code editor (Monaco, Yjs, Judge0).</p>
+<hr>
+<h2>13. Risks &amp; Mitigations</h2>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Impact</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LLM output unsafe/inconsistent</td>
+<td>High</td>
+<td>AST allow-list, schema mode, tests on every generation</td>
+</tr>
+<tr>
+<td>Big players copy idea</td>
+<td>Medium</td>
+<td>Move fast, community, token-graph moat</td>
+</tr>
+<tr>
+<td>3D hurts performance</td>
+<td>Medium</td>
+<td>Lazy load, reduced-motion, static fallback</td>
+</tr>
+<tr>
+<td>Chrome Web Store review delays</td>
+<td>Medium</td>
+<td>Minimal permissions, clear privacy policy</td>
+</tr>
+<tr>
+<td>Solo-founder bandwidth</td>
+<td>High</td>
+<td>Ship small, depth over features, automate CI</td>
+</tr>
+<tr>
+<td>AI API cost</td>
+<td>Medium</td>
+<td>Caching, quotas, smaller models for simple tasks</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>14. Definition of Done (per feature)</h2>
+<p>PRD updated → API contract written → typed → a11y checked (axe) → tested → documented with live demo → changeset added → shipped and announced publicly.</p>
+<hr>
+<h2>15. Execution Principles</h2>
+<ol>
+<li><strong>Document before coding</strong> – PRD, diagram, API contract first.</li>
+<li><strong>Depth over feature count</strong> – fast, typed, accessible, resilient.</li>
+<li><strong>Public execution</strong> – push daily, write technical posts, share on X/LinkedIn.</li>
+</ol>
+
+
+<!--claude-mermaid-runtime-begin:3477-->
+<style>.mermaid-diagram{margin-block:4px}.mermaid-diagram svg{display:block;margin:0 auto;max-width:100%;height:auto}</style>
+<script src="/_runtime/mermaid-11.16.1.min.js"></script>
+<script>(function(){
+var CFG={"palettes":{"light":{"surface":"#f4efe4","text":"#42392e","line":"#8a7f6d","border":"#7a6c52","bg":"#fffdf8"},"dark":{"surface":"#262b34","text":"#f2f3f5","line":"#a8adb8","border":"#9aa4b8","bg":"#1f232b"}}};
+if(typeof mermaid==='undefined')return;
+var pres=Array.prototype.slice.call(document.querySelectorAll('pre.mermaid')).filter(function(p){if(p.hasAttribute('data-claude-mermaid-claimed'))return false;p.setAttribute('data-claude-mermaid-claimed','1');return true;});
+if(!pres.length)return;
+var mq=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)'):null;
+var root=document.documentElement;
+var items=pres.map(function(pre){
+var mount=document.createElement('div');mount.className='mermaid-diagram';
+return {pre:pre,mount:mount,src:pre.textContent||''};
+});
+var seq=0;
+var renderGen=0;
+var lastKey='';
+function pageBg(fallback){
+var els=[document.body,document.documentElement];
+for(var i=0;i<els.length;i++){
+var c=els[i]&&getComputedStyle(els[i]).backgroundColor;
+if(c&&c!=='transparent'&&c!=='rgba(0, 0, 0, 0)')return c;
+}
+return fallback;
+}
+function render(){
+var theme=root.getAttribute('data-theme');
+var dark=theme==='dark'||(!!(mq&&mq.matches)&&theme!=='light');
+var pal=dark?CFG.palettes.dark:CFG.palettes.light;
+var bg=pageBg(pal.bg);
+var key=(dark?'d':'l')+'|'+bg;
+if(key===lastKey)return;
+lastKey=key;
+var gen=++renderGen;
+var font=getComputedStyle(document.body).fontFamily||'sans-serif';
+var nat={useMaxWidth:false};
+mermaid.initialize({
+startOnLoad:false,securityLevel:'strict',theme:'base',
+flowchart:nat,sequence:nat,er:nat,state:nat,class:nat,pie:nat,
+gantt:nat,journey:nat,timeline:nat,gitGraph:nat,mindmap:nat,xyChart:nat,
+quadrantChart:nat,sankey:nat,c4:nat,requirement:nat,block:nat,
+packet:nat,kanban:nat,architecture:nat,radar:nat,
+themeVariables:{background:bg,mainBkg:pal.surface,primaryColor:pal.surface,
+primaryTextColor:pal.text,lineColor:pal.line,primaryBorderColor:pal.border,
+nodeBorder:pal.border,clusterBorder:pal.border,edgeLabelBackground:bg,
+clusterBkg:'rgba(127,127,127,0.07)',titleColor:pal.text,
+darkMode:dark,rowOdd:bg,rowEven:'rgba(127,127,127,0.07)',
+attributeBackgroundColorOdd:bg,attributeBackgroundColorEven:'rgba(127,127,127,0.07)',
+fontSize:'16px',fontFamily:font},
+themeCSS:'.node rect, .node circle, .node polygon, .node path, .cluster rect { stroke-width: 2px; }'
+});
+items.forEach(function(it){
+var id='claude-mermaid-'+seq++;
+mermaid.render(id,it.src).then(function(r){
+if(gen!==renderGen)return;
+var prev=it.pre.previousElementSibling;
+if(prev&&prev.className==='mermaid-diagram'&&prev!==it.mount)return;
+it.mount.innerHTML=r.svg;
+if(!it.mount.parentNode)it.pre.parentNode.insertBefore(it.mount,it.pre);
+it.pre.style.display='none';
+},function(){
+var scratch=document.getElementById(id);
+if(scratch)scratch.parentNode.removeChild(scratch);
+scratch=document.getElementById('d'+id);
+if(scratch)scratch.parentNode.removeChild(scratch);
+if(gen!==renderGen)return;
+if(it.mount.parentNode)it.mount.parentNode.removeChild(it.mount);
+it.pre.style.display='';
+});
+});
+}
+render();
+if(mq&&mq.addEventListener)mq.addEventListener('change',render);
+if(typeof MutationObserver!=='undefined')new MutationObserver(render).observe(root,{attributes:true,attributeFilter:['data-theme']});
+})();</script>
+<!--claude-mermaid-runtime-end-->
+</body></html>
