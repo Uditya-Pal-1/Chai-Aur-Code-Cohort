@@ -4,8 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>React Learning</title>
+    <script type="module" src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script type="module" src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 </head>
 <body>
-    
+    <div id="root">this is classic root</div>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+
+    <script type="text/babel">
+        const Chai = ({ name }) => (
+            <div>
+                <h2>{name}</h2>
+            </div>
+        );
+        const App = () => (
+            <div>
+                <h1>Chai Variations</h1>
+                <Chai name = "Ginger Tea" />
+                <Chai name = "Masala Tea" />
+                <Chai name = "Blue Tea" />
+            </div>
+        );
+
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(<App />);
+    </script>
 </body>
 </html>
