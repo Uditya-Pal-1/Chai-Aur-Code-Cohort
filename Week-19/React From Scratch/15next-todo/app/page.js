@@ -1,69 +1,131 @@
+'use client';
+import { useState, useEffect } from 'react'
+import todoService from '@/services/todoService';
 import Image from "next/image";
 
 export default function Home() {
+  const [todos, setTodos] = useState([]);
+  const [newTodoTitle, setNewTodoTitle] = useState('');
+  const [editingTodo, setEditingTodo] = useState(null);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    loadTodos();
+  }, []);
+
+  const loadTodos = async () => {
+    try {
+      const data = await todoService.getAllTodos();
+      setTodos(data);
+    } catch (err) {
+      setError("Failed to load todos");
+    }
+  };
+
+  const handleCreateTodo = async (e) => {
+    e.preventDefault();
+    if (!newTodoTitle.trim()) return;
+
+    try {
+      const newTodo = await todoService.createTodo({ title: newTodoTitle });
+      setTodos([newTodo, ...todos]);
+      setNewTodoTitle('')
+      setError('');
+    } catch (err) {
+      setError('Failed to create todo')
+    }
+  }
+
+  const handleUpdateTodo = async (id, title) => {
+    try {
+      const updateTodo = await todoService.updateTodo(id, { title });
+      setTodos(todos.map(todo =>
+        todo._id === id ? updateTodo : todo
+      ));
+      setEditingTodo(null);
+      setError('')
+    } catch (err) {
+      setError('Failed to update todo')
+    }
+  }
+  const handleDeleteTodo = async (id) => {
+    try {
+      await todoService.deleteTodo(id);
+      setTodos(todos.filter(todo => todo._id !== id))
+      setError('')
+    } catch (err) {
+      setError('Failed to delete todo')
+    }
+  };
+
+  const handleToggleRecorded = async (id, currentStatus) => {
+    try {
+      const updatedTodo = await todoService.toggleRecorded(id, !currentStatus);
+      setTodos(todos.map(todo =>
+        todo._id === id ? updatedTodo : todo
+      ))
+      setError("")
+    } catch (err) {
+      setError("Failed to update todo status")
+    }
+  }
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div style={{ padding: "20px" }}>
+      <h1> Youtube Video Ideas</h1>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
+
+      <form onSubmit={handleCreateTodo}>
+        <input
+          type="text"
+          value={newTodoTitle}
+          onChange={(e) => setNewTodoTitle(e.target.value)}
+          placeholder='Enter Video Ideas'
+          style={{ marginRight: '10px' }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.js
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+        <button type="submit">Add Idea</button>
+      </form>
+
+      <div style={{ marginTop: '20px' }}>
+        {todos.map(todo => (
+          <div key={todo._id} style={{ marginBottom: "10px" }}>
+            {editingTodo === todo._id ? (
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                handleUpdateTodo(todo._id, e.target.title.value);
+              }}>
+                <input type="text" name="title" defaultValue={todo.title} required />
+                <button type="submit">Save</button>
+                <button type="button" onClick={() => setEditingTodo(null)}>Cancel</button>
+              </form>
+            ) : (
+              <div>
+                <span style={{ marginRight: '10px'}}>
+                  {todo.title}
+                </span>
+                <button
+                onClick={() => handleToggleRecorded(todo._id, todo.isRecorded)}
+                style={{ marginRight: '10px' }}
+                >
+                  {todo.isRecorded ? 'Mark as Not Recorded' : 'Mark as Recorded'}
+                </button>
+                <button
+                onClick={() => setEditingTodo(todo._id)}
+                style={{ marginRight: '10px' }}
+                >
+                  Edit
+                </button>
+                <button
+                onClick={() => handleDeleteTodo(todo._id)}
+                style={{ color: 'red' }}
+                >
+                  delete
+                  </button>
+                </div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

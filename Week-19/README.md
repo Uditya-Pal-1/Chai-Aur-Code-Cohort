@@ -189,6 +189,9 @@ npm run dev
 
 ---
 
+##  Redis Eraser Link:
+https://app.eraser.io/workspace/8oBAlPuy2f9ZPsnLOFFb?origin=share
+
 ## 🎯 Key Concepts & Takeaways
 
 1. **Defense in Depth**: Utilizing `HTTP-Only` cookies for JWT tokens protects against client-side XSS attacks compared to `localStorage`.
