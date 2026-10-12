@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket-IO</title>
+</head>
+<body>
+<div>
+    <div>
+        <input type="text" name="messageInput" id="message-input">
+        <button id="send-btn">Send</button>
+    </div>
+    <div class="message">
+        <ul>
+            <li></li>
+        </ul>
+    </div>
+</div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io(); //connect to the backend over websocket.
+    </script>
+</body>
+</html>
