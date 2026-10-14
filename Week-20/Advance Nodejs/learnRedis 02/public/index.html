@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket-IO</title>
+</head>
+<body>
+    <div id="checkbox-container"></div>
+    <ul id="message-container"></ul>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const checkboxes = new Array(100).fill(0)
+        const checkBoxContainer = document.getElementById('checkbox-container');
+        const socket = io();
+        const messageContainer = document.getElementById('message-container')
+
+        checkboxes.forEach((_, i) => {
+            const input = document.createElement('input');
+            input.setAttribute('type', 'checkbox');
+            input.id = `index-${i}`;
+            input.addEventListener('change', () => {
+                socket.emit('checkbox-update', { index: i, value: input.checked });
+            });
+            checkBoxContainer.append(input);
+        })
+
+        async function stateUpdate() {
+            const resp = await fetch('/state', {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const json = await resp.json();
+            if (json.state) {
+                json.state.forEach((value, index) => {
+                    const el = document.getElementById(`index-${index}`);
+                    if (el) {
+                        el.checked = Boolean(value);
+                    }
+                });
+            }
+        }
+
+        socket.on('checkbox-update', () => {
+            stateUpdate();
+        });
+
+        socket.on('server-message', (msg) => {
+            const li = document.createElement('li')
+            li.innerText = msg;
+            messageContainer.appendChild(li);
+        })
+
+        stateUpdate();
+    </script>
+
+</body>
+</html>
