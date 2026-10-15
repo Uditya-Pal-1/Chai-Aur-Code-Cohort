@@ -1,8 +1,8 @@
-import {Worker} from 'bullmq'
-import {QueueMap, notificationQueue} from './queue.js'
-import { redisConnection } from '../connection.js'
+import { Worker } from 'bullmq';
+import { QueueMap, notificationQueue } from './queue.js';
+import { redisConnection } from '../connection.js';
 
-const wait = (e) => new Promise((res) => setTimeout(res, s * 1000));
+const wait = (seconds) => new Promise((resolve) => setTimeout(resolve, seconds * 1000));
 
 export const videoProcessingWorker = new Worker(
     QueueMap['VIDEO_PROCESSING_QUEUE'],

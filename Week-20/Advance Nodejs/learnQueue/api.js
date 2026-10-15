@@ -6,21 +6,27 @@ const app = express();
 const PORT = process.env.PORT ?? 8000;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const requestVideoPostRequestSchema = z.object({
-  videoURL: z.string(),
+  videoURL: z.string().url(),
 });
 
 app.get('/', (req, res) => {
   return res.json({ status: 'server is up and running!' });
 });
 
-app.post('/video-process', async (req, res) => {
+const parseVideoRequest = (req) => ({
+  ...req.query,
+  ...req.body,
+});
+
+app.all('/video-process', async (req, res) => {
   const validationResult = await requestVideoPostRequestSchema.safeParseAsync(
-    req.body
+    parseVideoRequest(req)
   );
   if (validationResult.error) {
-    return res.status(400).json({ error: validationResult.error });
+    return res.status(400).json({ error: validationResult.error.issues });
   }
 
   const { videoURL } = validationResult.data;
@@ -28,7 +34,7 @@ app.post('/video-process', async (req, res) => {
     videoURL,
   });
 
-  return res.json({ status: 'enqueued', jobId: job.id });
+  return res.json({ status: 'enqueued', jobId: job.id, videoURL });
 });
 
 app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
