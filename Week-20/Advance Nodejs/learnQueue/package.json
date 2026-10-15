@@ -2,15 +2,19 @@
   "name": "learnqueue",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "type":"module",
+  "main": "api.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node --watch api.js",
+    "start": "node api.js",
+    "worker": "node worker.js",
+    "notification-worker": "node notification-worker.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-   "bullmq": "^6.3.15",
+  "dependencies": {
+    "bullmq": "^6.3.15",
     "express": "^5.3.0",
     "ioredis": "^6.0.0",
     "zod": "^4.6.7"
