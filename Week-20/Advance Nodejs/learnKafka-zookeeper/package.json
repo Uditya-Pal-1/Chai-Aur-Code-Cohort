@@ -1,0 +1,15 @@
+{
+  "name": "learnkafka-zookeeper",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "admin.js",
+  "scripts": {
+    "dev": "node admin.js"
+  },
+  "dependencies": {
+    "kafkajs": "^2.2.4"
+  }
+}
