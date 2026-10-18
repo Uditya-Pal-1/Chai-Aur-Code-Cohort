@@ -13,6 +13,7 @@ async function init() {
     });
 }
 
+
 init().catch((error) => {
     console.error("Failed to consume Kafka messages:", error);
     process.exitCode = 1;
