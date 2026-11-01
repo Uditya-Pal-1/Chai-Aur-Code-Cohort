@@ -10,17 +10,20 @@ This directory is where concepts leave the notebook and become working software.
 
 ## Portfolio Overview
 
-This directory contains standalone application work built from the concepts practiced in the cohort. LeetLab is the current implementation; AtellixDo and AtellixUI are planned products with briefs, not completed applications.
+This directory contains standalone application work built from the concepts practiced in the cohort. LeetLab and AtellixHome have application implementations, AtellixUI has early frontend and backend scaffolds, and the remaining Atellix projects are currently product briefs.
 
 ## Project Index
 
-| Project       | Status         | Focus                                                       | Documentation                                                   | Demo          |
-| ------------- | -------------- | ----------------------------------------------------------- | --------------------------------------------------------------- | ------------- |
-| **LeetLab**   | In development | Coding problems, submissions, execution, and playlists      | [Project README](./leetLab/Readme.md) · [PRD](./leetLab/PRD.md) | Not deployed  |
-| **AtellixDo** | Planned        | Task management with optional, human-reviewed AI assistance | [Project brief](./AtellixDo/README.md)                          | Not available |
-| **AtellixUI** | Planned        | Reusable UI components and interactive documentation        | [Project brief](./AtellixUI/README.md)                          | Not available |
+| Project            | Status         | Focus                                                         | Documentation                                                                                  | Demo          |
+| ------------------ | -------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------- |
+| **LeetLab**        | In development | Coding problems, submissions, execution, and playlists        | [Project README](./leetLab/Readme.md) · [PRD](./leetLab/PRD.md)                                | Not deployed  |
+| **AtellixHome**    | In development | Furniture storefront and gated customer-submission workflows  | [Project README](./AtellixHome/README.md)                                                       | Not deployed  |
+| **AtellixUI**      | Prototype      | Token-driven React component system and design-to-code tools  | [Project README](./AtellixUI/README.md) · [PRD v2.1](./AtellixUI/AtellixUI%20PRD%20v2.1.md)    | Not deployed  |
+| **AtellixDo**      | Planned        | Task management with optional, human-reviewed AI assistance   | [Project brief](./AtellixDo/README.md)                                                         | Not available |
+| **AtellixCareer**  | Concept        | Career planning and role-based learning paths                 | [Project brief](./AtellixCareer/README.md)                                                     | Not available |
+| **AtellixEngine**  | Concept        | Collaborative browser-based development workspace             | [Project brief](./AtellixEngine/README.md)                                                     | Not available |
 
-**Status definitions:** “In development” means implementation exists but still needs end-to-end verification. “Planned” means only a brief exists in this repository.
+**Status definitions:** “In development” means application code exists but end-to-end behavior and deployment are not verified. “Prototype” means starter scaffolding exists, but the product described in its brief is not implemented. “Planned” and “Concept” mean the repository contains product documentation rather than an application.
 
 ## LeetLab: Product Overview
 
