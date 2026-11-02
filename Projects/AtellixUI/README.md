@@ -1,8 +1,8 @@
 # AtellixUI
 
-**A planned, token-driven React component system with visual design and code-generation tools.**
+**A prototype React component system with an interactive component gallery and visual design tools.**
 
-> **Project status:** Prototype scaffold. This directory contains a Vite/React frontend starter and a minimal Express backend entry point. The component platform described in the product documents is not implemented, and there is no deployed demo.
+> **Project status:** Frontend prototype. The Vite/React app includes a dark/light landing page, dedicated `/system`, `/about`, and `/components` pages, a two-mode `/playground`, an animated responsive mobile navigation, a shared footer, a Three.js hero, and theme-specific founder portraits. The homepage features six selected components; the full library has a searchable, filterable sidebar, interactive previews, and copyable React TSX source. The playground's Basic mode is the fast local component preview with copyable JSX; its optional Sandpack Live Code Editor mode adds editable React, a live preview, and a console-free compact IDE. Sandpack is Apache-2.0 licensed and its live sandbox requires an internet connection. Route and preview transitions use Framer Motion and respect reduced-motion preferences. Preview source uses shared AtellixUI demo styles, so copy the relevant styles when adapting it outside this app. The contact-form preview validates locally but does not deliver messages. The backend remains a minimal Express scaffold; there is no deployed demo.
 
 ## Product direction
 
@@ -10,11 +10,21 @@ AtellixUI aims to help developers build consistent interfaces from a shared desi
 
 The current product direction is documented in [PRD v2.1](./AtellixUI%20PRD%20v2.1.md), which supersedes the earlier [PRD v2.0](./AtellixUI%20PRD%20v2.0.md). These documents describe planned scope, not shipped capabilities.
 
+## Creator & Architectural Credits
+
+- **Architect & Lead Engineer:** Uditya Pal
+- **Portfolio:** [uditya-pal.vercel.app](https://my-portfolio-uditya-pal.vercel.app/)
+- **GitHub:** [Uditya-Pal-1](https://github.com/Uditya-Pal-1)
+- **X / Twitter:** [@Aman_pal_1](https://x.com/Aman_pal_1)
+- **LinkedIn:** [in/udityapal](https://www.linkedin.com/in/udityapal/)
+
+These links are included in the product experience and source documentation so the creator, portfolio, public repositories, and professional profiles remain visible and connected with the AtellixUI brand.
+
 ## Current repository state
 
 | Area | Present in this repository | Not implemented yet |
 | --- | --- | --- |
-| Frontend | Vite, React, TypeScript, Tailwind CSS, and small sample components | Design-token system, component catalogue, documentation site, and visual editor |
+| Frontend | Vite, React, TypeScript, Tailwind CSS, landing page, dedicated `/system` and `/about` pages, shared footer, searchable `/components` library with 55 interactive previews in `Frontend/src/components/ui`, configurable `/playground` with responsive interactive previews, Sandpack live React editor, and copyable JSX, Framer Motion transitions, animated mobile navigation, and theme-aware surfaces | Production design-token package, documented distribution registry, and visual drag-and-drop editor |
 | Backend | Express dependency and an entry file that imports Express | Running API, routes, authentication, MongoDB models, registry, and AI generation |
 | Product plan | Component tiers, CLI/MCP distribution, Studio, and extension plans in the PRDs | The planned monorepo packages, CLI, MCP server, and browser extension |
 
@@ -36,7 +46,7 @@ npm run lint
 npm run build
 ```
 
-The development server URL is printed by Vite. The page currently demonstrates starter UI rather than the planned AtellixUI product.
+The development server URL is printed by Vite. The page is an interactive product prototype; it does not yet provide the planned npm packages, CLI, or MCP distribution.
 
 ### Backend
 
