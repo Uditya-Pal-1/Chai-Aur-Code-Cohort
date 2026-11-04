@@ -100,15 +100,6 @@ button {
   color: var(--text);
 }
 
-.atellix-root {
-  position: relative;
-  min-height: 100vh;
-  isolation: isolate;
-  background: var(--bg);
-  color: var(--text);
-  transition: background-color 320ms ease, color 320ms ease;
-}
-
 .atellix-root::before {
   position: fixed;
   z-index: 0;

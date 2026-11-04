@@ -12,6 +12,7 @@ import HomeThemeStudio from './components/HomeThemeStudio'
 import TestimonialCarousel from './components/TestimonialCarousel'
 import DaisyUiShowcaseSections from './components/DaisyUiShowcaseSections'
 import { creatorLinks, productFeatures } from './data/siteContent'
+import { components as componentCatalog } from './data/componentCatalog'
 import './App.css'
 import './playground-preview.css'
 
@@ -52,6 +53,15 @@ function App() {
   const rootRef = useRef<HTMLDivElement>(null)
   const quickSearchInputRef = useRef<HTMLInputElement>(null)
   const resourcesMenuRef = useRef<HTMLDetailsElement>(null)
+  const normalizedSearchQuery = quickSearchQuery.trim().toLowerCase()
+  const matchingPages = searchablePages.filter((item) =>
+    `${item.label} ${item.description}`.toLowerCase().includes(normalizedSearchQuery),
+  )
+  const matchingComponents = componentCatalog
+    .filter((item) =>
+      `${item.name} ${item.category} ${item.summary}`.toLowerCase().includes(normalizedSearchQuery),
+    )
+    .slice(0, 6)
 
   useEffect(() => {
     const handleSearchShortcut = (event: KeyboardEvent) => {
@@ -110,7 +120,11 @@ function App() {
   useEffect(() => {
     if (page !== 'home') return
 
-    const revealItems = document.querySelectorAll<HTMLElement>('.reveal')
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll<HTMLElement>('.reveal').forEach((item) => item.classList.add('is-visible'))
+      return
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -123,10 +137,15 @@ function App() {
       { threshold: 0.12, rootMargin: '0px 0px -36px 0px' },
     )
 
-    revealItems.forEach((item) => observer.observe(item))
+    const observeRevealItems = () => {
+      document.querySelectorAll<HTMLElement>('.reveal:not(.is-visible)').forEach((item) => observer.observe(item))
+    }
+
+    const mutationObserver = new MutationObserver(observeRevealItems)
+    mutationObserver.observe(rootRef.current ?? document.body, { childList: true, subtree: true })
+    observeRevealItems()
     const revealVisibleItems = () => {
-      revealItems.forEach((item) => {
-        if (item.classList.contains('is-visible')) return
+      document.querySelectorAll<HTMLElement>('.reveal:not(.is-visible)').forEach((item) => {
         const bounds = item.getBoundingClientRect()
         if (bounds.top <= window.innerHeight && bounds.bottom >= 0) {
           item.classList.add('is-visible')
@@ -141,6 +160,7 @@ function App() {
     requestAnimationFrame(() => requestAnimationFrame(revealVisibleItems))
     return () => {
       observer.disconnect()
+      mutationObserver.disconnect()
       window.removeEventListener('scroll', revealVisibleItems)
       window.removeEventListener('resize', revealVisibleItems)
     }
@@ -209,7 +229,11 @@ function App() {
 
   return (
     <MotionConfig reducedMotion="user">
-    <div ref={rootRef} className={`atellix-root ${theme}`} data-theme={theme}>
+    <div
+      ref={rootRef}
+      className={`atellix-root relative isolate min-h-screen bg-[var(--bg)] text-[var(--text)] transition-colors duration-[320ms] ${theme}`}
+      data-theme={theme}
+    >
       <nav className="top-nav" onKeyDown={(event) => {
         if (event.key === 'Escape') setMobileNavOpen(false)
       }}>
@@ -349,18 +373,16 @@ function App() {
                 type="search"
                 value={quickSearchQuery}
                 onChange={(event) => setQuickSearchQuery(event.target.value)}
-                placeholder="Search pages and tools..."
-                aria-label="Search pages and tools"
+                placeholder="Search pages and components..."
+                aria-label="Search pages and components"
               />
               <kbd>ESC</kbd>
             </div>
             <div className="quick-search-results">
-              {searchablePages
-                .filter((item) => `${item.label} ${item.description}`.toLowerCase().includes(quickSearchQuery.trim().toLowerCase()))
-                .map((item) => (
+              {matchingPages.map((item) => (
                   <button
                     type="button"
-                    key={item.path}
+                    key={`page-${item.path}`}
                     onClick={() => {
                       setQuickSearchOpen(false)
                       if (item.path === '/components') navigateToComponents()
@@ -368,12 +390,26 @@ function App() {
                     }}
                   >
                     <span className="quick-search-result-icon"><Search size={15} aria-hidden="true" /></span>
-                    <span><strong>{item.label}</strong><small>{item.description}</small></span>
+                    <span><strong>{item.label}</strong><small>Page · {item.description}</small></span>
                     <ArrowUpRight size={15} aria-hidden="true" />
                   </button>
                 ))}
-              {searchablePages.every((item) => !`${item.label} ${item.description}`.toLowerCase().includes(quickSearchQuery.trim().toLowerCase())) && (
-                <p className="quick-search-empty">No pages match “{quickSearchQuery}”. Try “themes” or “components”.</p>
+              {matchingComponents.map((item) => (
+                <button
+                  type="button"
+                  key={`component-${item.id}`}
+                  onClick={() => {
+                    setQuickSearchOpen(false)
+                    navigateToComponents(item.id)
+                  }}
+                >
+                  <span className="quick-search-result-icon"><Code2 size={15} aria-hidden="true" /></span>
+                  <span><strong>{item.name}</strong><small>Component · {item.category}</small></span>
+                  <ArrowUpRight size={15} aria-hidden="true" />
+                </button>
+              ))}
+              {matchingPages.length === 0 && matchingComponents.length === 0 && (
+                <p className="quick-search-empty">No pages or components match “{quickSearchQuery}”. Try “themes” or “button”.</p>
               )}
             </div>
             <div className="quick-search-hint"><span>Navigate to a page</span><span><kbd>ESC</kbd> to close</span></div>
@@ -389,7 +425,7 @@ function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* <Suspense fallback={<div className="route-loading" role="status">Loading AtellixUI tools…</div>}> */}
+          <Suspense fallback={<div className="route-loading" role="status">Loading AtellixUI tools…</div>}>
           {page === 'themes' ? (
             <section className="section-block themes-page">
               <div className="wrap">
@@ -437,15 +473,13 @@ function App() {
                 Browse the interactive library for product interfaces, landing pages, and everyday workflows.
                 Select a component to try it, inspect its React source, and copy it into your project.
               </p>
-              {/* <Suspense fallback={<div className="route-loading" role="status">Loading component library…</div>}> */}
                 <ComponentGallery
-                  key="component-library"
+                  key={`component-library-${selectedComponent ?? 'default'}`}
                   mode="library"
                   theme={theme}
                   onToggleTheme={toggleTheme}
                   initialId={selectedComponent}
                 />
-              {/* </Suspense> */}
             </div>
           </section>
 
@@ -615,8 +649,8 @@ function App() {
               Shape a component, preview responsive states in real-time, inspect clean TSX code, and launch into the live Sandpack IDE.
             </p>
             <Suspense fallback={<div className="route-loading" role="status">Loading playground…</div>}>
-  <HomePlaygroundPreview onNavigate={() => navigateToPage('/playground')} />
-</Suspense>
+              <HomePlaygroundPreview onNavigate={() => navigateToPage('/playground')} />
+            </Suspense>
           </div>
         </section>
 
@@ -675,7 +709,7 @@ function App() {
 
           </>
         )}
-        {/* </Suspense> */}
+          </Suspense>
         </motion.div>
       </main>
       <Footer

@@ -1,23 +1,26 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { Quote, Sparkles, Star } from 'lucide-react'
+import { Layers, MousePointer2, Palette, Sparkles } from 'lucide-react'
 
-const testimonials = [
+const principles = [
   {
-    quote: 'AtellixUI accelerated our product launch by weeks with ready-to-use components.',
-    name: 'Jane Doe',
-    role: 'Lead Engineer · Acme Corp',
+    title: 'Start from a shared foundation.',
+    description: 'Keep color, spacing, and type decisions consistent with reusable design tokens.',
+    icon: Palette,
+    label: 'DESIGN TOKENS',
     variant: 'testimonial-card--feature',
   },
   {
-    quote: 'The token-first approach gave us consistent design across platforms.',
-    name: 'John Smith',
-    role: 'UI Architect · BetaTech',
+    title: 'Explore before you adapt.',
+    description: 'Try component states in context and inspect the React source as you work.',
+    icon: MousePointer2,
+    label: 'INTERACTIVE EXAMPLES',
     variant: 'testimonial-card--top',
   },
   {
-    quote: 'Zero-runtime CSS overhead means a faster experience for our users.',
-    name: 'Maria Lee',
-    role: 'Frontend Engineer · Gamma Studios',
+    title: 'Build with useful patterns.',
+    description: 'Browse practical examples for forms, navigation, data, and everyday product flows.',
+    icon: Layers,
+    label: 'COMPONENT LIBRARY',
     variant: 'testimonial-card--bottom',
   },
 ]
@@ -30,19 +33,18 @@ export default function TestimonialCarousel() {
       <div className="testimonial-fabric" aria-hidden="true" />
       <div className="wrap testimonial-inner">
         <header className="testimonial-heading">
-          <span className="eyebrow">SAMPLE TEAM FEEDBACK</span>
+          <span className="eyebrow">DESIGNED TO WORK TOGETHER</span>
           <h2 id="testimonial-title">Good systems make better work.</h2>
-          <p>Thoughtful details, consistent tokens, and a faster path from idea to interface.</p>
-          <small className="testimonial-disclaimer">
-            Placeholder testimonials for this preview; replace them with verified customer feedback before publishing.
-          </small>
+          <p>A practical foundation for moving from design decisions to working interfaces.</p>
         </header>
 
         <div className="testimonial-grid">
-          {testimonials.map((testimonial, index) => (
+          {principles.map((principle, index) => {
+            const Icon = principle.icon
+            return (
             <motion.article
-              className={`testimonial-card ${testimonial.variant}`}
-              key={testimonial.name}
+              className={`testimonial-card ${principle.variant}`}
+              key={principle.label}
               initial={shouldReduceMotion ? false : { opacity: 0, y: 22 }}
               whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -50,19 +52,14 @@ export default function TestimonialCarousel() {
               whileHover={shouldReduceMotion ? undefined : { y: -7, rotateX: 3, rotateY: index === 1 ? -3 : 3 }}
               style={{ transformPerspective: 1000, transformStyle: 'preserve-3d' }}
             >
-              <div className="testimonial-card-top">
-                <span className="testimonial-quote-icon"><Quote size={20} aria-hidden="true" /></span>
-                <span className="testimonial-stars" role="img" aria-label="5 out of 5 stars">
-                  {Array.from({ length: 5 }, (_, star) => <Star size={13} key={star} fill="currentColor" aria-hidden="true" />)}
-                </span>
-              </div>
-              <blockquote>“{testimonial.quote}”</blockquote>
+              <span className="eyebrow">{principle.label}</span>
+              <span className="testimonial-quote-icon"><Icon size={20} aria-hidden="true" /></span>
+              <blockquote>{principle.title}</blockquote>
               <div className="testimonial-person">
-                <span className="testimonial-avatar" aria-hidden="true">{testimonial.name.split(' ').map((part) => part[0]).join('')}</span>
-                <span><strong>{testimonial.name}</strong><small>{testimonial.role}</small></span>
+                <span>{principle.description}</span>
               </div>
             </motion.article>
-          ))}
+          )})}
 
           <motion.article
             className="testimonial-card testimonial-card--manifesto"

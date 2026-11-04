@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+@theme {
+  --color-primary: #ff8a3d;
+  --color-secondary: #0ea5e9;
+  --color-accent: #a855f7;
+  --font-sans: Manrope, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+}
