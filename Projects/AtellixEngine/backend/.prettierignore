@@ -1,7 +1,6 @@
 node_modules
 package.json
 package-lock.json
-pisma.config.ts
 skills-lock.json
 .agents
 .claude

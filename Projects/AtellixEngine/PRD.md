@@ -1,11 +1,11 @@
 # AtellixEngine Product Requirements
 
-| Field | Value |
-| --- | --- |
-| Product | AtellixEngine |
-| Status | Product direction and implementation draft |
+| Field    | Value                                                  |
+| -------- | ------------------------------------------------------ |
+| Product  | AtellixEngine                                          |
+| Status   | Product direction and implementation draft             |
 | Audience | Engineering interviewers, hiring teams, and candidates |
-| Updated | 2026-11-04 |
+| Updated  | 2026-11-04                                             |
 
 ## 1. Product summary
 
@@ -52,17 +52,17 @@ Scheduling, live interview rooms, realtime code collaboration, candidate managem
 
 ## 6. Functional requirements
 
-| ID | Priority | Requirement | Acceptance criteria |
-| --- | --- | --- | --- |
-| AUTH-01 | P0 | Secure account access | Registration, sign-in, sign-out, and session restoration use server-verified HTTP-only cookies. |
-| TEAM-01 | P0 | Organization roles | Every API and collaboration action checks organization and session membership. |
-| INT-01 | P0 | Create and invite to an interview | Only authorized team members can create a session; candidate links are scoped and expire. |
-| CODE-01 | P0 | Collaborative editor | Changes propagate to participants, save state is visible, and reconnect recovery is defined. |
-| EXEC-01 | P0 | Execute candidate code | The server owns hidden tests; runners have resource limits, default-deny network, and cleanup. |
-| FEED-01 | P0 | Capture structured feedback | Interviewers can submit role-relevant observations visible only to authorized hiring teammates. |
-| PRIV-01 | P0 | Apply data retention | Users can understand, export, and delete records under published retention rules. |
-| BLOG-01 | P1 | Editorial content | Blog index and article pages have accessible navigation, responsive layouts, and shareable URLs. |
-| LEGAL-01 | P0 | Publish accurate legal pages | Privacy and terms match actual infrastructure, vendors, retention, and applicable jurisdictions. |
+| ID       | Priority | Requirement                       | Acceptance criteria                                                                              |
+| -------- | -------- | --------------------------------- | ------------------------------------------------------------------------------------------------ |
+| AUTH-01  | P0       | Secure account access             | Registration, sign-in, sign-out, and session restoration use server-verified HTTP-only cookies.  |
+| TEAM-01  | P0       | Organization roles                | Every API and collaboration action checks organization and session membership.                   |
+| INT-01   | P0       | Create and invite to an interview | Only authorized team members can create a session; candidate links are scoped and expire.        |
+| CODE-01  | P0       | Collaborative editor              | Changes propagate to participants, save state is visible, and reconnect recovery is defined.     |
+| EXEC-01  | P0       | Execute candidate code            | The server owns hidden tests; runners have resource limits, default-deny network, and cleanup.   |
+| FEED-01  | P0       | Capture structured feedback       | Interviewers can submit role-relevant observations visible only to authorized hiring teammates.  |
+| PRIV-01  | P0       | Apply data retention              | Users can understand, export, and delete records under published retention rules.                |
+| BLOG-01  | P1       | Editorial content                 | Blog index and article pages have accessible navigation, responsive layouts, and shareable URLs. |
+| LEGAL-01 | P0       | Publish accurate legal pages      | Privacy and terms match actual infrastructure, vendors, retention, and applicable jurisdictions. |
 
 ## 7. Trust boundaries and security
 

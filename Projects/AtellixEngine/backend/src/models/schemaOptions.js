@@ -3,9 +3,9 @@ export const schemaOptions = {
   versionKey: false,
   toJSON: {
     transform: (_document, value) => {
-      value.id = value._id.toString()
-      delete value._id
-      return value
+      value.id = value._id.toString();
+      delete value._id;
+      return value;
     },
   },
-}
+};

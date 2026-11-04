@@ -1,11 +1,11 @@
-import { Canvas, useFrame } from '@react-three/fiber'
-import { useRef } from 'react'
+import { Canvas, useFrame } from "@react-three/fiber";
+import { useRef } from "react";
 
 const OrbitingShapes = () => {
-  const group = useRef(null)
+  const group = useRef(null);
   useFrame((_, delta) => {
-    if (group.current) group.current.rotation.y += delta * 0.08
-  })
+    if (group.current) group.current.rotation.y += delta * 0.08;
+  });
 
   return (
     <group ref={group}>
@@ -15,15 +15,23 @@ const OrbitingShapes = () => {
       </mesh>
       <mesh position={[-2.3, 1.05, -0.5]} rotation={[0.3, 0.6, 0.2]}>
         <boxGeometry args={[0.42, 0.42, 0.42]} />
-          <meshStandardMaterial color="#ff7942" metalness={0.5} roughness={0.25} />
+        <meshStandardMaterial
+          color="#ff7942"
+          metalness={0.5}
+          roughness={0.25}
+        />
       </mesh>
       <mesh position={[2.5, -1.1, 0.1]} rotation={[0.5, 0.2, 0]}>
         <octahedronGeometry args={[0.22, 0]} />
-        <meshStandardMaterial color="#ffae86" metalness={0.65} roughness={0.22} />
+        <meshStandardMaterial
+          color="#ffae86"
+          metalness={0.65}
+          roughness={0.22}
+        />
       </mesh>
     </group>
-  )
-}
+  );
+};
 
 const HeroScene = () => (
   <div className="hero-scene" aria-hidden="true">
@@ -33,6 +41,6 @@ const HeroScene = () => (
       <OrbitingShapes />
     </Canvas>
   </div>
-)
+);
 
-export default HeroScene
+export default HeroScene;

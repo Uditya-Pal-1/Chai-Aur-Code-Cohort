@@ -53,4 +53,4 @@ All routes are under `/api/v1` except `/api/health`:
 
 ## PostgreSQL history
 
-`prisma/` and `prisma.config.ts` contain the former Prisma/PostgreSQL schema and migrations. They are not used by the current runtime. No PostgreSQL-to-MongoDB data transfer has been performed. Back up the old database and migrate existing users and records before switching a populated deployment.
+`prisma/` contains the former Prisma/PostgreSQL schema and migrations. It is not used by the current runtime. No PostgreSQL-to-MongoDB data transfer has been performed. Back up the old database and migrate existing users and records before switching a populated deployment.

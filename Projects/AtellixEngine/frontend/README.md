@@ -17,5 +17,7 @@ Vite proxies `/api` requests to `http://localhost:8080`. Configure `VITE_API_BAS
 - `npm run build` creates the production bundle in `dist/`.
 - `npm run preview` serves the production bundle locally.
 - `npm run lint` runs ESLint.
+- `npm run format` formats frontend source with Prettier.
+- `npm run format:check` checks frontend formatting.
 
 The 3D hero scene loads as a separate bundle. Blog content and legal draft copy are currently static frontend content.

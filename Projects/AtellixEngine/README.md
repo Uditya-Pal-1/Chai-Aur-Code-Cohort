@@ -33,14 +33,14 @@ AtellixEngine is being shaped around practical coding interviews, real collabora
 
 ### Routes
 
-| Route | Purpose |
-| --- | --- |
-| `/` | Product landing page |
-| `/platform`, `/solutions`, `/pricing` | Product information |
-| `/blog`, `/blog/:slug` | Editorial pages |
-| `/privacy`, `/terms`, `/security` | Legal and security drafts |
-| `/login`, `/signup` | Account access |
-| `/workspace` | Signed-in account landing page |
+| Route                                 | Purpose                        |
+| ------------------------------------- | ------------------------------ |
+| `/`                                   | Product landing page           |
+| `/platform`, `/solutions`, `/pricing` | Product information            |
+| `/blog`, `/blog/:slug`                | Editorial pages                |
+| `/privacy`, `/terms`, `/security`     | Legal and security drafts      |
+| `/login`, `/signup`                   | Account access                 |
+| `/workspace`                          | Signed-in account landing page |
 
 ## Run locally
 
@@ -87,7 +87,7 @@ Vite proxies `/api` to `http://localhost:8080`. Set `VITE_API_BASE_URL` in `fron
 
 ## MongoDB migration note
 
-The application code now uses MongoDB/Mongoose. Historical Prisma schema and migration files are retained as reference; they are not used at runtime. Moving existing PostgreSQL records into MongoDB is a separate data migration and has not been run. Back up and migrate existing data before replacing a database that contains user records.
+The application code now uses MongoDB/Mongoose. The historical Prisma schema and migration files are retained as reference; they are not used at runtime. Moving existing PostgreSQL records into MongoDB is a separate data migration and has not been run. Back up and migrate existing data before replacing a database that contains user records.
 
 ## Before a public launch
 
