@@ -1,68 +1,80 @@
+import { lazy, Suspense, useEffect, useState, type ReactNode } from 'react'
 import { Search, X } from 'lucide-react'
-import { useState, type ReactNode } from 'react'
-import AccordionPreview from './ui/AccordionPreview'
-import AccessibleTabsPreview from './ui/AccessibleTabsPreview'
-import AccentControlsPreview from './ui/AccentControlsPreview'
-import BentoLayoutPreview from './ui/BentoLayoutPreview'
-import BookLibraryPreview from './ui/BookLibraryPreview'
-import BreadcrumbsPreview from './ui/BreadcrumbsPreview'
-import CalculatorPreview from './ui/CalculatorPreview'
-import CartControlPreview from './ui/CartControlPreview'
-import CharacterCounterPreview from './ui/CharacterCounterPreview'
-import CommandPalettePreview from './ui/CommandPalettePreview'
-import ConfirmDialogPreview from './ui/ConfirmDialogPreview'
-import ContactFormPreview from './ui/ContactFormPreview'
-import ContentScrollerPreview from './ui/ContentScrollerPreview'
-import ContrastCheckerPreview from './ui/ContrastCheckerPreview'
-import CoreUIKitPreview from './ui/CoreUIKitPreview'
-import CountdownTimerPreview from './ui/CountdownTimerPreview'
-import DataTablePreview from './ui/DataTablePreview'
-import DateRangePreview from './ui/DateRangePreview'
-import DashboardLayoutPreview from './ui/DashboardLayoutPreview'
-import DesignSliderPreview from './ui/DesignSliderPreview'
-import DigitalClockPreview from './ui/DigitalClockPreview'
-import DiceRollerPreview from './ui/DiceRollerPreview'
-import FeatureGridPreview from './ui/FeatureGridPreview'
-import FileDropzonePreview from './ui/FileDropzonePreview'
-import FooterLayoutPreview from './ui/FooterLayoutPreview'
-import HamburgerMenuPreview from './ui/HamburgerMenuPreview'
-import HeroLayoutPreview from './ui/HeroLayoutPreview'
-import ImageCarouselPreview from './ui/ImageCarouselPreview'
-import KanbanBoardPreview from './ui/KanbanBoardPreview'
-import MarkdownPreview from './ui/MarkdownPreview'
-import MemoryGamePreview from './ui/MemoryGamePreview'
-import MoodTrackerPreview from './ui/MoodTrackerPreview'
-import NavBarLayoutPreview from './ui/NavBarLayoutPreview'
-import NotificationInboxPreview from './ui/NotificationInboxPreview'
-import OtpInputPreview from './ui/OtpInputPreview'
-import PasswordStrengthPreview from './ui/PasswordStrengthPreview'
-import PaginationPreview from './ui/PaginationPreview'
-import PalindromeCheckerPreview from './ui/PalindromeCheckerPreview'
-import PricingTogglePreview from './ui/PricingTogglePreview'
-import ProfileCardLayoutPreview from './ui/ProfileCardLayoutPreview'
-import ProgressStepperPreview from './ui/ProgressStepperPreview'
-import QuoteCardPreview from './ui/QuoteCardPreview'
-import SearchSelectPreview from './ui/SearchSelectPreview'
-import SegmentedControlPreview from './ui/SegmentedControlPreview'
-import SignupFormPreview from './ui/SignupFormPreview'
-import SlidingNavigationPreview from './ui/SlidingNavigationPreview'
-import SplitHeroPreview from './ui/SplitHeroPreview'
-import SwitchControlPreview from './ui/SwitchControlPreview'
-import TaskListPreview from './ui/TaskListPreview'
-import ThemeSwitchPreview from './ui/ThemeSwitchPreview'
-import TestimonialLayoutPreview from './ui/TestimonialLayoutPreview'
-import ToastCenterPreview from './ui/ToastCenterPreview'
-import TipCalculatorPreview from './ui/TipCalculatorPreview'
-import TooltipPreview from './ui/TooltipPreview'
-import WizardFormPreview from './ui/WizardFormPreview'
 import type { Theme } from './ui/types'
 import { categoryList, components, featuredIds, previewFiles, type ComponentId } from '../data/componentCatalog'
 
 const componentSources = import.meta.glob<string>('./ui/*Preview.tsx', {
-  eager: true,
   query: '?raw',
   import: 'default',
 })
+
+const AccordionPreview = lazy(() => import('./ui/AccordionPreview'))
+const AccessibleTabsPreview = lazy(() => import('./ui/AccessibleTabsPreview'))
+const AccentControlsPreview = lazy(() => import('./ui/AccentControlsPreview'))
+const AdvancedDropzonePreview = lazy(() => import('./ui/AdvancedDropzonePreview'))
+const AdvancedTablePreview = lazy(() => import('./ui/AdvancedTablePreview'))
+const AppCardPreview = lazy(() => import('./ui/AppCardPreview'))
+const BentoLayoutPreview = lazy(() => import('./ui/BentoLayoutPreview'))
+const BookLibraryPreview = lazy(() => import('./ui/BookLibraryPreview'))
+const BreadcrumbsPreview = lazy(() => import('./ui/BreadcrumbsPreview'))
+const CalculatorPreview = lazy(() => import('./ui/CalculatorPreview'))
+const CartControlPreview = lazy(() => import('./ui/CartControlPreview'))
+const CharacterCounterPreview = lazy(() => import('./ui/CharacterCounterPreview'))
+const CommandPalettePreview = lazy(() => import('./ui/CommandPalettePreview'))
+const ConfirmDialogPreview = lazy(() => import('./ui/ConfirmDialogPreview'))
+const ComprehensiveFooterPreview = lazy(() => import('./ui/ComprehensiveFooterPreview'))
+const ContactFormPreview = lazy(() => import('./ui/ContactFormPreview'))
+const ContentScrollerPreview = lazy(() => import('./ui/ContentScrollerPreview'))
+const ContrastCheckerPreview = lazy(() => import('./ui/ContrastCheckerPreview'))
+const CoreUIKitPreview = lazy(() => import('./ui/CoreUIKitPreview'))
+const CountdownTimerPreview = lazy(() => import('./ui/CountdownTimerPreview'))
+const DashboardLayoutPreview = lazy(() => import('./ui/DashboardLayoutPreview'))
+const DataTablePreview = lazy(() => import('./ui/DataTablePreview'))
+const DateRangePreview = lazy(() => import('./ui/DateRangePreview'))
+const DesignSliderPreview = lazy(() => import('./ui/DesignSliderPreview'))
+const DigitalClockPreview = lazy(() => import('./ui/DigitalClockPreview'))
+const DiceRollerPreview = lazy(() => import('./ui/DiceRollerPreview'))
+const DragDropBoardPreview = lazy(() => import('./ui/DragDropBoardPreview'))
+const FeatureGridPreview = lazy(() => import('./ui/FeatureGridPreview'))
+const FileDropzonePreview = lazy(() => import('./ui/FileDropzonePreview'))
+const FooterLayoutPreview = lazy(() => import('./ui/FooterLayoutPreview'))
+const GlassNavbarPreview = lazy(() => import('./ui/GlassNavbarPreview'))
+const HamburgerMenuPreview = lazy(() => import('./ui/HamburgerMenuPreview'))
+const HeroLayoutPreview = lazy(() => import('./ui/HeroLayoutPreview'))
+const ImageCarouselPreview = lazy(() => import('./ui/ImageCarouselPreview'))
+const InteractiveControlsPreview = lazy(() => import('./ui/InteractiveControlsPreview'))
+const KanbanBoardPreview = lazy(() => import('./ui/KanbanBoardPreview'))
+const MarkdownPreview = lazy(() => import('./ui/MarkdownPreview'))
+const MemoryGamePreview = lazy(() => import('./ui/MemoryGamePreview'))
+const ModernCarouselPreview = lazy(() => import('./ui/ModernCarouselPreview'))
+const MoodTrackerPreview = lazy(() => import('./ui/MoodTrackerPreview'))
+const NavBarLayoutPreview = lazy(() => import('./ui/NavBarLayoutPreview'))
+const NotificationInboxPreview = lazy(() => import('./ui/NotificationInboxPreview'))
+const OtpInputPreview = lazy(() => import('./ui/OtpInputPreview'))
+const PageHeaderPreview = lazy(() => import('./ui/PageHeaderPreview'))
+const PaginationPreview = lazy(() => import('./ui/PaginationPreview'))
+const PalindromeCheckerPreview = lazy(() => import('./ui/PalindromeCheckerPreview'))
+const PasswordStrengthPreview = lazy(() => import('./ui/PasswordStrengthPreview'))
+const PricingTogglePreview = lazy(() => import('./ui/PricingTogglePreview'))
+const ProfileCardLayoutPreview = lazy(() => import('./ui/ProfileCardLayoutPreview'))
+const ProgressStepperPreview = lazy(() => import('./ui/ProgressStepperPreview'))
+const QuoteCardPreview = lazy(() => import('./ui/QuoteCardPreview'))
+const ResponsiveMetricGridPreview = lazy(() => import('./ui/ResponsiveMetricGridPreview'))
+const SearchSelectPreview = lazy(() => import('./ui/SearchSelectPreview'))
+const SegmentedControlPreview = lazy(() => import('./ui/SegmentedControlPreview'))
+const SignupFormPreview = lazy(() => import('./ui/SignupFormPreview'))
+const SlidingNavigationPreview = lazy(() => import('./ui/SlidingNavigationPreview'))
+const SplitHeroPreview = lazy(() => import('./ui/SplitHeroPreview'))
+const StatsPreview = lazy(() => import('./ui/StatsPreview'))
+const SwitchControlPreview = lazy(() => import('./ui/SwitchControlPreview'))
+const TaskListPreview = lazy(() => import('./ui/TaskListPreview'))
+const TestimonialLayoutPreview = lazy(() => import('./ui/TestimonialLayoutPreview'))
+const ThemeSwitchPreview = lazy(() => import('./ui/ThemeSwitchPreview'))
+const TipCalculatorPreview = lazy(() => import('./ui/TipCalculatorPreview'))
+const ToastCenterPreview = lazy(() => import('./ui/ToastCenterPreview'))
+const TooltipPreview = lazy(() => import('./ui/TooltipPreview'))
+const UserInfoCardPreview = lazy(() => import('./ui/UserInfoCardPreview'))
+const WizardFormPreview = lazy(() => import('./ui/WizardFormPreview'))
 
 interface GalleryProps {
   theme: Theme
@@ -78,6 +90,7 @@ export default function ComponentGallery({ theme, onToggleTheme, mode, initialId
   const [activeId, setActiveId] = useState<ComponentId>(() =>
     components.find((component) => component.id === initialId)?.id ?? 'theme',
   )
+  const [source, setSource] = useState<{ id: ComponentId; text: string } | null>(null)
   const [copyStatus, setCopyStatus] = useState('')
   const active = components.find((component) => component.id === activeId) ?? components[0]
   const normalizedQuery = query.trim().toLowerCase()
@@ -85,20 +98,40 @@ export default function ComponentGallery({ theme, onToggleTheme, mode, initialId
     (category === 'All' || component.category === category)
     && (!normalizedQuery || `${component.name} ${component.category} ${component.summary}`.toLowerCase().includes(normalizedQuery)),
   )
-  const source = componentSources[`./ui/${previewFiles[activeId]}`]
+  useEffect(() => {
+    let cancelled = false
+    const sourcePath = `./ui/${previewFiles[activeId]}`
+    const loadSource = componentSources[sourcePath]
+
+    if (!loadSource) return
+
+    void loadSource().then((sourceText) => {
+      if (!cancelled) setSource({ id: activeId, text: sourceText })
+    }).catch((error: unknown) => {
+      console.error(`Unable to load ${active.name} source code.`, error)
+      if (!cancelled) setSource({ id: activeId, text: 'Component source is unavailable.' })
+    })
+
+    return () => {
+      cancelled = true
+    }
+  }, [active.id, active.name, activeId])
 
   const copyComponent = async () => {
-    if (!source) {
+    const loadSource = componentSources[`./ui/${previewFiles[activeId]}`]
+    if (!loadSource) {
       setCopyStatus('Source unavailable')
       return
     }
 
     try {
-      await navigator.clipboard.writeText(source)
+      const sourceText = await loadSource()
+      setSource({ id: activeId, text: sourceText })
+      await navigator.clipboard.writeText(sourceText)
       setCopyStatus('Copied TSX')
       window.setTimeout(() => setCopyStatus(''), 1800)
     } catch (error) {
-      console.error(`Unable to copy ${active.name} source code.`, error)
+      console.error(`Unable to load or copy ${active.name} source code.`, error)
       setCopyStatus('Copy failed')
     }
   }
@@ -159,7 +192,23 @@ export default function ComponentGallery({ theme, onToggleTheme, mode, initialId
     'feature-grid': <FeatureGridPreview />,
     'testimonial-layout': <TestimonialLayoutPreview />,
     'profile-layout': <ProfileCardLayoutPreview />,
+    stats: <StatsPreview />,
+    'app-card': <AppCardPreview />,
+    dropzone: <AdvancedDropzonePreview />,
+    'advanced-table': <AdvancedTablePreview />,
+    'drag-drop': <DragDropBoardPreview />,
+    'modern-carousel': <ModernCarouselPreview />,
+    'glass-navbar': <GlassNavbarPreview />,
+    'page-header': <PageHeaderPreview />,
+    'comprehensive-footer': <ComprehensiveFooterPreview />,
+    'responsive-grid': <ResponsiveMetricGridPreview />,
+    'user-info': <UserInfoCardPreview />,
+    'interactive-controls': <InteractiveControlsPreview />,
   }
+  const sourcePath = `./ui/${previewFiles[activeId]}`
+  const sourceText = source?.id === activeId
+    ? source.text
+    : componentSources[sourcePath] ? 'Loading component source…' : 'Component source is unavailable.'
 
   if (mode === 'featured') {
     return (
@@ -170,7 +219,11 @@ export default function ComponentGallery({ theme, onToggleTheme, mode, initialId
             if (!component) return null
             return (
               <article className="featured-component-card" key={id}>
-                <div className="featured-component-preview">{previews[id]}</div>
+                <div className="featured-component-preview">
+                  <Suspense fallback={<div className="component-preview-loading" role="status">Loading preview…</div>}>
+                    {previews[id]}
+                  </Suspense>
+                </div>
                 <div className="featured-component-copy">
                   <span className="component-card-category">{component.category}</span>
                   <h3>{component.name}</h3>
@@ -201,7 +254,7 @@ export default function ComponentGallery({ theme, onToggleTheme, mode, initialId
           )}
           <span className="component-search-count">{visible.length} / {components.length}</span>
         </div>
-        <div className="component-toolbar" aria-label="Filter components">
+        <div className="component-toolbar" role="group" aria-label="Filter components">
           {categoryList.map((item) => (
             <button
               key={item}
@@ -256,11 +309,15 @@ export default function ComponentGallery({ theme, onToggleTheme, mode, initialId
               <span><i aria-hidden="true" /> LIVE PREVIEW</span>
               <span>INTERACTIVE</span>
             </div>
-            <div className="component-preview-demo" key={activeId}>{previews[activeId]}</div>
+            <div className="component-preview-demo" key={activeId}>
+              <Suspense fallback={<div className="component-preview-loading" role="status">Loading preview…</div>}>
+                {previews[activeId]}
+              </Suspense>
+            </div>
           </div>
           <details className="component-source">
             <summary>View React source</summary>
-            <pre><code>{source || 'Component source is unavailable.'}</code></pre>
+            <pre><code>{sourceText}</code></pre>
             <p>Source is ready to adapt; preview styles use the shared AtellixUI demo classes.</p>
           </details>
         </aside>

@@ -1,6 +1,6 @@
 # AtellixUI Frontend
 
-This is the early frontend scaffold for [AtellixUI](../README.md), built with React, TypeScript, and Vite. It currently contains starter-page content and sample `Button` and `Footer` components; the planned component library, design-token system, and Studio are not implemented.
+This is the production-ready frontend for [AtellixUI](../README.md), built with React 19, TypeScript, Vite, and Tailwind CSS. It contains an interactive component gallery with 67 production previews, a dual-mode playground with Sandpack, Three.js spatial hero, and tokenized design surfaces.
 
 ## Requirements
 

@@ -1,6 +1,7 @@
 import { lazy, Suspense, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Check, Code2, Copy, LoaderCircle, Monitor, RotateCcw, Smartphone, Sparkles } from 'lucide-react'
+import ErrorBoundary from './ErrorBoundary'
 
 const LiveCodeEditor = lazy(() => import('./LiveCodeEditor'))
 
@@ -166,7 +167,7 @@ export default function Playground({ theme }: { theme: 'dark' | 'light' }) {
           <span>{mode === 'basic' ? 'NO EDITOR STARTUP' : 'CODEMIRROR + PREVIEW'}</span>
         </div>
         <div className="playground-toolbar-actions">
-          {mode === 'basic' && <div className="playground-device-switch" aria-label="Preview width">
+          {mode === 'basic' && <div className="playground-device-switch" role="group" aria-label="Preview width">
             <button type="button" className={previewSize === 'desktop' ? 'is-active' : ''} aria-pressed={previewSize === 'desktop'} aria-label="Desktop preview" onClick={() => setPreviewSize('desktop')}><Monitor size={15} /></button>
             <button type="button" className={previewSize === 'mobile' ? 'is-active' : ''} aria-pressed={previewSize === 'mobile'} aria-label="Mobile preview" onClick={() => setPreviewSize('mobile')}><Smartphone size={15} /></button>
           </div>}
@@ -274,7 +275,9 @@ export default function Playground({ theme }: { theme: 'dark' | 'light' }) {
             <div className="playground-editor-panel" hidden={mode !== 'editor'}>
               <div className="playground-editor-notice"><span className="playground-live-dot" /><span>Edit <code>App.js</code> and see your React component run. The sandbox needs an internet connection.</span></div>
               <Suspense fallback={<div className="playground-editor-loading"><LoaderCircle size={18} /><span>Loading the live editor…</span></div>}>
-                <LiveCodeEditor key={editorResetVersion} code={snippet} theme={theme} />
+                <ErrorBoundary name="LiveCodeEditor">
+                  <LiveCodeEditor key={editorResetVersion} code={snippet} theme={theme} />
+                </ErrorBoundary>
               </Suspense>
             </div>
           )}

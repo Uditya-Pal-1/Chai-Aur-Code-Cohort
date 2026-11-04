@@ -183,7 +183,15 @@ export default function DotPortrait({ theme }: DotPortraitProps) {
     >
       <div className="creator-portrait-glow" aria-hidden="true" />
       {theme === 'light' ? (
-        <img src={portraitImage} className="creator-portrait-photo" alt="" />
+        <img
+          src={portraitImage}
+          className="creator-portrait-photo"
+          alt=""
+          width={768}
+          height={768}
+          loading="lazy"
+          decoding="async"
+        />
       ) : (
         <canvas ref={canvasRef} className="creator-portrait-canvas" aria-hidden="true" />
       )}

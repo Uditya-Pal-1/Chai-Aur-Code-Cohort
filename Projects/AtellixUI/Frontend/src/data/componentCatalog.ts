@@ -54,6 +54,18 @@ export const components = [
   { id: 'feature-grid', name: 'Feature grid', category: 'Landing pages', summary: 'Present product principles in a responsive card grid.' },
   { id: 'testimonial-layout', name: 'Testimonial carousel', category: 'Content', summary: 'Browse attributed quotes with previous and next controls.' },
   { id: 'profile-layout', name: 'Profile card', category: 'Content', summary: 'Show a creator profile with a follow interaction.' },
+  { id: 'stats', name: 'Analytics stats', category: 'Data', summary: 'DaisyUI-inspired metrics grid with trend badges and time range filters.' },
+  { id: 'app-card', name: 'Application card', category: 'Layout', summary: 'SaaS project card with avatars, progress bar, and action triggers.' },
+  { id: 'dropzone', name: 'Advanced dropzone', category: 'Inputs', summary: 'Multi-file drag-and-drop zone with type preview, progress, and remove buttons.' },
+  { id: 'advanced-table', name: 'Selectable data table', category: 'Data', summary: 'Responsive table with row checkboxes, sorting, and pagination controls.' },
+  { id: 'drag-drop', name: 'Drag & drop board', category: 'Productivity', summary: 'Interactive workflow columns with smooth Framer Motion layout transitions.' },
+  { id: 'modern-carousel', name: 'Slide carousel', category: 'Interaction', summary: 'Animated card slider with dot indicators, arrow navigation, and autoplay.' },
+  { id: 'glass-navbar', name: 'Glass navbar', category: 'Navigation', summary: 'Glassmorphic responsive navbar with dropdown menus and mobile drawer.' },
+  { id: 'page-header', name: 'Enterprise page header', category: 'Layout', summary: 'SaaS page header with breadcrumbs, action bar, and status pill.' },
+  { id: 'comprehensive-footer', name: 'Multi-column footer', category: 'Layout', summary: 'Comprehensive footer with newsletter signup, link groups, and social icons.' },
+  { id: 'responsive-grid', name: 'Responsive bento grid', category: 'Landing pages', summary: 'Asymmetric feature grid with metrics and interactive glow states.' },
+  { id: 'user-info', name: 'User profile card', category: 'Content', summary: 'Profile avatar with live online status, follower metrics, and social pills.' },
+  { id: 'interactive-controls', name: 'Interactive controls', category: 'Inputs', summary: 'Stepped range slider, icon toggle switch, and button loading states.' },
 ] as const
 
 export type ComponentId = (typeof components)[number]['id']
@@ -114,6 +126,18 @@ export const previewFiles: Record<ComponentId, string> = {
   'feature-grid': 'FeatureGridPreview.tsx',
   'testimonial-layout': 'TestimonialLayoutPreview.tsx',
   'profile-layout': 'ProfileCardLayoutPreview.tsx',
+  stats: 'StatsPreview.tsx',
+  'app-card': 'AppCardPreview.tsx',
+  dropzone: 'AdvancedDropzonePreview.tsx',
+  'advanced-table': 'AdvancedTablePreview.tsx',
+  'drag-drop': 'DragDropBoardPreview.tsx',
+  'modern-carousel': 'ModernCarouselPreview.tsx',
+  'glass-navbar': 'GlassNavbarPreview.tsx',
+  'page-header': 'PageHeaderPreview.tsx',
+  'comprehensive-footer': 'ComprehensiveFooterPreview.tsx',
+  'responsive-grid': 'ResponsiveMetricGridPreview.tsx',
+  'user-info': 'UserInfoCardPreview.tsx',
+  'interactive-controls': 'InteractiveControlsPreview.tsx',
 }
 
 export const categoryList = ['All', ...new Set(components.map(({ category }) => category))]

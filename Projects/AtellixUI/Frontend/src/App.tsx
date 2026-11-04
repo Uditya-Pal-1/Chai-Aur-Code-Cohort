@@ -1,20 +1,42 @@
-import { useEffect, useRef, useState } from 'react'
-import { ArrowUpRight, Code2, Menu, X } from 'lucide-react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { ArrowUpRight, ChevronDown, Code2, Command, Menu, Search, X } from 'lucide-react'
 import { MotionConfig, motion } from 'framer-motion'
-import lightLogo from './assets/atellix-logo.png'
-import darkLogo from './assets/atellix-logo-dark-transparent.png'
-import ComponentGallery from './components/ComponentGallery'
-import DotPortrait from './components/DotPortrait'
-import Playground from './components/Playground'
+import lightLogo from './assets/atellix-logo.webp'
+import darkLogo from './assets/atellix-logo-dark-transparent.webp'
+import ErrorBoundary from './components/ErrorBoundary'
+import Footer from './components/Footer'
 import ThreeHeroScene from './components/ThreeHeroScene'
-import { creatorLinks, productFeatures, themeTokens } from './data/siteContent'
+import MncMarqueeTicker from './components/MncMarqueeTicker'
+import HomePlaygroundPreview from './components/HomePlaygroundPreview'
+import HomeThemeStudio from './components/HomeThemeStudio'
+import TestimonialCarousel from './components/TestimonialCarousel'
+import DaisyUiShowcaseSections from './components/DaisyUiShowcaseSections'
+import { creatorLinks, productFeatures } from './data/siteContent'
 import './App.css'
+import './playground-preview.css'
+
+const ComponentGallery = lazy(() => import('./components/ComponentGallery'))
+const DotPortrait = lazy(() => import('./components/DotPortrait'))
+const Playground = lazy(() => import('./components/Playground'))
+const SystemPage = lazy(() => import('./components/SystemPage'))
+
+const searchablePages = [
+  { label: 'Components', description: 'Browse the interactive component library', path: '/components' },
+  { label: 'Themes', description: 'Tune palettes and export design tokens', path: '/themes' },
+  { label: 'Playground', description: 'Preview components and inspect the code', path: '/playground' },
+  { label: 'Design system', description: 'Explore accessibility, spacing, and type', path: '/system' },
+  { label: 'About AtellixUI', description: 'Learn about the project and its creator', path: '/about' },
+  { label: 'Home', description: 'Return to the AtellixUI overview', path: '/' },
+] as const
 
 function App() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark')
+  const [accentColor, setAccentColor] = useState('#ff8a3d')
   const [copied, setCopied] = useState(false)
-  const [page, setPage] = useState<'home' | 'components' | 'playground' | 'system' | 'about'>(() => {
+  const [copyFailed, setCopyFailed] = useState(false)
+  const [page, setPage] = useState<'home' | 'themes' | 'components' | 'playground' | 'system' | 'about'>(() => {
     const path = window.location.pathname.replace(/\/+$/, '')
+    if (path === '/themes') return 'themes'
     if (path === '/components') return 'components'
     if (path === '/playground') return 'playground'
     if (path === '/system') return 'system'
@@ -22,10 +44,33 @@ function App() {
     return 'home'
   })
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
+  const [quickSearchOpen, setQuickSearchOpen] = useState(false)
+  const [quickSearchQuery, setQuickSearchQuery] = useState('')
   const [selectedComponent, setSelectedComponent] = useState(() =>
     new URLSearchParams(window.location.search).get('component') ?? undefined,
   )
   const rootRef = useRef<HTMLDivElement>(null)
+  const quickSearchInputRef = useRef<HTMLInputElement>(null)
+  const resourcesMenuRef = useRef<HTMLDetailsElement>(null)
+
+  useEffect(() => {
+    const handleSearchShortcut = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault()
+        setQuickSearchQuery('')
+        setQuickSearchOpen((open) => !open)
+      } else if (event.key === 'Escape') {
+        setQuickSearchOpen(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleSearchShortcut)
+    return () => window.removeEventListener('keydown', handleSearchShortcut)
+  }, [])
+
+  useEffect(() => {
+    if (quickSearchOpen) quickSearchInputRef.current?.focus()
+  }, [quickSearchOpen])
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -35,7 +80,8 @@ function App() {
     const syncPage = () => {
       const path = window.location.pathname.replace(/\/+$/, '')
       setPage(
-        path === '/components' ? 'components'
+        path === '/themes' ? 'themes'
+          : path === '/components' ? 'components'
           : path === '/playground' ? 'playground'
             : path === '/system' ? 'system'
               : path === '/about' ? 'about'
@@ -52,6 +98,7 @@ function App() {
   useEffect(() => {
     const titles = {
       home: 'AtellixUI — Thoughtful React Components',
+      themes: 'Themes — AtellixUI',
       components: 'Components — AtellixUI',
       playground: 'Playground — AtellixUI',
       system: 'Design System — AtellixUI',
@@ -90,7 +137,8 @@ function App() {
 
     window.addEventListener('scroll', revealVisibleItems, { passive: true })
     window.addEventListener('resize', revealVisibleItems)
-    revealVisibleItems()
+    // Double rAF ensures DOM is fully painted before checking positions on hard reload
+    requestAnimationFrame(() => requestAnimationFrame(revealVisibleItems))
     return () => {
       observer.disconnect()
       window.removeEventListener('scroll', revealVisibleItems)
@@ -102,14 +150,27 @@ function App() {
     try {
       await navigator.clipboard.writeText(text)
       setCopied(true)
+      setCopyFailed(false)
       window.setTimeout(() => setCopied(false), 1200)
-    } catch {
+    } catch (error) {
+      console.error('Unable to copy the development command:', error)
       setCopied(false)
+      setCopyFailed(true)
+      window.setTimeout(() => setCopyFailed(false), 2400)
     }
   }
 
   const toggleTheme = () => {
     setTheme((current) => current === 'dark' ? 'light' : 'dark')
+  }
+
+  const applyAccent = (color: string) => {
+    setAccentColor(color)
+    rootRef.current?.style.setProperty('--accent', color)
+    rootRef.current?.style.setProperty('--accent-strong', color)
+    rootRef.current?.style.setProperty('--accent-soft', `${color}1f`)
+    rootRef.current?.style.setProperty('--line', `${color}2e`)
+    rootRef.current?.style.setProperty('--shadow', `${color}24`)
   }
 
   const navigateToComponents = (componentId?: string) => {
@@ -120,17 +181,20 @@ function App() {
     setSelectedComponent(componentId)
     window.scrollTo({ top: 0, behavior: 'instant' })
     setMobileNavOpen(false)
+    if (resourcesMenuRef.current) resourcesMenuRef.current.open = false
   }
 
-  const navigateToPage = (path: '/' | '/playground' | '/system' | '/about') => {
+  const navigateToPage = (path: '/' | '/themes' | '/playground' | '/system' | '/about') => {
     window.history.pushState({}, '', path)
     setPage(
       path === '/' ? 'home'
+        : path === '/themes' ? 'themes'
         : path === '/playground' ? 'playground'
           : path === '/system' ? 'system'
             : 'about',
     )
     setMobileNavOpen(false)
+    if (resourcesMenuRef.current) resourcesMenuRef.current.open = false
     window.scrollTo({ top: 0, behavior: 'instant' })
   }
 
@@ -156,31 +220,63 @@ function App() {
           <img
             src={theme === 'light' ? lightLogo : darkLogo}
             className="brand-logo"
-            alt="Atellix UI"
+            alt=""
+            width={720}
+            height={240}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
           />
         </a>
 
         <ul id="primary-navigation" className={mobileNavOpen ? 'is-open' : ''}>
-          <li><a href="/system" aria-current={page === 'system' ? 'page' : undefined} onClick={(event) => {
-            event.preventDefault()
-            navigateToPage('/system')
-          }}>System</a></li>
           <li><a href="/components" aria-current={page === 'components' ? 'page' : undefined} onClick={(event) => {
             event.preventDefault()
             navigateToComponents()
           }}>Components</a></li>
+          <li><a href="/themes" aria-current={page === 'themes' ? 'page' : undefined} onClick={(event) => {
+            event.preventDefault()
+            navigateToPage('/themes')
+          }}>Themes</a></li>
           <li><a href="/playground" aria-current={page === 'playground' ? 'page' : undefined} onClick={(event) => {
             event.preventDefault()
             navigateToPage('/playground')
           }}>Playground</a></li>
-          <li><a href="/about" aria-current={page === 'about' ? 'page' : undefined} onClick={(event) => {
-            event.preventDefault()
-            navigateToPage('/about')
-          }}>About</a></li>
+          <li className="nav-resources-item">
+            <details className="nav-resources" ref={resourcesMenuRef}>
+              <summary aria-label="Open resources menu">Resources <ChevronDown size={14} aria-hidden="true" /></summary>
+              <div className="nav-resources-menu">
+                <a href="/system" aria-current={page === 'system' ? 'page' : undefined} onClick={(event) => {
+                  event.preventDefault()
+                  navigateToPage('/system')
+                }}>Design system <span>Tokens, type, and accessibility</span></a>
+                <a href="/about" aria-current={page === 'about' ? 'page' : undefined} onClick={(event) => {
+                  event.preventDefault()
+                  navigateToPage('/about')
+                }}>About AtellixUI <span>Project and creator</span></a>
+              </div>
+            </details>
+          </li>
+          <li className="mobile-search-entry">
+            <button type="button" onClick={() => { setMobileNavOpen(false); setQuickSearchOpen(true) }}>
+              <Search size={15} aria-hidden="true" /> Search pages <kbd>Ctrl K</kbd>
+            </button>
+          </li>
           <li className="mobile-nav-cta">
-            <a href="/components" onClick={(event) => { event.preventDefault(); navigateToComponents() }}>Explore components <span aria-hidden="true">↗</span></a>
+            <a href="/themes" onClick={(event) => { event.preventDefault(); navigateToPage('/themes') }}>Explore themes <span aria-hidden="true">↗</span></a>
           </li>
         </ul>
+
+        <button
+          type="button"
+          className="nav-search-trigger"
+          aria-label="Search pages and components"
+          onClick={() => setQuickSearchOpen(true)}
+        >
+          <Search size={15} aria-hidden="true" />
+          <span>Search</span>
+          <kbd><Command size={11} aria-hidden="true" /> K</kbd>
+        </button>
 
         <button
           type="button"
@@ -227,14 +323,63 @@ function App() {
           <span className="theme-toggle-label">{theme === 'dark' ? 'Light' : 'Dark'}</span>
         </button>
 
-        <a className="nav-cta" href="/components" onClick={(event) => {
+        <a className="nav-cta" href="/themes" onClick={(event) => {
           event.preventDefault()
-          navigateToComponents()
+          navigateToPage('/themes')
         }}>
-          <span>Explore components</span>
+          <span>Explore themes</span>
           <span aria-hidden="true">↗</span>
         </a>
       </nav>
+
+      {quickSearchOpen && (
+        <div
+          className="quick-search-backdrop"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setQuickSearchOpen(false)
+          }}
+        >
+          <section className="quick-search-dialog" role="dialog" aria-modal="true" aria-labelledby="quick-search-title">
+            <h2 id="quick-search-title" className="sr-only">Search AtellixUI</h2>
+            <div className="quick-search-input-wrap">
+              <Search size={18} aria-hidden="true" />
+              <input
+                ref={quickSearchInputRef}
+                type="search"
+                value={quickSearchQuery}
+                onChange={(event) => setQuickSearchQuery(event.target.value)}
+                placeholder="Search pages and tools..."
+                aria-label="Search pages and tools"
+              />
+              <kbd>ESC</kbd>
+            </div>
+            <div className="quick-search-results">
+              {searchablePages
+                .filter((item) => `${item.label} ${item.description}`.toLowerCase().includes(quickSearchQuery.trim().toLowerCase()))
+                .map((item) => (
+                  <button
+                    type="button"
+                    key={item.path}
+                    onClick={() => {
+                      setQuickSearchOpen(false)
+                      if (item.path === '/components') navigateToComponents()
+                      else navigateToPage(item.path)
+                    }}
+                  >
+                    <span className="quick-search-result-icon"><Search size={15} aria-hidden="true" /></span>
+                    <span><strong>{item.label}</strong><small>{item.description}</small></span>
+                    <ArrowUpRight size={15} aria-hidden="true" />
+                  </button>
+                ))}
+              {searchablePages.every((item) => !`${item.label} ${item.description}`.toLowerCase().includes(quickSearchQuery.trim().toLowerCase())) && (
+                <p className="quick-search-empty">No pages match “{quickSearchQuery}”. Try “themes” or “components”.</p>
+              )}
+            </div>
+            <div className="quick-search-hint"><span>Navigate to a page</span><span><kbd>ESC</kbd> to close</span></div>
+          </section>
+        </div>
+      )}
 
       <main id="top">
         <motion.div
@@ -244,8 +389,43 @@ function App() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
         >
-        {page === 'components' ? (
-          <section className="section-block components-page">
+          {/* <Suspense fallback={<div className="route-loading" role="status">Loading AtellixUI tools…</div>}> */}
+          {page === 'themes' ? (
+            <section className="section-block themes-page">
+              <div className="wrap">
+                <a className="components-back-link" href="/" onClick={(event) => { event.preventDefault(); navigateToPage('/') }}>← Back to AtellixUI</a>
+                <span className="eyebrow">THEME COLLECTION</span>
+                <h1>Set the tone.<br /><em>Make it yours.</em></h1>
+                <p className="lead">
+                  Choose a canvas for your interface, then tune the accent palette and export the tokens for your own product.
+                </p>
+                <div className="theme-mode-grid" role="group" aria-label="Choose a theme">
+                  <button type="button" className={`theme-mode-card ${theme === 'dark' ? 'is-selected' : ''}`} onClick={() => setTheme('dark')} aria-pressed={theme === 'dark'}>
+                    <span className="theme-mode-preview theme-mode-preview-dark" aria-hidden="true"><i /><i /><i /></span>
+                    <span className="theme-mode-copy"><strong>Obsidian</strong><small>Deep surfaces with radiant accents</small></span>
+                    <span className="theme-mode-status">{theme === 'dark' ? 'Active' : 'Preview'}</span>
+                  </button>
+                  <button type="button" className={`theme-mode-card ${theme === 'light' ? 'is-selected' : ''}`} onClick={() => setTheme('light')} aria-pressed={theme === 'light'}>
+                    <span className="theme-mode-preview theme-mode-preview-light" aria-hidden="true"><i /><i /><i /></span>
+                    <span className="theme-mode-copy"><strong>Soft Ivory</strong><small>Warm, considered light-mode surfaces</small></span>
+                    <span className="theme-mode-status">{theme === 'light' ? 'Active' : 'Preview'}</span>
+                  </button>
+                </div>
+                <div className="theme-studio-heading">
+                  <span className="eyebrow">LIVE THEME STUDIO</span>
+                  <h2>Fine-tune your design tokens.</h2>
+                  <p className="lead">Change the accent color, test it on live components, and copy a ready-to-use token set.</p>
+                </div>
+                <HomeThemeStudio
+                  currentTheme={theme}
+                  accentColor={accentColor}
+                  onToggleTheme={toggleTheme}
+                  onSelectAccent={applyAccent}
+                />
+              </div>
+            </section>
+          ) : page === 'components' ? (
+            <section className="section-block components-page">
             <div className="wrap">
               <a className="components-back-link" href="/" onClick={(event) => {
                 event.preventDefault()
@@ -257,15 +437,18 @@ function App() {
                 Browse the interactive library for product interfaces, landing pages, and everyday workflows.
                 Select a component to try it, inspect its React source, and copy it into your project.
               </p>
-              <ComponentGallery
-                key="component-library"
-                mode="library"
-                theme={theme}
-                onToggleTheme={toggleTheme}
-                initialId={selectedComponent}
-              />
+              {/* <Suspense fallback={<div className="route-loading" role="status">Loading component library…</div>}> */}
+                <ComponentGallery
+                  key="component-library"
+                  mode="library"
+                  theme={theme}
+                  onToggleTheme={toggleTheme}
+                  initialId={selectedComponent}
+                />
+              {/* </Suspense> */}
             </div>
           </section>
+
         ) : page === 'playground' ? (
           <section className="section-block playground-page">
             <div className="wrap">
@@ -278,33 +461,18 @@ function App() {
               <Playground theme={theme} />
             </div>
           </section>
+
         ) : page === 'system' ? (
-          <section className="section-block system-page">
-            <div className="wrap">
-              <a className="components-back-link" href="/" onClick={(event) => { event.preventDefault(); navigateToPage('/') }}>← Back to AtellixUI</a>
-              <span className="eyebrow">THE ATELLIX FOUNDATION</span>
-              <h1>A system with <em>intention.</em></h1>
-              <p className="lead">A practical visual language for building consistent interfaces: tokens first, accessible patterns by default, and motion that earns its place.</p>
-              <div className="system-token-panel">
-                <div className="system-page-heading"><span className="system-index">01</span><div><h2>Color tokens</h2><p>Warm orange accents, balanced surfaces, and readable contrast in both themes.</p></div></div>
-                <div className="system-token-grid">
-                  {themeTokens.map((token, index) => <div className="system-token" key={token}><span style={{ background: token }} /><strong>{['Orange 300', 'Orange 400', 'Orange 500', 'Orange 600', 'Orange 700'][index]}</strong><code>{token}</code></div>)}
-                </div>
-              </div>
-              <div className="system-principles">
-                {productFeatures.map((feature, index) => <motion.article className="system-principle" key={feature.title} whileHover={{ y: -4 }} transition={{ duration: 0.18 }}><span className="system-index">0{index + 2}</span><div className="tag">{feature.category}</div><h2>{feature.title}</h2><p>{feature.description}</p></motion.article>)}
-              </div>
-              <div className="system-architecture">
-                <div><span className="eyebrow">BUILT IN LAYERS</span><h2>One foundation.<br /><em>Multiple ways to build.</em></h2></div>
-                <div className="architecture-stack">
-                  <article><span>01</span><div><strong>Foundation</strong><small>Tokens · accessibility · shared patterns</small></div></article>
-                  <article><span>02</span><div><strong>Components</strong><small>Useful primitives · product layouts · motion</small></div></article>
-                  <article><span>03</span><div><strong>Workflow</strong><small>Live previews · source inspection · copyable JSX</small></div></article>
-                </div>
-              </div>
-              <button type="button" className="components-explore-button" onClick={() => navigateToComponents()}>Explore the component library <span aria-hidden="true">↗</span></button>
-            </div>
-          </section>
+          <SystemPage
+            theme={theme}
+            accentColor={accentColor}
+            onToggleTheme={toggleTheme}
+            onSelectAccent={applyAccent}
+            onNavigateHome={() => navigateToPage('/')}
+            onNavigateToThemes={() => navigateToPage('/themes')}
+            onNavigateToComponents={() => navigateToComponents()}
+          />
+
         ) : page === 'about' ? (
           <section className="section-block about-page">
             <div className="wrap">
@@ -332,9 +500,10 @@ function App() {
               <div className="about-note"><span className="system-index">ATX</span><p>AtellixUI is currently a frontend prototype. The component library, live playground, and design system are actively evolving; CLI and MCP distribution remain future product direction.</p></div>
             </div>
           </section>
+
         ) : (
           <>
-        <section className="hero">
+          <section className="hero">
           <div className="wrap hero-layout">
             <div className="hero-copy reveal">
               <div className="hero-kicker">
@@ -359,18 +528,20 @@ function App() {
                 <a href="/system" className="text-link" onClick={(event) => { event.preventDefault(); navigateToPage('/system') }}>Discover the system <span aria-hidden="true">↗</span></a>
               </div>
 
-              <div className="cmd hero-command" aria-label="Copy installation command">
-                <span className="mono"><b>$</b> npx atellix init</span>
-                <button type="button" onClick={() => handleCopy('npx atellix init')}>
-                  {copied ? 'Copied' : 'Copy'}
+              <div className="cmd hero-command" role="group" aria-label="Development command">
+                <span className="mono"><b>$</b> npm run dev</span>
+                <button type="button" onClick={() => handleCopy('npm run dev')} aria-live="polite">
+                  {copied ? 'Copied' : copyFailed ? 'Copy failed' : 'Copy'}
                 </button>
               </div>
             </div>
 
             <div className="hero-visual reveal">
-              <div className="hero-art" aria-label="Abstract orange-accented 3D component stack">
+              <div className="hero-art" role="img" aria-label="Abstract orange-accented 3D component stack">
                 <div className="hero-art-glow" />
-                <ThreeHeroScene />
+                <ErrorBoundary name="ThreeHeroScene">
+                  <ThreeHeroScene />
+                </ErrorBoundary>
                 <span className="art-index mono">ATX <span>—</span> 001</span>
               </div>
               <div className="hero-visual-meta">
@@ -380,9 +551,9 @@ function App() {
               </div>
             </div>
           </div>
-        </section>
+          </section>
 
-        <section id="system" className="section-block reveal">
+          <section id="system" className="section-block reveal">
           <div className="wrap">
             <span className="eyebrow">Why teams pick AtellixUI</span>
             <h2>Built for production products, not just pretty demos.</h2>
@@ -413,6 +584,7 @@ function App() {
           </div>
         </section>
 
+
         <section id="components" className="section-block reveal">
           <div className="wrap">
             <span className="eyebrow">Component library</span>
@@ -420,48 +592,63 @@ function App() {
             <p className="lead">
               Explore six working examples from a growing collection of original components. Each one is designed to be clear, adaptable, and useful beyond the demo.
             </p>
-            <ComponentGallery
-              mode="featured"
-              theme={theme}
-              onToggleTheme={toggleTheme}
-              onNavigateToComponent={navigateToComponents}
-            />
+            <Suspense fallback={<div className="component-gallery-loading" aria-hidden="true" />}>
+              <ComponentGallery
+                mode="featured"
+                theme={theme}
+                onToggleTheme={toggleTheme}
+                onNavigateToComponent={navigateToComponents}
+              />
+            </Suspense>
             <button type="button" className="components-explore-button" onClick={() => navigateToComponents()}>
               Explore all components <span aria-hidden="true">↗</span>
             </button>
           </div>
         </section>
 
+
         <section id="sandbox" className="section-block reveal">
           <div className="wrap">
-            <span className="eyebrow">Playground</span>
+            <span className="eyebrow">INTERACTIVE WORKBENCH</span>
             <h2>From first tweak to ready-to-use code.</h2>
-            <p className="lead">Shape a component, preview responsive states, and copy a working JSX snippet from one focused workspace.</p>
-            <button type="button" className="components-explore-button" onClick={() => navigateToPage('/playground')}>Open the playground <span aria-hidden="true">↗</span></button>
+            <p className="lead">
+              Shape a component, preview responsive states in real-time, inspect clean TSX code, and launch into the live Sandpack IDE.
+            </p>
+            <Suspense fallback={<div className="route-loading" role="status">Loading playground…</div>}>
+  <HomePlaygroundPreview onNavigate={() => navigateToPage('/playground')} />
+</Suspense>
           </div>
         </section>
 
-        <section className="section-block reveal">
+
+        {/* MNC Engineers Marquee Animation Loop (Right to Left & Left to Right) */}
+        <MncMarqueeTicker />
+
+        <section id="theme" className="section-block reveal">
           <div className="wrap">
-            <span className="eyebrow">Theme system</span>
+            <span className="eyebrow">TOKEN LABORATORY</span>
             <h2>Configure the visual language to fit your product.</h2>
-            <p className="lead">One shared theme keeps the site, previews, and controls in sync. Switch between a deep obsidian canvas and a warm, understated light surface.</p>
-            <div className="swatch-row" aria-label="Color palette picker">
-              {themeTokens.map((token) => (
-                <button
-                  key={token}
-                  type="button"
-                  className="swatch"
-                  style={{ background: token }}
-                  aria-label={`Set primary ${token}`}
-                  onClick={() => {
-                    rootRef.current?.style.setProperty('--accent', token)
-                  }}
-                />
-              ))}
-            </div>
+            <p className="lead">
+              One shared token store keeps your site, previews, and primitives in sync. Switch between deep obsidian and warm ivory, customize radiant accents, and export clean JSON tokens.
+            </p>
+            <HomeThemeStudio
+              currentTheme={theme}
+              accentColor={accentColor}
+              onToggleTheme={toggleTheme}
+              onSelectAccent={(token) => {
+                applyAccent(token)
+              }}
+            />
           </div>
         </section>
+
+
+        {/* DaisyUI-Inspired Mockup, KPI, FAQ, and CTA Sections */}
+        <TestimonialCarousel />
+        <DaisyUiShowcaseSections
+          onNavigateToComponents={navigateToComponents}
+          onNavigateToPlayground={() => navigateToPage('/playground')}
+        />
 
         <section id="creator" className="section-block creator-block reveal">
           <div className="wrap creator-wrap">
@@ -485,22 +672,22 @@ function App() {
             <DotPortrait theme={theme} />
           </div>
         </section>
+
           </>
         )}
+        {/* </Suspense> */}
         </motion.div>
       </main>
-      <footer className="site-footer">
-        <div className="wrap site-footer-inner">
-          <a href="/" className="footer-brand" onClick={(event) => { event.preventDefault(); navigateToPage('/') }}><img src={theme === 'light' ? lightLogo : darkLogo} alt="" /><span>Thoughtful interfaces, built to move.</span></a>
-          <nav aria-label="Footer navigation">
-            <a href="/system" onClick={(event) => { event.preventDefault(); navigateToPage('/system') }}>System</a>
-            <a href="/components" onClick={(event) => { event.preventDefault(); navigateToComponents() }}>Components</a>
-            <a href="/playground" onClick={(event) => { event.preventDefault(); navigateToPage('/playground') }}>Playground</a>
-            <a href="/about" onClick={(event) => { event.preventDefault(); navigateToPage('/about') }}>About</a>
-          </nav>
-          <span className="footer-copyright">© {new Date().getFullYear()} AtellixUI · Made by Uditya Pal</span>
-        </div>
-      </footer>
+      <Footer
+        theme={theme}
+        onNavigate={(path) => {
+          if (path === '/components') {
+            navigateToComponents()
+          } else {
+            navigateToPage(path as '/' | '/themes' | '/playground' | '/system' | '/about')
+          }
+        }}
+      />
     </div>
     </MotionConfig>
   )

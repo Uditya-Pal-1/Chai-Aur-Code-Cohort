@@ -1,21 +1,43 @@
-# AtellixUI Backend
+# AtellixUI Backend Service
 
-This directory is an incomplete Express scaffold for [AtellixUI](../README.md), not a working backend service.
+Production-ready modular REST API and Component Registry Service for [AtellixUI](../README.md).
 
-## Current state
+## Features
 
-- `index.js` imports Express but does not create an application, register routes, or listen on a port.
-- No API endpoints, authentication, database models, or registry functionality are implemented.
-- `package.json` has no start or development script. Its `test` script runs `nodemon index.js`; it does not run automated tests and does not start a useful server.
+- **Express 5** application with ES modules (`type: module`).
+- **Resilient MongoDB Connection** via Mongoose with automatic fallback mode if MongoDB is offline.
+- **RESTful Endpoints**:
+  - `GET /`: API overview & available endpoints.
+  - `GET /api/health`: Server health check, uptime, memory, and database status.
+  - `POST /api/contact`: Validated project inquiries with rate limiting and database/in-memory persistence.
+  - `GET /api/contact`: List inquiries (for dashboard / admin review).
+  - `GET /api/registry`: Component list with tier, categories, tokens, and dependencies.
+  - `GET /r/:component.json`: CLI distribution endpoint (`npx atellix add <component>`) matching PRD v2.1.
+- **Security & Reliability**:
+  - Security headers (`X-Content-Type-Options`, `X-Frame-Options`, `X-XSS-Protection`, etc.).
+  - CORS configuration with origin allow-list.
+  - In-memory rate limiting on contact submissions.
+  - Standardized JSON error response handler.
+  - Graceful shutdown handling (`SIGTERM` / `SIGINT`).
 
-The MongoDB, Express/TypeScript API, registry, and AI-generation components in [PRD v2.1](../AtellixUI%20PRD%20v2.1.md) are planned architecture, not current functionality.
+## Getting Started
 
-## Dependencies
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-The package manifest lists Express, Mongoose, JWT, cookie parsing, CORS, bcrypt, and Nodemailer. Installing these packages alone does not configure or provide the planned API.
+2. Copy the sample environment file:
+   ```bash
+   cp .env.sample .env
+   ```
 
-```bash
-npm install
-```
+3. Run in development mode with nodemon:
+   ```bash
+   npm run dev
+   ```
 
-Before using this backend, implement and document an application entry point, configuration, routes, persistence, and suitable start and test scripts. Do not add real credentials to the repository.
+4. Run in production:
+   ```bash
+   npm start
+   ```

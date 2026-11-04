@@ -24,8 +24,8 @@ These links are included in the product experience and source documentation so t
 
 | Area | Present in this repository | Not implemented yet |
 | --- | --- | --- |
-| Frontend | Vite, React, TypeScript, Tailwind CSS, landing page, dedicated `/system` and `/about` pages, shared footer, searchable `/components` library with 55 interactive previews in `Frontend/src/components/ui`, configurable `/playground` with responsive interactive previews, Sandpack live React editor, and copyable JSX, Framer Motion transitions, animated mobile navigation, and theme-aware surfaces | Production design-token package, documented distribution registry, and visual drag-and-drop editor |
-| Backend | Express dependency and an entry file that imports Express | Running API, routes, authentication, MongoDB models, registry, and AI generation |
+| Frontend | Vite, React, TypeScript, Tailwind CSS, landing page, dedicated `/system` and `/about` pages, shared footer, searchable `/components` library with 67 interactive previews in `Frontend/src/components/ui`, configurable `/playground` with responsive interactive previews, Sandpack live React editor, and copyable JSX, Framer Motion transitions, animated mobile navigation, and theme-aware surfaces | Production design-token package, documented distribution registry, and visual drag-and-drop editor |
+| Backend | Modular Express REST API, resilient MongoDB connection with offline fallback, `/api/health`, `/api/contact` with rate limiting, and `/r/:component.json` CLI distribution | Full JWT user auth and hosted AI generator |
 | Product plan | Component tiers, CLI/MCP distribution, Studio, and extension plans in the PRDs | The planned monorepo packages, CLI, MCP server, and browser extension |
 
 ## Getting started
@@ -50,7 +50,14 @@ The development server URL is printed by Vite. The page is an interactive produc
 
 ### Backend
 
-The backend is not yet a runnable API. Its `index.js` only imports Express, and its package does not define a server start script. Do not treat the existing `npm test` script as a test suite; it starts `nodemon` against that incomplete entry point.
+Run the backend from `Projects/AtellixUI/Backend`:
+
+```bash
+npm install
+npm run dev   # or npm start
+```
+
+The API provides `/api/health`, `/api/contact`, and the `/r/:component.json` registry endpoint. It connects to MongoDB when available and operates in an in-memory fallback mode when offline.
 
 ## Repository layout
 
