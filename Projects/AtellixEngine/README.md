@@ -1,155 +1,98 @@
 # AtellixEngine
 
-**A planned collaborative browser-based development workspace for software engineering teams.**
+**A candidate-first technical interview platform for engineering teams.**
 
-> **Project status:** Concept / planning. This folder currently contains product documentation only; there is no implemented editor, collaboration service, AI integration, or code-execution environment here.
+AtellixEngine is being shaped around practical coding interviews, real collaboration, and clear interviewer feedback. The product direction takes cues from live coding interview tools while keeping its own focus on a calm, human interview experience.
 
-## Overview
-
-AtellixEngine is intended to bring collaborative code editing, team workspaces, AI-assisted development, and isolated code execution into a browser-based environment. The long-term direction is to reduce setup friction for software teams while preserving clear boundaries between users, projects, AI providers, and untrusted code.
-
-The first product should validate the shared editing and workspace experience before expanding into hosted development environments or autonomous AI agents.
-
-## Intended users
-
-- Software engineering teams collaborating on code and prototypes.
-- Educators or project groups who need a shared development environment.
-- Individual developers who want to start or review a project without configuring a local toolchain.
+> **Project status:** The React marketing site, account flows, blog, legal draft pages, and existing code-practice API are in development. Live interview rooms, scheduling, realtime collaboration, interviewer notes, and hiring workflows are not implemented yet. Marketing workspace panels are illustrative UI.
 
 ## Product principles
 
-1. **Collaboration must be understandable.** Users should see who is editing, whether changes are saved, and how concurrent edits are reconciled.
-2. **The project remains under user control.** AI suggestions are reviewable, attributable, and reversible; generated changes are never silently applied.
-3. **Code execution is untrusted by default.** User code must run in a strongly isolated environment with explicit resource and network limits.
-4. **Privacy is part of the workspace boundary.** Project membership governs access to files, presence, execution output, and AI context.
-5. **Reliability takes precedence over novelty.** Saving, recovery, and clear failure handling must work before advanced AI workflows are added.
-6. **Security is designed in.** Threat modeling, dependency hygiene, auditability, and incident response are launch requirements.
+- **Show real engineering work.** Use practical prompts and give candidates room to clarify, discuss, and explain tradeoffs.
+- **Keep the interview human.** Tools should support a good conversation rather than turn it into a speed test.
+- **Make feedback useful.** Help interview teams record observations consistently and compare evidence against role needs.
+- **Protect workspace boundaries.** Access to prompts, candidate work, notes, and results must be scoped to the right people.
+- **Be clear about product status.** Draft legal pages and illustrative screens are identified as such until they reflect the production service.
 
-## Proposed MVP
+## Current implementation
 
-### Workspace and editing
+### Frontend
 
-- Create a workspace and invite collaborators with explicit roles.
-- Create, open, and edit text files in a browser-based editor.
-- Save changes durably and communicate save status to each participant.
-- Support concurrent editing using a well-tested collaboration strategy, such as CRDTs or operational transformation, selected after prototyping.
-- Display collaborator presence and file-level activity without exposing data to unauthorized users.
-- Recover gracefully from reconnects and transient service failures.
+- React 19, Vite 8, Tailwind CSS 4, React Router, and Lucide icons.
+- Black and orange visual system, responsive layouts, Framer Motion transitions, and a lazy-loaded Three.js hero scene.
+- Account registration, sign-in, session restoration, and sign-out connected to the API.
+- Product, solutions, pricing, blog index and articles, privacy, terms, and security pages.
+- Legal page copy is a planning draft and must be reviewed against production data flows before launch.
 
-### AI assistance
+### Backend
 
-- Stream assistant responses with visible generation and completion states.
-- Provide selected, minimal project context only when needed for a user-requested operation.
-- Present code edits as a diff or proposal for user review and acceptance.
-- Enforce the same workspace permissions for AI context retrieval as for ordinary file access.
-- Make provider errors, timeouts, and usage limits visible and provide a usable non-AI path.
+- Node.js and Express 5 API with MongoDB through Mongoose.
+- Cookie-based JWT authentication and role-protected problem authoring.
+- Coding problem, Judge0 execution, submission history, solved-problem, and playlist endpoints.
+- Existing code-practice backend work remains available; live interview session APIs still need to be built.
 
-### Code execution
+### Routes
 
-- Run supported commands only in short-lived, isolated execution environments.
-- Apply CPU, memory, storage, process, and wall-clock limits.
-- Restrict network access by default and provide no access to host credentials or workspace secrets.
-- Capture output and execution status without allowing one run to interfere with another user's environment.
-- Terminate and clean up the execution environment after its lifetime or on explicit cancellation.
+| Route | Purpose |
+| --- | --- |
+| `/` | Product landing page |
+| `/platform`, `/solutions`, `/pricing` | Product information |
+| `/blog`, `/blog/:slug` | Editorial pages |
+| `/privacy`, `/terms`, `/security` | Legal and security drafts |
+| `/login`, `/signup` | Account access |
+| `/workspace` | Signed-in account landing page |
 
-## Out of scope for the first release
+## Run locally
 
-- General-purpose hosted cloud development environments with persistent machine state.
-- Autonomous agents that modify files, run commands, or deploy code without user approval.
-- Public execution of arbitrary code without a completed security review and abuse controls.
-- Production hosting, secret management, or deployment pipelines.
-- Claims of end-to-end confidentiality until the complete infrastructure and provider data flows support them.
+### API
 
-## Typical workflow
-
-1. A team member creates a workspace and grants access to collaborators.
-2. Collaborators edit files and see save and presence state.
-3. A user requests AI help; the workspace checks permissions and supplies only relevant context.
-4. The assistant streams a suggestion, which the user reviews as a diff before applying.
-5. A user starts an execution; the system runs it in an isolated, resource-limited environment and returns output.
-6. The workspace records the outcome and safely expires temporary execution resources.
-
-## Proposed architecture
-
-This diagram is a planning model, not a description of deployed services.
-
-```mermaid
-flowchart LR
-    Browser[Browser workspace] --> API[Workspace API]
-    Browser <-->|WebSocket collaboration| Realtime[Realtime collaboration service]
-    API --> Auth[Identity and workspace permissions]
-    API --> Files[Versioned file storage]
-    Realtime --> State[Collaboration state and presence]
-    API --> AI[AI gateway]
-    AI --> Provider[External model provider]
-    API --> Queue[Execution queue]
-    Queue --> Runner[Isolated ephemeral runner]
-    Runner --> Results[Execution output and status]
+```bash
+cd backend
+npm install
 ```
 
-### Proposed technology choices
+Copy `.env.sample` to `.env`, then set:
 
-| Area | Proposed direction |
-| --- | --- |
-| Client | Browser-based editor with accessible controls and resilient reconnect behavior |
-| Realtime | WebSocket transport with a CRDT or operational-transformation library |
-| API | Authenticated, versioned service with workspace-scoped authorization |
-| Persistence | Durable file/version storage and separately managed collaboration state |
-| AI | Provider gateway with context minimization, streaming, quotas, and schema validation |
-| Execution | Ephemeral sandbox or microVM/container isolation evaluated for the threat model |
-| Operations | Metrics, tracing, structured logs, capacity limits, backups, and incident procedures |
+```env
+PORT=8080
+MONGODB_URI=mongodb://127.0.0.1:27017/atellixengine
+JWT_SECRET=replace-with-a-long-random-secret
+JUDGE0_API_URL=http://your-judge0-host
+```
 
-Technology selection requires prototypes and a security review. A container alone must not be assumed to provide sufficient isolation for hostile code.
+Start MongoDB and Judge0, then run:
 
-## Security and privacy requirements
+```bash
+npm run dev
+```
 
-Before enabling shared workspaces or code execution:
+### Frontend
 
-- Define workspace roles and enforce authorization on every API, WebSocket, file, AI, and execution operation.
-- Authenticate WebSocket connections, authorize room membership, validate messages, and limit connection and message rates.
-- Protect against cross-workspace data leakage in collaboration state, logs, search, AI context, and execution results.
-- Run user code with least privilege, no host mounts, no privileged mode, no ambient credentials, strict quotas, and default-deny network policy.
-- Prevent sandbox escape paths through kernel, runtime, dependency, and image updates; maintain a vulnerability response process.
-- Store secrets outside source files and never pass workspace secrets to AI providers or execution environments by default.
-- Define retention, access, and deletion rules for code, prompts, generated content, execution logs, and backups.
-- Add abuse prevention, resource quotas, cancellation, and audit events for sensitive workspace and execution actions.
-- Threat-model prompt injection and malicious files; treat repository content as untrusted input to AI systems.
-- Publish clear provider disclosures and avoid making confidentiality guarantees that the implementation cannot meet.
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-## Reliability and operational expectations
+Vite proxies `/api` to `http://localhost:8080`. Set `VITE_API_BASE_URL` in `frontend/.env` only when the API is hosted elsewhere.
 
-- Make file persistence and collaboration recovery behavior explicit and testable.
-- Monitor connection success, edit propagation, save latency, error rates, runner queue time, and execution cleanup.
-- Bound WebSocket connections, room sizes, message sizes, AI output, and execution duration.
-- Provide graceful behavior during AI provider outages and runner capacity exhaustion.
-- Document backup, restore, incident response, and service recovery procedures before production use.
+## API overview
 
-## Roadmap
+- `POST /api/v1/auth/register`, `POST /api/v1/auth/login`, `POST /api/v1/auth/logout`, `GET /api/v1/auth/check`
+- `/api/v1/problems` for problem browse, authoring, and solved status
+- `POST /api/v1/execute-code` for Judge0 submissions
+- `/api/v1/submission` for the signed-in user's submission history
+- `/api/v1/playlist` for personal problem collections
+- `GET /api/health` for service health
 
-- [ ] Validate collaboration and browser-workspace needs with target teams.
-- [ ] Prototype concurrent editing and define conflict, persistence, and recovery semantics.
-- [ ] Specify workspace roles, threat model, data boundaries, and abuse controls.
-- [ ] Build a non-AI shared editing prototype with durable save and reconnect handling.
-- [ ] Add streaming AI suggestions with permission-aware context and reviewable diffs.
-- [ ] Evaluate and red-team isolated execution before exposing it to users.
-- [ ] Pilot with a limited group and measure reliability, usability, and operating costs.
-- [ ] Consider hosted development environments and agent workflows only after the core platform is secure and dependable.
+## MongoDB migration note
 
-## Success measures
+The application code now uses MongoDB/Mongoose. Historical Prisma schema and migration files are retained as reference; they are not used at runtime. Moving existing PostgreSQL records into MongoDB is a separate data migration and has not been run. Back up and migrate existing data before replacing a database that contains user records.
 
-Potential measures to validate during a pilot include:
+## Before a public launch
 
-- Time to create a workspace and make the first saved edit.
-- Edit propagation latency and successful recovery after disconnects.
-- Save durability and collaboration error rates under representative concurrency.
-- AI suggestion review and acceptance rates, measured alongside user-reported usefulness.
-- Execution completion, queue time, resource use, and cleanup success.
-- Security findings, abuse rates, and cross-workspace authorization test results.
-
-Do not optimize for AI usage or execution volume at the expense of user control, security, or workspace reliability.
-
-## Development and contribution
-
-No application setup or run commands are provided because this folder does not currently contain an implemented application. When implementation begins, document required tooling, local services, environment variables without secrets, test and security-check commands, supported execution limits, deployment, and incident reporting.
-
-Contributions that affect collaboration protocols, permission boundaries, AI context, or code execution should include tests and document their security and operational implications.
+- Implement and threat-model live interview rooms, scheduling, access controls, and candidate-data retention.
+- Validate the execution provider and isolate untrusted code beyond the current external Judge0 dependency.
+- Add rate limiting, email verification and recovery, operational monitoring, backups, and restore procedures.
+- Review privacy, terms, security, and pricing against the actual company, vendors, features, and jurisdictions.
+- Verify accessibility, responsive behavior, API authorization, and production deployment settings.
