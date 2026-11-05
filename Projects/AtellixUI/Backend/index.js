@@ -8,6 +8,8 @@ import { errorHandler, notFoundHandler } from './middlewares/errorHandler.js'
 import healthRoutes from './routes/healthRoutes.js'
 import contactRoutes from './routes/contactRoutes.js'
 import registryRoutes from './routes/registryRoutes.js'
+import accountRoutes from './routes/accountRoutes.js'
+import reviewRoutes from './routes/reviewRoutes.js'
 import { getComponent } from './controllers/registryController.js'
 
 // Load environment variables
@@ -55,6 +57,8 @@ app.get('/', (req, res) => {
       health: '/api/health',
       contact: '/api/contact',
       registry: '/api/registry',
+      accounts: '/api/account',
+      reviews: '/api/reviews',
       cliRegistry: '/r/:component.json',
     },
   })
@@ -67,6 +71,8 @@ app.get('/r/:name', getComponent)
 app.use('/api/health', healthRoutes)
 app.use('/api/contact', contactRoutes)
 app.use('/api/registry', registryRoutes)
+app.use('/api/account', accountRoutes)
+app.use('/api/reviews', reviewRoutes)
 
 // 404 & Global Error Handlers
 app.use(notFoundHandler)

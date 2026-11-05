@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState, type ReactNode } from 'react'
 import { Search, X } from 'lucide-react'
 import type { Theme } from './ui/types'
 import { categoryList, components, featuredIds, previewFiles, type ComponentId } from '../data/componentCatalog'
+import MotionShowcasePreview from './ui/MotionShowcasePreview'
 
 const componentSources = import.meta.glob<string>('./ui/*Preview.tsx', {
   query: '?raw',
@@ -15,6 +16,7 @@ const AdvancedDropzonePreview = lazy(() => import('./ui/AdvancedDropzonePreview'
 const AdvancedTablePreview = lazy(() => import('./ui/AdvancedTablePreview'))
 const AppCardPreview = lazy(() => import('./ui/AppCardPreview'))
 const BentoLayoutPreview = lazy(() => import('./ui/BentoLayoutPreview'))
+const BorderBeamCardPreview = lazy(() => import('./ui/BorderBeamCardPreview'))
 const BookLibraryPreview = lazy(() => import('./ui/BookLibraryPreview'))
 const BreadcrumbsPreview = lazy(() => import('./ui/BreadcrumbsPreview'))
 const CalculatorPreview = lazy(() => import('./ui/CalculatorPreview'))
@@ -42,6 +44,7 @@ const GlassNavbarPreview = lazy(() => import('./ui/GlassNavbarPreview'))
 const HamburgerMenuPreview = lazy(() => import('./ui/HamburgerMenuPreview'))
 const HeroLayoutPreview = lazy(() => import('./ui/HeroLayoutPreview'))
 const ImageCarouselPreview = lazy(() => import('./ui/ImageCarouselPreview'))
+const ImageBentoPreview = lazy(() => import('./ui/ImageBentoPreview'))
 const InteractiveControlsPreview = lazy(() => import('./ui/InteractiveControlsPreview'))
 const KanbanBoardPreview = lazy(() => import('./ui/KanbanBoardPreview'))
 const MarkdownPreview = lazy(() => import('./ui/MarkdownPreview'))
@@ -204,6 +207,28 @@ export default function ComponentGallery({ theme, onToggleTheme, mode, initialId
     'responsive-grid': <ResponsiveMetricGridPreview />,
     'user-info': <UserInfoCardPreview />,
     'interactive-controls': <InteractiveControlsPreview />,
+    'image-bento': <ImageBentoPreview />,
+    'beam-card': <BorderBeamCardPreview />,
+    'motion-shimmer-button': <MotionShowcasePreview effect="shimmer-button" />,
+    'motion-glow-card': <MotionShowcasePreview effect="glow-card" />,
+    'motion-text-reveal': <MotionShowcasePreview effect="text-reveal" />,
+    'motion-spotlight': <MotionShowcasePreview effect="spotlight-card" />,
+    'motion-magnetic-button': <MotionShowcasePreview effect="magnetic-button" />,
+    'motion-tilt-card': <MotionShowcasePreview effect="tilt-card" />,
+    'motion-parallax-stack': <MotionShowcasePreview effect="parallax-stack" />,
+    'motion-gradient-border': <MotionShowcasePreview effect="gradient-border" />,
+    'motion-orbit-icons': <MotionShowcasePreview effect="orbit-icons" />,
+    'motion-marquee': <MotionShowcasePreview effect="marquee-text" />,
+    'motion-blur-fade': <MotionShowcasePreview effect="blur-fade" />,
+    'motion-spring-badge': <MotionShowcasePreview effect="spring-badge" />,
+    'motion-ripple-button': <MotionShowcasePreview effect="ripple-button" />,
+    'motion-floating-dock': <MotionShowcasePreview effect="floating-dock" />,
+    'motion-beam-path': <MotionShowcasePreview effect="beam-path" />,
+    'motion-skeleton': <MotionShowcasePreview effect="skeleton-shimmer" />,
+    'motion-counter': <MotionShowcasePreview effect="counter-up" />,
+    'motion-typewriter': <MotionShowcasePreview effect="typewriter" />,
+    'motion-tabs': <MotionShowcasePreview effect="animated-tabs" />,
+    'motion-confetti': <MotionShowcasePreview effect="confetti-burst" />,
   }
   const sourcePath = `./ui/${previewFiles[activeId]}`
   const sourceText = source?.id === activeId

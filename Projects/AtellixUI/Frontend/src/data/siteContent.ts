@@ -7,9 +7,9 @@ export const productFeatures = [
   },
   {
     category: 'INTEGRATION',
-    title: 'AI-native workflow',
+    title: 'AI-ready component catalog',
     description:
-      'AtellixUI is structured for MCP-aware generation pipelines, agent-assisted authoring, and design-to-code handoff.',
+      'The component catalog supports local pattern discovery today and can serve as a foundation for the MCP and generation tools planned in PRD v2.1.',
   },
   {
     category: 'INTERACTION',

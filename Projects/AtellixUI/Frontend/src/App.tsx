@@ -1,16 +1,13 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
-import { ArrowUpRight, ChevronDown, Code2, Command, Menu, Search, X } from 'lucide-react'
+import { ArrowUpRight, ChevronDown, Code2, Command, Menu, Search, ShoppingBag, X } from 'lucide-react'
 import { MotionConfig, motion } from 'framer-motion'
 import lightLogo from './assets/atellix-logo.webp'
 import darkLogo from './assets/atellix-logo-dark-transparent.webp'
-import ErrorBoundary from './components/ErrorBoundary'
 import Footer from './components/Footer'
-import ThreeHeroScene from './components/ThreeHeroScene'
-import MncMarqueeTicker from './components/MncMarqueeTicker'
 import HomePlaygroundPreview from './components/HomePlaygroundPreview'
 import HomeThemeStudio from './components/HomeThemeStudio'
-import TestimonialCarousel from './components/TestimonialCarousel'
-import DaisyUiShowcaseSections from './components/DaisyUiShowcaseSections'
+import ReviewsSection from './components/ReviewsSection'
+import ProductPages, { type CartProduct } from './components/ProductPages'
 import { creatorLinks, productFeatures } from './data/siteContent'
 import { components as componentCatalog } from './data/componentCatalog'
 import './App.css'
@@ -20,6 +17,7 @@ const ComponentGallery = lazy(() => import('./components/ComponentGallery'))
 const DotPortrait = lazy(() => import('./components/DotPortrait'))
 const Playground = lazy(() => import('./components/Playground'))
 const SystemPage = lazy(() => import('./components/SystemPage'))
+const SplineScene = lazy(() => import('./components/SplineScene'))
 
 const searchablePages = [
   { label: 'Components', description: 'Browse the interactive component library', path: '/components' },
@@ -27,6 +25,14 @@ const searchablePages = [
   { label: 'Playground', description: 'Preview components and inspect the code', path: '/playground' },
   { label: 'Design system', description: 'Explore accessibility, spacing, and type', path: '/system' },
   { label: 'About AtellixUI', description: 'Learn about the project and its creator', path: '/about' },
+  { label: 'Blocks and templates', description: 'Browse copyable page products', path: '/shop' },
+  { label: 'Pricing', description: 'Compare AtellixUI plans', path: '/pricing' },
+  { label: 'Journal', description: 'Read design engineering notes', path: '/blog' },
+  { label: 'AI Studio', description: 'Get local suggestions from Atellix patterns', path: '/ai-studio' },
+  { label: 'Business services', description: 'Get help applying a design system', path: '/business' },
+  { label: 'Privacy policy', description: 'How account and review data are handled', path: '/privacy' },
+  { label: 'Terms of use', description: 'Terms for the AtellixUI prototype', path: '/terms' },
+  { label: 'License and copyright', description: 'Usage rights and attribution', path: '/license' },
   { label: 'Home', description: 'Return to the AtellixUI overview', path: '/' },
 ] as const
 
@@ -35,14 +41,12 @@ function App() {
   const [accentColor, setAccentColor] = useState('#ff8a3d')
   const [copied, setCopied] = useState(false)
   const [copyFailed, setCopyFailed] = useState(false)
-  const [page, setPage] = useState<'home' | 'themes' | 'components' | 'playground' | 'system' | 'about'>(() => {
+  const [page, setPage] = useState<string>(() => {
     const path = window.location.pathname.replace(/\/+$/, '')
-    if (path === '/themes') return 'themes'
-    if (path === '/components') return 'components'
-    if (path === '/playground') return 'playground'
-    if (path === '/system') return 'system'
-    if (path === '/about') return 'about'
-    return 'home'
+    return path ? path.slice(1) : 'home'
+  })
+  const [cart, setCart] = useState<CartProduct[]>(() => {
+    try { return JSON.parse(localStorage.getItem('atellix-cart') ?? '[]') as CartProduct[] } catch { return [] }
   })
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const [quickSearchOpen, setQuickSearchOpen] = useState(false)
@@ -87,16 +91,13 @@ function App() {
   }, [theme])
 
   useEffect(() => {
+    localStorage.setItem('atellix-cart', JSON.stringify(cart))
+  }, [cart])
+
+  useEffect(() => {
     const syncPage = () => {
       const path = window.location.pathname.replace(/\/+$/, '')
-      setPage(
-        path === '/themes' ? 'themes'
-          : path === '/components' ? 'components'
-          : path === '/playground' ? 'playground'
-            : path === '/system' ? 'system'
-              : path === '/about' ? 'about'
-                : 'home',
-      )
+      setPage(path ? path.slice(1) : 'home')
       setSelectedComponent(new URLSearchParams(window.location.search).get('component') ?? undefined)
       setMobileNavOpen(false)
     }
@@ -106,7 +107,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const titles = {
+    const titles: Record<string, string> = {
       home: 'AtellixUI — Thoughtful React Components',
       themes: 'Themes — AtellixUI',
       components: 'Components — AtellixUI',
@@ -114,7 +115,8 @@ function App() {
       system: 'Design System — AtellixUI',
       about: 'About — AtellixUI',
     }
-    document.title = titles[page]
+    const readablePage = page.startsWith('blog/') ? 'Journal' : page.replaceAll('-', ' ').replace(/\b\w/g, (letter) => letter.toUpperCase())
+    document.title = titles[page] ?? (page === 'home' ? 'AtellixUI — Thoughtful React Components' : `${readablePage} — AtellixUI`)
   }, [page])
 
   useEffect(() => {
@@ -166,17 +168,19 @@ function App() {
     }
   }, [page])
 
-  const handleCopy = async (text: string) => {
+  const handleCopy = async (text: string): Promise<boolean> => {
     try {
       await navigator.clipboard.writeText(text)
       setCopied(true)
       setCopyFailed(false)
       window.setTimeout(() => setCopied(false), 1200)
+      return true
     } catch (error) {
       console.error('Unable to copy the development command:', error)
       setCopied(false)
       setCopyFailed(true)
       window.setTimeout(() => setCopyFailed(false), 2400)
+      return false
     }
   }
 
@@ -204,18 +208,27 @@ function App() {
     if (resourcesMenuRef.current) resourcesMenuRef.current.open = false
   }
 
-  const navigateToPage = (path: '/' | '/themes' | '/playground' | '/system' | '/about') => {
+  const navigateToPage = (path: string) => {
     window.history.pushState({}, '', path)
-    setPage(
-      path === '/' ? 'home'
-        : path === '/themes' ? 'themes'
-        : path === '/playground' ? 'playground'
-          : path === '/system' ? 'system'
-            : 'about',
-    )
+    const pathname = new URL(path, window.location.href).pathname.replace(/\/+$/, '')
+    setPage(pathname ? pathname.slice(1) : 'home')
     setMobileNavOpen(false)
     if (resourcesMenuRef.current) resourcesMenuRef.current.open = false
     window.scrollTo({ top: 0, behavior: 'instant' })
+  }
+
+  const addToCart = (product: CartProduct) => setCart((current) => {
+    return current.some((item) => item.id === product.id) ? current : [...current, product]
+  })
+  const removeFromCart = (id: string) => setCart((current) => {
+    return current.filter((item) => item.id !== id)
+  })
+  const handleProductNavigate = (path: string) => {
+    if (path.startsWith('/components?component=')) {
+      navigateToComponents(path.split('=')[1])
+      return
+    }
+    navigateToPage(path)
   }
 
   const updateCardGlow = (event: React.PointerEvent<HTMLDivElement>) => {
@@ -278,6 +291,11 @@ function App() {
                   event.preventDefault()
                   navigateToPage('/about')
                 }}>About AtellixUI <span>Project and creator</span></a>
+                <a href="/shop" onClick={(event) => { event.preventDefault(); navigateToPage('/shop') }}>Blocks &amp; templates <span>Copyable product pages</span></a>
+                <a href="/blog" onClick={(event) => { event.preventDefault(); navigateToPage('/blog') }}>Journal <span>Design engineering notes</span></a>
+                <a href="/ai-studio" onClick={(event) => { event.preventDefault(); navigateToPage('/ai-studio') }}>Studio assistant <span>Pattern discovery prototype</span></a>
+                <a href="/pricing" onClick={(event) => { event.preventDefault(); navigateToPage('/pricing') }}>Pricing <span>Free core, planned bundles</span></a>
+                <a href="/business" onClick={(event) => { event.preventDefault(); navigateToPage('/business') }}>Business help <span>System setup and implementation</span></a>
               </div>
             </details>
           </li>
@@ -347,11 +365,15 @@ function App() {
           <span className="theme-toggle-label">{theme === 'dark' ? 'Light' : 'Dark'}</span>
         </button>
 
-        <a className="nav-cta" href="/themes" onClick={(event) => {
+        <a className="nav-search-trigger" href="/cart" aria-label={`Open cart with ${cart.length} items`} onClick={(event) => { event.preventDefault(); navigateToPage('/cart') }}>
+          <ShoppingBag size={15} aria-hidden="true" /><span>Cart{cart.length ? ` · ${cart.length}` : ''}</span>
+        </a>
+
+        <a className="nav-cta" href="/shop" onClick={(event) => {
           event.preventDefault()
-          navigateToPage('/themes')
+          navigateToPage('/shop')
         }}>
-          <span>Explore themes</span>
+          <span>Explore blocks</span>
           <span aria-hidden="true">↗</span>
         </a>
       </nav>
@@ -535,6 +557,8 @@ function App() {
             </div>
           </section>
 
+        ) : page !== 'home' ? (
+          <ProductPages page={page} cart={cart} onAddToCart={addToCart} onRemoveFromCart={removeFromCart} onNavigate={handleProductNavigate} onCopy={handleCopy} />
         ) : (
           <>
           <section className="hero">
@@ -547,11 +571,10 @@ function App() {
                 <span>01 / 04</span>
               </div>
               <h1>
-                A sharper standard for <em>digital interfaces.</em>
+                A thoughtful starting point for <em>better interfaces.</em>
               </h1>
               <p className="sub">
-                AtellixUI brings considered design tokens, useful React components, and restrained
-                motion into one cohesive system.
+                Explore working React patterns, tune shared design tokens, and copy a clear starting point for your next product interface.
               </p>
 
               <div className="row">
@@ -571,12 +594,34 @@ function App() {
             </div>
 
             <div className="hero-visual reveal">
-              <div className="hero-art" role="img" aria-label="Abstract orange-accented 3D component stack">
+              <div className="hero-art">
                 <div className="hero-art-glow" />
-                <ErrorBoundary name="ThreeHeroScene">
-                  <ThreeHeroScene />
-                </ErrorBoundary>
-                <span className="art-index mono">ATX <span>—</span> 001</span>
+                <div className="relative isolate h-[min(68vw,490px)] min-h-[350px] w-full overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950 shadow-2xl shadow-orange-950/20">
+                  <img
+                    src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=85"
+                    alt="A designer working on a laptop in a sunlit studio"
+                    className="absolute inset-0 h-full w-full object-cover object-center opacity-75 transition duration-700 hover:scale-[1.03]"
+                    fetchPriority="high"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-zinc-950 via-zinc-950/35 to-transparent" />
+                  <div className="absolute right-5 top-5 z-10 size-24 overflow-hidden rounded-2xl border border-white/15 bg-zinc-950/60 shadow-xl backdrop-blur sm:right-8 sm:top-8 sm:size-32">
+                    <Suspense fallback={<span className="grid h-full place-items-center text-xs text-orange-200">3D scene</span>}><SplineScene /></Suspense>
+                    <a href="https://spline.design/" target="_blank" rel="noreferrer" aria-label="Open Spline" className="absolute inset-x-0 bottom-0 bg-zinc-950/75 px-2 py-1 text-center text-[9px] text-white/65">Interactive 3D</a>
+                  </div>
+                  <div className="absolute inset-x-5 bottom-5 rounded-2xl border border-white/15 bg-zinc-950/70 p-5 shadow-xl backdrop-blur-xl sm:inset-x-8 sm:bottom-8 sm:p-6">
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        <span className="mb-2 block font-mono text-[10px] uppercase tracking-[0.22em] text-orange-300">Made for the work</span>
+                        <p className="m-0 text-lg font-semibold tracking-tight text-white sm:text-2xl">Thoughtful details. Real products.</p>
+                      </div>
+                      <span className="grid size-11 shrink-0 place-items-center rounded-full border border-orange-300/40 text-orange-200" aria-hidden="true">↗</span>
+                    </div>
+                    <div className="mt-5 flex flex-wrap items-center justify-between gap-2 text-xs text-white/65">
+                      <span className="flex items-center gap-2"><span className="size-1.5 rounded-full bg-emerald-400" /> A component system built to move with you</span>
+                      <span className="text-[10px] text-white/45">Photo by Wenbin Sia / Unsplash</span>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="hero-visual-meta">
                 <span>Built on a token-first foundation</span>
@@ -590,11 +635,9 @@ function App() {
           <section id="system" className="section-block reveal">
           <div className="wrap">
             <span className="eyebrow">Why teams pick AtellixUI</span>
-            <h2>Built for production products, not just pretty demos.</h2>
+              <h2>Useful patterns you can explore and adapt.</h2>
             <p className="lead">
-              Modern design systems need to balance accessibility, customization, and performance.
-              AtellixUI brings those principles together in a motion-first foundation with flexible
-              component architecture.
+              Preview interactive examples, check practical accessibility details, and adjust shared tokens before bringing a pattern into your own product.
             </p>
 
             <div className="grid g3">
@@ -655,8 +698,32 @@ function App() {
         </section>
 
 
-        {/* MNC Engineers Marquee Animation Loop (Right to Left & Left to Right) */}
-        <MncMarqueeTicker />
+        <section className="section-block reveal">
+          <div className="wrap grid gap-4 sm:grid-cols-3">
+            {[
+              ['01 / Explore', 'Try component states and find a pattern that fits.'],
+              ['02 / Tune', 'Adjust colors and tokens in the live theme studio.'],
+              ['03 / Adapt', 'Inspect the source and shape it for your product.'],
+            ].map(([title, copy]) => <article key={title} className="card !p-6"><span className="eyebrow">{title}</span><p className="mb-0 mt-3 text-sm leading-6">{copy}</p></article>)}
+          </div>
+        </section>
+
+        <section className="section-block reveal">
+          <div className="wrap grid gap-4 lg:grid-cols-[1.2fr_.8fr]">
+            <article className="card !p-8 sm:!p-10">
+              <span className="eyebrow">STUDIO ASSISTANT</span>
+              <h2>Find a useful starting point, faster.</h2>
+              <p>Describe an interface need and get local suggestions from the component library. Your prompt stays in this browser in the current prototype.</p>
+              <button type="button" className="btn" onClick={() => navigateToPage('/ai-studio')}>Try the assistant <span aria-hidden="true">↗</span></button>
+            </article>
+            <article className="card !p-8 sm:!p-10">
+              <span className="eyebrow">BLOCKS &amp; TEMPLATES</span>
+              <h2>Copy a page. Make it yours.</h2>
+              <p>Explore page and section previews, copy the starter source, and save bundles to your local cart.</p>
+              <button type="button" className="btn" onClick={() => navigateToPage('/shop')}>Explore blocks <span aria-hidden="true">↗</span></button>
+            </article>
+          </div>
+        </section>
 
         <section id="theme" className="section-block reveal">
           <div className="wrap">
@@ -677,12 +744,34 @@ function App() {
         </section>
 
 
-        {/* DaisyUI-Inspired Mockup, KPI, FAQ, and CTA Sections */}
-        <TestimonialCarousel />
-        <DaisyUiShowcaseSections
-          onNavigateToComponents={navigateToComponents}
-          onNavigateToPlayground={() => navigateToPage('/playground')}
-        />
+        {/* Product contexts describe intended use cases, not customer endorsements. */}
+        <section className="section-block reveal">
+          <div className="wrap">
+            <span className="eyebrow">Designed for different kinds of work</span>
+            <h2>One foundation. Many product shapes.</h2>
+            <p className="lead">AtellixUI is being shaped for teams building across SaaS, commerce, fintech, creator tools, and developer platforms. These are product contexts we design for, not claimed customer logos.</p>
+            <div className="grid g3">
+              {[
+                ['SaaS & productivity', 'Dashboards, settings, and multi-step work flows.'],
+                ['Commerce & fintech', 'Pricing, checkout patterns, and clear data surfaces.'],
+                ['Creator & developer tools', 'Portfolios, docs, and expressive interactive pages.'],
+              ].map(([title, text]) => <article className="card" key={title}><span className="tag">PRODUCT CONTEXT</span><h3>{title}</h3><p>{text}</p></article>)}
+            </div>
+          </div>
+        </section>
+        <ReviewsSection />
+        <section className="section-block reveal">
+          <div className="wrap grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-start">
+            <div><span className="eyebrow">Common questions</span><h2>Start small. Make it yours.</h2><p className="lead">AtellixUI is an evolving component playground. Use each example as a starting point and review the code for your own product needs.</p></div>
+            <div className="grid gap-3">
+              {[
+                ['Is this a published npm package?', 'No. The current library is a website prototype with interactive examples and source previews.'],
+                ['Can I use the examples in a product?', 'Review the project license and each dependency before reuse. A final reusable component license is still being prepared.'],
+                ['Does Studio Assistant use a hosted AI?', 'No. It currently matches prompts against the local component catalog; prompts are not sent to an AI provider.'],
+              ].map(([question, answer]) => <details key={question} className="rounded-2xl border border-white/10 bg-white/[.025] p-5"><summary className="cursor-pointer font-medium marker:text-orange-300">{question}</summary><p className="mb-0 mt-3 text-sm leading-6 text-zinc-400">{answer}</p></details>)}
+            </div>
+          </div>
+        </section>
 
         <section id="creator" className="section-block creator-block reveal">
           <div className="wrap creator-wrap">
@@ -718,7 +807,7 @@ function App() {
           if (path === '/components') {
             navigateToComponents()
           } else {
-            navigateToPage(path as '/' | '/themes' | '/playground' | '/system' | '/about')
+            navigateToPage(path)
           }
         }}
       />

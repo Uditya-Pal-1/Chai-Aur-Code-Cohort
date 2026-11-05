@@ -92,12 +92,19 @@ export const Footer: FC<FooterProps> = ({ theme = 'dark', onNavigate }) => {
             <a href="/components" onClick={(event) => handleClick(event, '/components')}>Component library <ArrowUpRight size={12} aria-hidden="true" /></a>
             <a href="/themes" onClick={(event) => handleClick(event, '/themes')}>Theme studio <ArrowUpRight size={12} aria-hidden="true" /></a>
             <a href="/playground" onClick={(event) => handleClick(event, '/playground')}>Live playground <ArrowUpRight size={12} aria-hidden="true" /></a>
+            <a href="/shop" onClick={(event) => handleClick(event, '/shop')}>Blocks &amp; templates <ArrowUpRight size={12} aria-hidden="true" /></a>
+            <a href="/pricing" onClick={(event) => handleClick(event, '/pricing')}>Pricing <ArrowUpRight size={12} aria-hidden="true" /></a>
+            <a href="/blog" onClick={(event) => handleClick(event, '/blog')}>Journal <ArrowUpRight size={12} aria-hidden="true" /></a>
           </nav>
           <nav aria-label="Design resources">
             <h2>Foundations</h2>
             <a href="/system" onClick={(event) => handleClick(event, '/system')}>Design system <ArrowUpRight size={12} aria-hidden="true" /></a>
             <a href="/themes" onClick={(event) => handleClick(event, '/themes')}>Color &amp; tokens <ArrowUpRight size={12} aria-hidden="true" /></a>
             <a href="/about" onClick={(event) => handleClick(event, '/about')}>About AtellixUI <ArrowUpRight size={12} aria-hidden="true" /></a>
+            <a href="/privacy" onClick={(event) => handleClick(event, '/privacy')}>Privacy <ArrowUpRight size={12} aria-hidden="true" /></a>
+            <a href="/terms" onClick={(event) => handleClick(event, '/terms')}>Terms of use <ArrowUpRight size={12} aria-hidden="true" /></a>
+            <a href="/license" onClick={(event) => handleClick(event, '/license')}>License &amp; copyright <ArrowUpRight size={12} aria-hidden="true" /></a>
+            <a href="/copyright" onClick={(event) => handleClick(event, '/copyright')}>Copyright notice <ArrowUpRight size={12} aria-hidden="true" /></a>
           </nav>
           <nav aria-label="Connect with AtellixUI">
             <h2>Connect</h2>
