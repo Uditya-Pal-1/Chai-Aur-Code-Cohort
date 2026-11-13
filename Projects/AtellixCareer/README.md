@@ -132,6 +132,25 @@ Do not treat employment, interview, or salary outcomes as attributable to the pr
 
 ## Development and contribution
 
-No application setup or run commands are provided because this folder does not currently contain an implemented application. When implementation begins, add reproducible setup instructions, environment-variable documentation without secrets, test commands, deployment guidance, and a documented security-reporting channel.
+### Project structure
+
+```
+AtellixCareer/
+├── frontend/   # Next.js 15 + React 19 + Tailwind CSS v4 (marketing site + app UI)
+├── backend/    # Node.js + Express + MongoDB/Mongoose REST API
+└── README.md
+```
+
+### Running locally
+
+```bash
+# Frontend (http://localhost:3000)
+cd frontend && npm install && npm run dev
+
+# Backend API (http://localhost:4000) — works without a DB in demo mode
+cd backend && cp .env.example .env && npm install && npm run dev
+```
+
+See `backend/README.md` for the API endpoint reference.
 
 Contributions to product planning should keep assumptions explicit, cite sources for role frameworks, and preserve the principles and limitations described above.
