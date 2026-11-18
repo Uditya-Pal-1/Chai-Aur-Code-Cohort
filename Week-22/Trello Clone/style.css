@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: burlywood;
+}
+.board-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    /* border: 2px solid yellow; */
+    border-radius: 10px;
+    gap: 10px;
+}
+.column{
+    background-color: green;
+    width: 300px;
+    min-height: 400px;
+    padding: 20px;
+    box-shadow: 20px 20px 20px blanchedalmond;
+    border-radius: 10px;
+}
+h1 {
+    justify-self: center;
+    padding-bottom: 10px;
+}
+
+.tasks {
+    min-height: 300px;
+}
+
+.task-input{
+    width: 100%;
+    padding: 10px 5px;
+    border-radius: 4px;
+    border: 2px solid white;
+    margin-top: 10px;
+}
+.Add-btn {
+    width: 100%;
+    padding: 10px 10px;
+    border-radius: 4px;
+    border: 1px solid white;
+    background-color: orangered;
+    margin-top: 10px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}
+.Add-btn:hover {
+    background-color: rgb(183, 53, 6);
+    border: none;
+}
+
+.card {
+    background-color: black;
+    color: chartreuse;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: grab;
+    transition: all 0.3s ease;
+}
+.card:hover{
+    transform:scale(1.05)
+}
